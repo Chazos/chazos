@@ -26,3 +26,16 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 5. Run the server
 
     `php artisan config:cache && php artisan serve`
+
+
+### Todo
+
+- [ ] Allow admin to add, edit and delete content
+- [ ] Add pagination in manage
+- [ ] Remove stock styles from the frontend
+- [ ] Allow admin to add, edit and delete collections/documents
+- [ ] Add relationships between documents
+- [ ] Add API for the frontend
+- [ ] Add media library
+- [ ] Add settings
+

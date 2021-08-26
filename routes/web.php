@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CollectionsController;
+use App\Http\Controllers\ContentTypeController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +36,12 @@ Route::get('/test-database', [TestController::class, 'test_database'])->name('ho
 // Admin Routes
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard',  [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/manage/{table_name}',  [AdminController::class, 'manage'])->name('admin.manage');
+    Route::get('/manage/{table_name}',  [CollectionsController::class, 'manage'])->name('admin.manage');
+    Route::get('/manage/{table_name}/delete/{id}',  [CollectionsController::class, 'delete_item'])->name('admin.delete_item');
+    Route::get('/manage/{table_name}/edit/{id}',  [CollectionsController::class, 'edit_item'])->name('admin.edit_item');
+
+    Route::get('/content-types',  [ContentTypeController::class, 'index'])->name('admin.content-types');
+    Route::post('/content-types/create',  [ContentTypeController::class, 'create'])->name('admin.content-types.create');
 });
 
 

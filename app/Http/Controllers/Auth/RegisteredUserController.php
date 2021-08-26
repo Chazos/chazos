@@ -42,7 +42,7 @@ class RegisteredUserController extends Controller
 
         $users = User::all();
 
-        if (count($users) == 0){
+        if (count($users) == 0 && Role::all()->count() == 0) {
             Role::create(['name' => 'admin']);
             Role::create(['name' => 'user']);
             Role::create(['name' => 'writer']);

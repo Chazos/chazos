@@ -8,7 +8,7 @@
       </h2>
 
       <div class="flex justify-end py-3">
-        <div x-data="{ dropdownOpen: false }" class="relative my-32">
+        <div x-data="{ dropdownOpen: false }" class="relative">
 
             <div class="row">
 
@@ -167,6 +167,22 @@
         }else{
             element.classList.add('hidden');
         }
+    }
+
+    function deleteRow(className, rowId){
+        fetch('/manage/table_name/id', {
+				method: 'POST',
+                body: {
+                    _method: 'DELETE',
+                }
+            })
+			.then(() => {
+				this.message = 'Form sucessfully submitted!'
+			})
+			.catch(() => {
+				this.message = 'Ooops! Something went wrong!'
+			})
+		}
     }
 }
 </script>

@@ -11,7 +11,8 @@ class ContentTypeController extends Controller
     //
 
     public function index(){
-        return view('admin.content_types.index');
+        $collections = ContentType::all();
+        return view('admin.content_types.index', ['collections' => $collections]);
     }
 
     public function create(Request $request){

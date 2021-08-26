@@ -17,13 +17,10 @@
         <div class="h-60 overflow-y-scroll">
 
             <ul class="ml-5">
-                <li class="py-3 bg-gray-400">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
-                <li class="py-3">Lorem ipsum dolor sit amet</li>
+                @foreach ( $collections as $collection )
+                    <li class="py-3 hover:bg-purple-400"><button class="">{{ ucfirst($collection->display_name)  }}</button></li>
+                @endforeach
+
 
 
               </ul>
@@ -52,16 +49,16 @@
           <div class="flex justify-end py-3">
             <div class="relative">
 
-                <div class="row">
 
-                </div>
 
               <div class="flex flex-row">
-                <div x-data="{ dropdownOpen: false }" class="relative">
 
-                    <div class="row">
+                <button x-on:click="showAddField = true; showAddCollectionModel = true; showCollectionNameForm = false" class="bg-purple-600 ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    New Field
+                  </button>
+                <div x-data="{ dropdownOpen: false }" class="relative ml-5">
 
-                    </div>
+
 
                   <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
                     <div class="flex flex-row">
@@ -89,12 +86,13 @@
 
                   </div>
                 </div>
-                <button x-on:click="deleteUnsavedCollection()" class="bg-red-400 hover:bg-red-600 w-20 text-white relative z-10 block rounded-md  p-2 focus:outline-none">
+                <button x-on:click="deleteUnsavedCollection()" class="bg-red-400 ml-4 hover:bg-red-600 w-20 text-white relative z-10 block rounded-md  p-2 focus:outline-none">
                     Cancel
                   </button>
                   <button x-on:click="createNewCollection()" class="bg-purple-600 ml-5 hover:bg-purple-400 w-20 relative z-10 block rounded-md  p-2 focus:outline-none">
                     Save
                   </button>
+
               </div>
 
 
@@ -119,7 +117,8 @@
                 </tbody>
               </table>
             </div>
-            <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+
+            {{-- <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
               <span class="flex items-center col-span-3">
                 Showing 21-30 of 100
               </span>
@@ -178,7 +177,7 @@
                   </ul>
                 </nav>
               </span>
-            </div>
+            </div> --}}
           </div>
 
 

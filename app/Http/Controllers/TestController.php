@@ -18,6 +18,10 @@ class TestController extends Controller
                 [
                     'field_name' => 'name',
                     'field_type' => 'string',
+                    'unique' => true,
+                    'default' => 'Some Value',
+                    'nullable' => false,
+                    
                 ],
                 [
                     'field_name' => 'color',

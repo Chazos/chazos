@@ -87,4 +87,100 @@ class ContentTypeController extends Controller
 
 
     }
+
+    public function update(Request $request, $id){
+        
+        $table_id = $id;
+        $table_name = $request->collection_name;
+        $fields = $request->fields;
+        $configure_fields = $request->configure_fields;
+        $display_name = $request->display_name;
+        
+
+        // Delete fields if any 
+        $delete_fields = $request->delete_fields;
+     
+        
+        if ($delete_fields != null){
+            foreach($delete_fields as $field){
+                $this->deleteColumn($table_name, $field);
+            }
+        }
+
+        // Rename fields if any
+        // TODO implemenent
+
+        // Drop foreing keys if any
+        // TODO implement
+
+
+        // Add foreign keys if any
+        // TODO implement
+
+        // Finally Save the data
+        $update_collection = ContentType::where('id', $id)->first();
+        
+        if ($update_collection != null){
+            $update_collection->display_name = $display_name;
+            $update_collection->collection_name = $table_name;
+            $update_collection->slug = $table_name;
+            $update_collection->fields = json_encode($fields);
+            $update_collection->configure_fields = json_encode($configure_fields);
+            $update_collection->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Content Type Updated',
+                'details' => $request]);
+        }
+
+
+
+
+
+    }
+
+
+    public function renameColumn($table_name, $old_name, $new_name){
+        $table_string = "Schema::table('$table_name', function (\$table)";
+        $table_string .= "{\$table->renameColumn('$old_name', '$new_name');});";
+
+        eval($table_string);
+
+    }
+
+    public function deleteColumn($table_name, $column){
+        $table_string = "Schema::table('$table_name', function (\$table) {";
+        $table_string .= "\$table->dropColumn('$column');";
+        $table_string .= "});";
+
+        eval($table_string);
+    }
+
+    public function dropForeign($table_name, $column){
+        $foreign_key_name = $table_name . '_';
+        $foreign_column_name .= $column_name . '_foreign';
+        $table_string = "Schema::table('$table_name', function(\$table)";
+        $table_string .= "{\$table->dropForeign('$foreign_column_name');});";
+
+        eval($table_string);
+    }
+
+    public function addForeignKey($table_name, $column_name, $foreign_table, $foreign_column_name, $on_delete=""){
+        $table_string = "Schema::table('$table_name', function(\$table){";
+        $table_string .= "$table->foreign('$column_name')";
+        $table_string .= "->references('$foreign_column_name')";
+     
+
+        if ($on_delete == ""){
+            $table_string .= "->on('$foreign_table_name');";
+        }else{
+            $table_string .= "->on('$foreign_table_name')";
+            $table_string .= "->onDelete('$on_delete')";
+        }
+
+        $table_string .= "});";
+        eval($table_string);
+            
+    }
 }

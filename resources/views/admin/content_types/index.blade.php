@@ -9,12 +9,12 @@
 @section('content')
 <main class="h-full overflow-y-auto " x-data="{ acceptsData: 'false', showAddCollectionModel : false, showAddField : false, showCollectionNameForm: true }">
 
-  <div class="grid grid-cols-4 gap-4 h-full">
-    <div class="col-span-1 py-10  bg-gray-200">
+  <div class="grid grid-cols-4 gap-4 md:h-full">
+    <div class="md:col-span-1 sm:col-span-4 py-10  bg-gray-200">
 
         <div class="ml-5">
             <p class="font-bold uppercase text-xs text-gray-600">Collection type</p>
-        <div class="h-60 overflow-y-scroll">
+        <div class="xl:h-60 overflow-y-scroll">
 
             <ul class="ml-5">
                 @foreach ( $collections as $collection )
@@ -39,7 +39,7 @@
 
     </div>
 
-    <div class="col-span-3 px-5 py-10 mr-5">
+    <div class="md:col-span-3 sm:col-span-4 px-5 py-10 mr-5">
 
         <h4 id="active-table-name" class="mb-4 text-xl font-semibold text-gray-600 dark:text-gray-300">
             Table Name
@@ -53,7 +53,7 @@
 
               <div class="flex flex-row">
 
-                <button x-on:click="showAddField = true; showAddCollectionModel = true; showCollectionNameForm = false" class="bg-purple-600 ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                <button x-on:click="showAddField = true; showAddCollectionModel = true; showCollectionNameForm = false" class="bg-purple-600 text-white ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     New Field
                   </button>
                 <div x-data="{ dropdownOpen: false }" class="relative ml-5">
@@ -89,7 +89,7 @@
                 <button x-on:click="deleteUnsavedCollection()" class="bg-red-400 ml-4 hover:bg-red-600 w-20 text-white relative z-10 block rounded-md  p-2 focus:outline-none">
                     Cancel
                   </button>
-                  <button x-on:click="createNewCollection()" class="bg-purple-600 ml-5 hover:bg-purple-400 w-20 relative z-10 block rounded-md  p-2 focus:outline-none">
+                  <button id="save-collection-button" onclick="createNewCollection()" class="bg-purple-600 ml-5 text-white hover:bg-purple-400 w-20 relative z-10 block rounded-md  p-2 focus:outline-none">
                     Save
                   </button>
 
@@ -313,7 +313,7 @@
                         <!-- Buttons -->
                         <div class="text-right space-x-5 mt-5">
                             <button @click="showAddCollectionModel = !showAddCollectionModel" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Finish</button>
-                            <button @click="addCollectionField()" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Add Another Field</button>
+                            <button @click="addCollectionField('newCollection')" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Add Another Field</button>
                         </div>
                     </div>
 

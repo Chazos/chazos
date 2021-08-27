@@ -1,12 +1,24 @@
-const addItemsToTable = () => {
-    let newCollection =  localStorage.getItem('newCollection');
+const capitalize = (s) => {
+  if (typeof s !== 'string') return ''
+  return s.charAt(0).toUpperCase() + s.slice(1)
+}
 
-    if (newCollection != null && newCollection != undefined) {
-        newCollection = JSON.parse(newCollection);
-        let tableName = newCollection.name
-        let fields = newCollection.columns
 
-        document.getElementById('active-table-name').innerHTML = tableName[0].toUpperCase() + tableName.substr(1);
+const changeTableHeader = (tableName) => {
+    alert(tableName)
+ tableName = capitalize(tableName)
+ document.getElementById('active-table-name').innerText = tableName
+}
+
+const addItemsToTable = (storeName) => {
+    let collection =  localStorage.getItem(storeName);
+
+    if (collection != null && collection != undefined) {
+        collection = JSON.parse(collection);
+        let tableName = collection.display_name.toLowerCase()
+        let fields = collection.fields
+
+       changeTableHeader(tableName)
 
         document.getElementById('active-collection-fields').innerHTML = ''
 
@@ -38,22 +50,10 @@ const addItemsToTable = () => {
                   </div>
 
                 </td>
-
               </tr>
-
-
-
-
             `
-
-
         }
-
-
-
-
     }
-
 }
 
 
@@ -61,8 +61,8 @@ const draftCollection = () =>{
     newCollection = {}
     newCollection.display_name = document.getElementById('display_name').value
     newCollection.name = document.getElementById('collection_name').value
-    newCollection.columns = []
-    newCollection.config_fields = {}
+    newCollection.fields = []
+    newCollection.configure_fields = {}
 
     localStorage.setItem('newCollection', JSON.stringify(newCollection))
 }
@@ -92,15 +92,7 @@ const createNewCollection = () => {
         .then(response => {
             console.log(response)
         })
-
-
-
-
-
     }
-
-
-
 }
 
 const addConfigField = (fieldName, checkedStatus) => {
@@ -108,20 +100,20 @@ const addConfigField = (fieldName, checkedStatus) => {
 
     if (newCollection != null && newCollection != undefined) {
         newCollection = JSON.parse(newCollection);
-        newCollection.config_fields[fieldName] = checkedStatus;
+        newCollection.configure_fields[fieldName] = checkedStatus;
         localStorage.setItem('newCollection', JSON.stringify(newCollection));
     }
 }
 
-const appendFieldToConfigure = () => {
+const appendFieldToConfigure = (storeName) => {
   let configFieldsViewElem =  document.getElementById("configure-fields-view")
     configFieldsViewElem.innerHTML = ""
-    newCollection = localStorage.getItem('newCollection')
+    newCollection = localStorage.getItem(storeName)
 
     if (newCollection != null && newCollection != undefined) {
         newCollection = JSON.parse(newCollection);
 
-        let fields = newCollection.config_fields
+        let fields = newCollection.configure_fields
         let fieldKeys = Object.keys(fields)
         for (let fieldKey of fieldKeys){
 
@@ -130,7 +122,6 @@ const appendFieldToConfigure = () => {
           }else{
             checked = ""
           }
-
 
           configFieldsViewElem.innerHTML += `
           <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
@@ -141,25 +132,28 @@ const appendFieldToConfigure = () => {
     }
 }
 
-const addCollectionField = () => {
-    newCollection = JSON.parse(localStorage.getItem('newCollection'))
+const addCollectionField = (storeName="newCollection", newField=undefined) => {
+    collection = JSON.parse(localStorage.getItem(storeName))
 
-    if (newCollection != null && newCollection != undefined){
-        let newField = {
-            'field_name' : document.getElementById('field_name').value,
-            'field_type' : document.getElementById('field_type').value,
-            'unique' : document.getElementById('unique').value,
-            'default' : document.getElementById('default_value').value,
-            'nullable' : document.getElementById('nullable').value,
-            'accepts_file' : document.getElementById('accepts-file').value,
-            'file_type' : document.getElementById('file-type').value
+    if (collection != null && collection != undefined){
 
+        if (newField == undefined){
+            let newField = {
+                'field_name' : document.getElementById('field_name').value,
+                'field_type' : document.getElementById('field_type').value,
+                'unique' : document.getElementById('unique').value,
+                'default' : document.getElementById('default_value').value,
+                'nullable' : document.getElementById('nullable').value,
+                'accepts_file' : document.getElementById('accepts-file').value,
+                'file_type' : document.getElementById('file-type').value
+
+            }
         }
 
-        newCollection.config_fields[newField.field_name] = false
-        newCollection.columns.push(newField)
-        localStorage.setItem('newCollection', JSON.stringify(newCollection))
-        appendFieldToConfigure()
+        collection.configure_fields[newField.field_name] = false
+        collection.fields.push(newField)
+        localStorage.setItem(storeName, JSON.stringify(collection))
+        appendFieldToConfigure(storeName)
 
         // Clear forms
         document.getElementById('field_name').value = ''
@@ -168,5 +162,38 @@ const addCollectionField = () => {
         document.getElementById('nullable').value = false
     }
 
-    addItemsToTable()
+    addItemsToTable(storeName)
+}
+
+const getCollectionDetails = (id) => {
+    fetch(`/content-types/${id}`,
+        {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": document.querySelector('input[name="_token"]').value
+                }
+        })
+        .then(response => response.json())
+        .then(response => {
+            if (response.status == "success"){
+                let storeName = "currentCollection"
+                let data = response.data
+                data.configure_fields = JSON.parse(data.configure_fields)
+                data.fields = JSON.parse(data.fields)
+                localStorage.setItem(storeName, JSON.stringify(data))
+
+                // changeTableHeader(data.display_name)
+                appendFieldToConfigure(storeName) 
+                addItemsToTable(storeName)
+            }
+        })
+}
+
+const deleteCollectionField = (field_name) => {
+    
+
+
 }

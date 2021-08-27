@@ -18,7 +18,7 @@
 
             <ul class="ml-5">
                 @foreach ( $collections as $collection )
-                    <li class="py-3 hover:bg-purple-400"><button class="">{{ ucfirst($collection->display_name)  }}</button></li>
+                    <li x-on:click="getCollectionDetails({{ $collection->id }})" class="py-3 hover:bg-purple-400"><button class="">{{ ucfirst($collection->display_name)  }}</button></li>
                 @endforeach
 
 
@@ -330,5 +330,6 @@
 
 @section('custom-js')
 <script src="{{ asset('js/content-type/add-collection.js') }}"></script>
+<script src="{{ asset('js/content-type/edit-collection.js') }}"></script>
 
 @endsection

@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/manage/{table_name}/edit/{id}',  [CollectionsController::class, 'edit_item'])->name('admin.edit_item');
 
     Route::get('/content-types',  [ContentTypeController::class, 'index'])->name('admin.content-types');
+    Route::get('/content-types/{id}',  [ContentTypeController::class, 'details'])->name('admin.content-types.detail');
     Route::post('/content-types/create',  [ContentTypeController::class, 'create'])->name('admin.content-types.create');
 });
 

@@ -29,6 +29,38 @@ class ContentTypeController extends Controller
         ]);
     }
 
+    public function addColumn($table_name, $field, $action = "create"){
+        $field_name = $field['field_name'];
+        $field_type = $field['field_type'];
+        $unique = $field['unique'];
+        $default = $field['default'];
+        $nullable = $field['nullable'];
+
+
+        $table_string = "if (Schema::hasColumn('$table_name', '$field_name') == false){";
+
+        $table_string .= "Schema::$action('$table_name', function (\$table) {";
+        $table_string .= "\$table->$field_type('$field_name')";
+
+        if ($unique == "true"){
+            $table_string .= "->unique()";
+        }
+
+        if ($default != "" && $default != "null" || $default != null){
+            $table_string .= "->default('$default')";
+        }
+
+        if ($nullable == "true"){
+            $table_string .= "->nullable()";
+        }
+
+        $table_string .= ";";
+        $table_string .= "});";
+        $table_string .= "}";
+        eval($table_string);
+
+    }
+
     public function create(Request $request){
 
         $fields = $request->fields;
@@ -36,37 +68,11 @@ class ContentTypeController extends Controller
         $table_name = $request->name;
         $display_name = $request->display_name;
 
-        $table_string = "Schema::create('$table_name', function (\$table) {";
+
 
         foreach ($fields as $field){
-            $field_name = $field['field_name'];
-            $field_type = $field['field_type'];
-            $unique = $field['unique'];
-            $default = $field['default'];
-            $nullable = $field['nullable'];
-
-            $table_string .= "\$table->$field_type('$field_name')";
-
-            if ($unique == "true"){
-                $table_string .= "->unique()";
-            }
-
-            if ($default != "" && $default != "null" || $default != null){
-                $table_string .= "->default('$default')";
-            }
-
-            if ($nullable == "true"){
-                $table_string .= "->nullable()";
-            }
-
-            $table_string .= ";";
+            $this->addColumn($table_name, $field);
         }
-
-        $table_string .= "});";
-
-        // Create a table
-        eval($table_string);
-
 
         // Save collection details to the
 
@@ -89,18 +95,18 @@ class ContentTypeController extends Controller
     }
 
     public function update(Request $request, $id){
-        
+
         $table_id = $id;
         $table_name = $request->collection_name;
         $fields = $request->fields;
         $configure_fields = $request->configure_fields;
         $display_name = $request->display_name;
-        
 
-        // Delete fields if any 
+
+        // Delete fields if any
         $delete_fields = $request->delete_fields;
-     
-        
+
+
         if ($delete_fields != null){
             foreach($delete_fields as $field){
                 $this->deleteColumn($table_name, $field);
@@ -117,9 +123,15 @@ class ContentTypeController extends Controller
         // Add foreign keys if any
         // TODO implement
 
+
+        // Add new fields if any
+        foreach ($fields as $field){
+            $this->addColumn($table_name, $field, 'table');
+        }
+
         // Finally Save the data
         $update_collection = ContentType::where('id', $id)->first();
-        
+
         if ($update_collection != null){
             $update_collection->display_name = $display_name;
             $update_collection->collection_name = $table_name;
@@ -149,7 +161,7 @@ class ContentTypeController extends Controller
 
     }
 
-    public function deleteColumn($table_name, $column){
+    public function deleteColumn($table_name ){
         $table_string = "Schema::table('$table_name', function (\$table) {";
         $table_string .= "\$table->dropColumn('$column');";
         $table_string .= "});";
@@ -157,8 +169,8 @@ class ContentTypeController extends Controller
         eval($table_string);
     }
 
-    public function dropForeign($table_name, $column){
-        $foreign_key_name = $table_name . '_';
+    public function dropForeign($table_name, $column_name){
+        $foreign_column_name = $table_name . '_';
         $foreign_column_name .= $column_name . '_foreign';
         $table_string = "Schema::table('$table_name', function(\$table)";
         $table_string .= "{\$table->dropForeign('$foreign_column_name');});";
@@ -168,19 +180,19 @@ class ContentTypeController extends Controller
 
     public function addForeignKey($table_name, $column_name, $foreign_table, $foreign_column_name, $on_delete=""){
         $table_string = "Schema::table('$table_name', function(\$table){";
-        $table_string .= "$table->foreign('$column_name')";
+        $table_string .= "\$table->foreign('$column_name')";
         $table_string .= "->references('$foreign_column_name')";
-     
+
 
         if ($on_delete == ""){
-            $table_string .= "->on('$foreign_table_name');";
+            $table_string .= "->on('$foreign_table');";
         }else{
-            $table_string .= "->on('$foreign_table_name')";
+            $table_string .= "->on('$foreign_table')";
             $table_string .= "->onDelete('$on_delete')";
         }
 
         $table_string .= "});";
         eval($table_string);
-            
+
     }
 }

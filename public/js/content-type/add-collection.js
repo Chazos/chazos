@@ -157,7 +157,7 @@ const addCollectionField = (storeName="newCollection") => {
                 'file_type' : document.getElementById('file-type').value
 
         }
-    
+
 
         collection.configure_fields[newField.field_name] = false
         collection.fields.push(newField)
@@ -195,12 +195,18 @@ const getCollectionDetails = (id) => {
                 localStorage.setItem(storeName, JSON.stringify(data))
 
                 // changeTableHeader(data.display_name)
-                appendFieldToConfigure(storeName) 
+                appendFieldToConfigure(storeName)
                 addItemsToTable(storeName)
                 changeElementAttr(
                     "#save-collection-button",
                     "onclick",
                     `saveCurrentCollection('${storeName}', ${data.id})`
+                )
+ 
+                changeElementAttr(
+                    "#add-field-to-collection",
+                    "onclick",
+                    `addCollectionField('${storeName}')`
                 )
             }
         })
@@ -213,12 +219,12 @@ const deleteCollectionField = (storeName, field_name) => {
         collection = JSON.parse(collection)
         let fields = collection.fields
 
-        
+
         if (collection.delete_fields == undefined){
             collection.delete_fields = []
         }
 
-        // Remove delete field from fields 
+        // Remove delete field from fields
         for (let index = 0; index < fields.length; index++) {
             const field = fields[index];
 
@@ -229,12 +235,12 @@ const deleteCollectionField = (storeName, field_name) => {
             }
         }
 
-        
+
 
         collection.delete_fields.push(field_name)
         document.getElementById(`x-row-${field_name}`).remove()
         localStorage.setItem(storeName, JSON.stringify(collection))
-        
+
     }
 }
 
@@ -245,7 +251,7 @@ const saveCurrentCollection = (storeName, id) => {
     if (collection != undefined && collection != undefined){
         collection = JSON.parse(collection)
 
-        
+
         fetch(`/content-types/update/${id}`,
         {
                 method: 'POST',

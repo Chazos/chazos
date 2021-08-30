@@ -98,9 +98,12 @@ const createNewCollection = () => {
                 },
                 body: JSON.stringify(collection)
         })
-        .then(response.json)
+        .then(response => response.json())
         .then(response => {
-            console.log(response)
+            if (response.status == 'success') {
+                localStorage.removeItem('newCollection')
+                window.location.href = '/content-types'
+            }
         })
     }
 }

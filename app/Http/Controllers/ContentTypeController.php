@@ -17,7 +17,9 @@ class ContentTypeController extends Controller
 
     public function delete($id){
 
-        ContentType::where('id', $id)->delete();
+        $collection = ContentType::where('id', $id)->first();
+        $table_name = $collection->collection_name;
+        eval("Schema::dropIfExists('$table_name');");
 
         return response()->json([
             'success' => true,
@@ -78,10 +80,11 @@ class ContentTypeController extends Controller
         $table_name = $request->name;
         $display_name = $request->display_name;
 
-
+        $action = "create";
 
         foreach ($fields as $field){
-            $this->addColumn($table_name, $field);
+            $this->addColumn($table_name, $field, $action);
+            $action = "table";
         }
 
         // Save collection details to the

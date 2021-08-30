@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/content-types',  [ContentTypeController::class, 'index'])->name('admin.content-types');
     Route::get('/content-types/{id}',  [ContentTypeController::class, 'details'])->name('admin.content-types.detail');
     Route::post('/content-types/update/{id}',  [ContentTypeController::class, 'update'])->name('admin.content-types.update');
+    Route::post('/content-types/delete/{id}',  [ContentTypeController::class, 'delete'])->name('admin.content-types.delete');
     Route::post('/content-types/create',  [ContentTypeController::class, 'create'])->name('admin.content-types.create');
 });
 

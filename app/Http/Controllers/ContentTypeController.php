@@ -15,6 +15,16 @@ class ContentTypeController extends Controller
         return view('admin.content_types.index', ['collections' => $collections]);
     }
 
+    public function delete($id){
+
+        ContentType::where('id', $id)->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Content Type Deleted Successfully'
+        ]);
+    }
+
     public function details(Request $request, $id){
         $collection = ContentType::where("id", $id)->first();
         $status = "failed";

@@ -35,7 +35,10 @@ Route::get('/test-database', [TestController::class, 'test_database'])->name('ho
 
 // Admin Routes
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
+    Route::get('/',  [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/dashboard',  [AdminController::class, 'index'])->name('admin.dashboard');
+
+    Route::get('/create/{table_name}',  [CollectionsController::class, 'create'])->name('admin.add_entry');
     Route::get('/manage/{table_name}',  [CollectionsController::class, 'manage'])->name('admin.manage');
     Route::get('/manage/{table_name}/delete/{id}',  [CollectionsController::class, 'delete_item'])->name('admin.delete_item');
     Route::get('/manage/{table_name}/edit/{id}',  [CollectionsController::class, 'edit_item'])->name('admin.edit_item');

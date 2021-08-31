@@ -8,11 +8,13 @@
       </h2>
 
       <div class="flex justify-end py-3">
+
+        <a  href="{{ route("admin.add_entry", ['table_name' => $table]) }}" class="bg-purple-600 px-3 mx-3 text-white ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+            New Field
+        </a>
         <div x-data="{ dropdownOpen: false }" class="relative">
 
-            <div class="row">
 
-            </div>
 
           <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
             <div class="flex flex-row">
@@ -29,9 +31,19 @@
 
             <p class="font-bold ml-4">Show/Hide fields</p>
             @foreach ($columns as $column)
-                <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                    <input onchange="hideTableField('column_{{ $column }}')" type="checkbox" name="" id="checkbox-hide-field">  <span class="ml-3">{{ $column }}</span>
-                </a>
+
+            @if ($config_fields[$column->field_name] == true)
+            <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                <input checked onchange="hideTableField('column_{{ $column->field_name }}')" type="checkbox" name="" id="checkbox-hide-field">  <span class="ml-3">{{ $column->field_name }}</span>
+            </a>
+            @else
+            <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
+                <input onchange="hideTableField('column_{{ $column->field_name }}')" type="checkbox" name="" id="checkbox-hide-field">  <span class="ml-3">{{ $column->field_name }}</span>
+            </a>
+
+            @endif
+
+
             @endforeach
 
 
@@ -47,7 +59,12 @@
               <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
                 @foreach ($columns as $column)
-                    <th class="px-4 py-3 column_{{ $column }}">{{ $column }}</th>
+
+                     @if ($config_fields[$column->field_name] == true)
+                       <th class="px-4 py-3 column_{{ $column->field_name }}">{{ $column->field_name}}</th>
+                     @else
+                        <th class="px-4 py-3 hidden column_{{ $column->field_name }}">{{ $column->field_name }}</th>
+                     @endif
 
                 @endforeach
                 <th class="px-4 py-3">Actions</th>
@@ -58,11 +75,17 @@
                 @foreach ($data as $item)
                 <tr class="text-gray-700 dark:text-gray-400">
                     @foreach ($columns as $column)
+                        @if ($config_fields[$column->field_name] == true)
+                            <td class="px-4 py-3 text-sm column_{{ $column->field_name }}">
+                                {{ $item[$column->field_name] }}
+                            </td>
+                        @else
+                            <td class="px-4 py-3 text-sm hidden column_{{ $column->field_name }}">
+                                {{ $item[$column->field_name] }}
+                            </td>
+                        @endif
 
 
-                        <td class="px-4 py-3 text-sm column_{{ $column }}">
-                            {{ $item[$column] }}
-                          </td>
                     @endforeach
                     <td class="px-4 py-3">
                         <div class="flex items-center space-x-4 text-sm">
@@ -159,13 +182,14 @@
 <script>
     function hideTableField(className){
 
-    let elements = document.getElementsByClassName(className);
+        let elements = document.getElementsByClassName(className);
 
-    for (const element of elements) {
-        if (element.classList.contains('hidden')) {
-            element.classList.remove('hidden');
-        }else{
-            element.classList.add('hidden');
+        for (const element of elements) {
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            }else{
+                element.classList.add('hidden');
+            }
         }
     }
 
@@ -183,8 +207,6 @@
 				this.message = 'Ooops! Something went wrong!'
 			})
 		}
-    }
-}
 </script>
 
 @endsection

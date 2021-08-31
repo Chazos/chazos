@@ -9,8 +9,8 @@
 @section('content')
 <main class="h-full overflow-y-auto " x-data="{ showCollectionTable: false, acceptsData: 'false', showAddCollectionModel : false,showAddField : false, showCollectionNameForm: true, editCollectionField : false }">
 
-  <div class="grid grid-cols-4 gap-4 md:h-full">
-    <div class="md:col-span-1 sm:col-span-4 py-10  bg-gray-200">
+  <div class="md:grid md:grid-cols-4 gap-4 md:h-full">
+    <div class="md:col-span-1 sm:w-full py-10  bg-gray-200">
 
         <div class="ml-5">
             <p class="font-bold uppercase text-xs text-gray-600">Collection type</p>
@@ -48,7 +48,7 @@
 
     </div>
 
-    <div class="md:col-span-3 sm:col-span-4 px-5 py-10 mr-5">
+    <div class="md:col-span-3 sm:w-full px-5 py-10 mr-5">
 
         <div x-show="showCollectionTable == false" class="flex items-center  w-full h-full">
             <div class="px-10 text-gray-600 text-5xl font-bold text-center">

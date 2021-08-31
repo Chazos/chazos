@@ -45,10 +45,15 @@
                         x-transition:leave-end="opacity-0 max-h-0"
                         class="p-2 mt-2 space-y-2 overflow-hidden text-sm font-medium text-gray-500 rounded-md shadow-inner bg-gray-50 dark:text-gray-400 dark:bg-gray-900"
                         aria-label="submenu">
+
+
+                        @foreach (get_collections() as $item)
                         <li
-                            class="px-2 py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
-                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => 'users']) }}">Users</a>
+                            class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
+
+                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->collection_name ]) }}">{{ ucfirst($item->collection_name) }}</a>
                         </li>
+                            @endforeach
 
                     </ul>
                 </template>

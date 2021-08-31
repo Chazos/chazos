@@ -38,12 +38,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/',  [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/dashboard',  [AdminController::class, 'index'])->name('admin.dashboard');
 
-    Route::get('/create/{table_name}',  [CollectionsController::class, 'create'])->name('admin.add_entry');
+    Route::get('/add-entry/{table_name}',  [CollectionsController::class, 'add_entry'])->name('admin.add_entry');
     Route::get('/manage/{table_name}',  [CollectionsController::class, 'manage'])->name('admin.manage');
     Route::get('/manage/{table_name}/delete/{id}',  [CollectionsController::class, 'delete_item'])->name('admin.delete_item');
     Route::get('/manage/{table_name}/edit/{id}',  [CollectionsController::class, 'edit_item'])->name('admin.edit_item');
 
     Route::get('/content-types',  [ContentTypeController::class, 'index'])->name('admin.content-types');
+    Route::get('/content-types/{table}/fields',  [ContentTypeController::class, 'fields'])->name('admin.content-types.fields');
+    Route::post('/content-types/{table}/create',  [ContentTypeController::class, 'create_entry'])->name('admin.content-types.create_entry');
     Route::get('/content-types/{id}',  [ContentTypeController::class, 'details'])->name('admin.content-types.detail');
     Route::post('/content-types/update/{id}',  [ContentTypeController::class, 'update'])->name('admin.content-types.update');
     Route::post('/content-types/delete/{id}',  [ContentTypeController::class, 'delete'])->name('admin.content-types.delete');

@@ -15,6 +15,22 @@ class ContentTypeController extends Controller
         return view('admin.content_types.index', ['collections' => $collections]);
     }
 
+    public function fields(Request $request, $table){
+        $collection = ContentType::where('collection_name', $table)->first();
+        $fields = json_decode($collection->fields);
+
+        return response()->json([
+            'status' => 'success',
+            'fields' => $fields
+        ]);
+
+    }
+
+    public function create_entry(Request $request){
+        dd($request->all());
+
+    }
+
     public function delete($id){
 
         $collection = ContentType::where('id', $id)->first();

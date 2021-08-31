@@ -25,8 +25,10 @@ class CollectionsController extends Controller
             'message' => 'Record has been deleted successfully.']);
     }
 
-    public function create(Request $request, $table){
+    public function add_entry(Request $request, $table){
         $collection = ContentType::where('collection_name', $table)->first();
+        $columns = json_decode($collection->fields);
+        return view('admin.collections.add_entry', compact('table', 'collection', 'columns'));
 
     }
 

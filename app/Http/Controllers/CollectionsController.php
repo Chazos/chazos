@@ -11,9 +11,11 @@ use Illuminate\Support\Facades\Schema;
 class CollectionsController extends Controller
 {
     public function manage(Request $request, $table){
-        $columns = Schema::getColumnListing($table);
+        $collection = ContentType::where('collection_name', $table)->first();
+        $config_fields = json_decode(json_encode(json_decode($collection->configure_fields)), true);
+        $columns = json_decode($collection->fields);
         $data = User::all();
-        return view('admin.collections.manage', compact('table', 'columns', 'data'));
+        return view('admin.collections.manage', compact('table','config_fields', 'collection', 'columns', 'data'));
     }
 
     public function delete_item(Request $request, $table, $id){
@@ -21,6 +23,11 @@ class CollectionsController extends Controller
         return response()->json([
             'success' => true,
             'message' => 'Record has been deleted successfully.']);
+    }
+
+    public function create(Request $request, $table){
+        $collection = ContentType::where('collection_name', $table)->first();
+
     }
 
     public function edit_item(Request $request, $table, $id){

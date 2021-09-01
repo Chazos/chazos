@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
                     "unique" => false,
                     "default" => null,
                     "nullable" => false,
-                    "accepts_file" => true,
+                    "accepts_file" => false,
                     "file_type" => "image",
                   ],
                 [

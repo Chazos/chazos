@@ -80,10 +80,16 @@
 @section('custom-js')
 
 <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script src="{{ asset('js/collections/add_entry.js')  }}"></script>
+
+
+
 <script>
-    window.editors = {}
-</script>
-<script>
+
+
+window.editors = {}
+
+
 const initEditors = async () => {
 
     @foreach ($columns as $column)
@@ -100,107 +106,11 @@ const initEditors = async () => {
 
 }
 
-</script>
-
-
-
-<script>
-
-    document.addEventListener('DOMContentLoaded', () => {
-
-        initEditors()
-        fetch('/content-types/{{ $table }}/fields')
-    .then(response => response.json())
-    .then(data => {
-        if (data.status == "success"){
-            let fields = data.fields
-            localStorage.setItem('currentTableFields', JSON.stringify(fields))
-        }
-    })
-    .catch(error => console.error(error));
-    })
-
-
-
-    const saveEntry = () => {
-        let fields = JSON.parse(localStorage.getItem('currentTableFields'))
-        let formData = new FormData()
-
-        fields.forEach(field => {
-            if (field.field_type == 'string'){
-                if (field.accept_file == "true"){
-                    let fileData = document.querySelector(`[name='${field.field_name}']`).files[0]
-                    alert(fileData)
-                    formData.append(field.field_name, fileData)
-                } else {
-                    formData.append(field.field_name, document.querySelector('[name="' + field.field_name + '"]').value)
-                }
-            }
-            if (field.field_type == 'integer'){
-                formData.append(field.field_name, document.querySelector('[name="' + field.field_name + '"]').value)
-            }
-            if (field.field_type == 'text'){
-                formData.append(field.field_name, CKEDITOR.instances['editor-' + field.field_name].getData())
-            }
-        })
-
-        fetch('/content-types/{{ $table }}/create', {
-            method: 'PUT',
-            headers: {
-
-                    "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute('content')
-                },
-            body: formData
-        })
-    }
-
+document.onload = function() {
+    initEditors()
+}
 
 </script>
-
-
-<script>
-
-window.addEventListener( "load", function () {
-  function sendData() {
-    const XHR = new XMLHttpRequest();
-
-    // Bind the FormData object and the form element
-    const FD = new FormData( form );
-
-    // Define what happens on successful data submission
-    XHR.addEventListener( "load", function(event) {
-        response = JSON.parse(event.target.responseText)
-        console.log(response)
-    } );
-
-    // Define what happens in case of error
-    XHR.addEventListener( "error", function( event ) {
-      console.log( 'Oops! Something went wrong.' );
-    } );
-
-    // Set up our request
-    XHR.open( "POST", "{{ route('admin.content-types.create_entry', ['table' => $table]) }}" );
-
-    // The data sent is what the user provided in the form
-    XHR.send( FD );
-  }
-
-  // Access the form element...
-  const form = document.getElementById( "myForm" );
-
-  // ...and take over its submit event.
-  form.addEventListener( "submit", function ( event ) {
-    event.preventDefault();
-
-    sendData();
-  } );
-} );
-</script>
-
-
-
-
-
 
 
 @endsection

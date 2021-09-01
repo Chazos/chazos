@@ -174,8 +174,15 @@ class ContentTypeController extends Controller
         $model_name = ucfirst($table_name);
 
         $this->addIdField($table_name);
-        
+
         foreach ($fields as $field){
+
+            $skipFields = array("id", "created_at", "updated_at");
+
+            if (in_array($field['field_name'], $skipFields)){
+                continue;
+            }
+
             $this->addColumn($table_name, $field, 'table');
 
         }

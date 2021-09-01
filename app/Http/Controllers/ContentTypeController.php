@@ -117,8 +117,9 @@ class ContentTypeController extends Controller
 
         // Create model for table
         $table_accepts_media = supports_media($fields);
+        $model_name = ucfirst($table_name);
 
-        dd($table_accepts_media);
+        create_model($model_name, $table_name, $table_accepts_media);
 
 
 

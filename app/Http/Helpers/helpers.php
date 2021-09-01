@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\ContentType;
+use Illuminate\Support\Facades\File;
 
 if (! function_exists('get_collections')) {
     function get_collections()
@@ -32,7 +33,7 @@ if (! function_exists('supports_media')) {
     function supports_media( $fields) {
 
         foreach( $fields as $field ) {
-            if ($field['default'] == "true"){
+            if ($field['accepts_file'] == "true"){
                 return true;
             }
         }
@@ -44,7 +45,7 @@ if (! function_exists('supports_media')) {
 if (! function_exists('create_model')) {
     function create_model( $model_name, $table_name, $accept_media=false ) {
 
-        $model_string = "namespace App\Models;";
+        $model_string = "<?php\nnamespace App\Models;";
         $model_string .= "\n\n";
         $model_string .= "use Illuminate\Database\Eloquent\Model;\n";
 
@@ -59,17 +60,15 @@ if (! function_exists('create_model')) {
 
         // Add trait if model supports media
         if ( $accept_media ) {
-            $model_string .= "use InteractsWithMedia;\n";
+            $model_string .= "\tuse InteractsWithMedia;\n";
         }
 
 
-        $model_string .= "protected \$table = '$table_name';\n";
+        $model_string .= "\tprotected \$table = '$table_name';\n";
         $model_string .= "}\n";
 
 
-        $model_file = fopen( "app/Models/$model_name.php", "w" );
-        fwrite( $model_file, $model_string );
-        fclose( $model_file );
+        File::put(base_path() . '/app/Models/' . $model_name . '.php', $model_string);
     }
 }
 

@@ -114,6 +114,14 @@ class ContentTypeController extends Controller
         $new_content_type->configure_fields = json_encode($configure_fields);
         $new_content_type->save();
 
+
+        // Create model for table
+        $table_accepts_media = supports_media($fields);
+
+        dd($table_accepts_media);
+
+
+
         return response()->json([
             'status' => 'success',
             'message' => 'Content Type Created',

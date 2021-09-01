@@ -3,15 +3,15 @@
 use App\Models\ContentType;
 use Illuminate\Support\Facades\File;
 
-if (! function_exists('get_collections')) {
-    function get_collections()
+if (! function_exists('cg_get_collections')) {
+    function cg_get_collections()
     {
         return ContentType::all();
     }
 }
 
-if (! function_exists('slugify')) {
-    function slugify( $section ) {
+if (! function_exists('cg_slugify')) {
+    function cg_slugify( $section ) {
 
         $section = preg_replace( '([^A-Za-z0-9])', '_', $section );
         $section = str_replace( '--', '_', $section );
@@ -20,8 +20,8 @@ if (! function_exists('slugify')) {
     }
 }
 
-if (! function_exists('unslugify')) {
-    function unslugify( $slug ) {
+if (! function_exists('cg_unslugify')) {
+    function cg_unslugify( $slug ) {
 
         $slug = str_replace( '-', ' ', $slug );
         $slug = str_replace( '_', ' ', $slug );
@@ -29,8 +29,8 @@ if (! function_exists('unslugify')) {
     }
 }
 
-if (! function_exists('supports_media')) {
-    function supports_media( $fields) {
+if (! function_exists('cg_supports_media')) {
+    function cg_supports_media( $fields) {
 
         foreach( $fields as $field ) {
             if ($field['accepts_file'] == "true"){

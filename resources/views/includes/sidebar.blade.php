@@ -47,7 +47,7 @@
                         aria-label="submenu">
 
 
-                        @foreach (get_collections() as $item)
+                        @foreach (cg_get_collections() as $item)
                         <li
                             class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 

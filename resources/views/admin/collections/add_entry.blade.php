@@ -24,13 +24,13 @@
 
                 @if ($column->accepts_file == "true")
                 <label class="block text-sm mt-4">
-                    <span class="text-gray-700 dark:text-gray-400">{{ unslugify($column->field_name) }}</span>
+                    <span class="text-gray-700 dark:text-gray-400">{{ cg_unslugify($column->field_name) }}</span>
                     <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}">
                   </label>
 
                 @else
                 <label class="block text-sm mt-4">
-                    <span class="text-gray-700 dark:text-gray-400">{{ unslugify($column->field_name) }}</span>
+                    <span class="text-gray-700 dark:text-gray-400">{{ cg_unslugify($column->field_name) }}</span>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}">
                   </label>
 
@@ -40,14 +40,14 @@
 
             @if ($column->field_type == 'integer')
             <label class="block text-sm mt-4">
-                <span class="text-gray-700 dark:text-gray-400">{{ unslugify($column->field_name) }}</span>
+                <span class="text-gray-700 dark:text-gray-400">{{ cg_unslugify($column->field_name) }}</span>
                 <input type="number" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}">
               </label>
             @endif
 
             @if ($column->field_type == 'text')
             <label class="block mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400 editor">{{ unslugify($column->field_name) }}</span>
+                <span class="text-gray-700 dark:text-gray-400 editor">{{ cg_unslugify($column->field_name) }}</span>
                 <textarea id="editor-{{ $column->field_name }}" name="{{ $column->field_name }}"></textarea>
                 {{-- <textarea class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-textarea focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray" rows="3" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}"></textarea> --}}
               </label>

@@ -14,6 +14,7 @@
 
       <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
+     <form id="myForm" action="{{ route('admin.content-types.create_entry', ['table' => $table]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @foreach ($columns as $column)
             @if ($column->field_type == 'string')
@@ -30,7 +31,7 @@
                 @else
                 <label class="block text-sm mt-4">
                     <span class="text-gray-700 dark:text-gray-400">{{ unslugify($column->field_name) }}</span>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}">
+                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" name="{{ $column->field_name }}" placeholder="Your {{ ucfirst($column->field_name) }}">
                   </label>
 
                 @endif
@@ -59,12 +60,13 @@
                 <button class="flex items-center justify-between px-4 ml-2  py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg hover:shadow  focus:outline-none focus:shadow-outline-purple">
                     Cancel
                 </button>
-                <button x-on:click="saveEntry()" class="flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                <button type="submit" class="flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Save
                 </button>
             </div>
         </div>
 
+     </form>
 
 
       </div>
@@ -127,7 +129,9 @@ const initEditors = async () => {
         fields.forEach(field => {
             if (field.field_type == 'string'){
                 if (field.accept_file == "true"){
-                    formData.append(field.field_name, document.querySelector('input[name="'+field.field_name+'"]').files[0])
+                    let fileData = document.querySelector(`[name='${field.field_name}']`).files[0]
+                    alert(fileData)
+                    formData.append(field.field_name, fileData)
                 } else {
                     formData.append(field.field_name, document.querySelector('[name="' + field.field_name + '"]').value)
                 }
@@ -141,7 +145,7 @@ const initEditors = async () => {
         })
 
         fetch('/content-types/{{ $table }}/create', {
-            method: 'POST',
+            method: 'PUT',
             headers: {
 
                     "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").getAttribute('content')
@@ -153,6 +157,45 @@ const initEditors = async () => {
 
 </script>
 
+
+<script>
+
+window.addEventListener( "load", function () {
+  function sendData() {
+    const XHR = new XMLHttpRequest();
+
+    // Bind the FormData object and the form element
+    const FD = new FormData( form );
+
+    // Define what happens on successful data submission
+    XHR.addEventListener( "load", function(event) {
+        response = JSON.parse(event.target.responseText)
+        console.log(response)
+    } );
+
+    // Define what happens in case of error
+    XHR.addEventListener( "error", function( event ) {
+      console.log( 'Oops! Something went wrong.' );
+    } );
+
+    // Set up our request
+    XHR.open( "POST", "{{ route('admin.content-types.create_entry', ['table' => $table]) }}" );
+
+    // The data sent is what the user provided in the form
+    XHR.send( FD );
+  }
+
+  // Access the form element...
+  const form = document.getElementById( "myForm" );
+
+  // ...and take over its submit event.
+  form.addEventListener( "submit", function ( event ) {
+    event.preventDefault();
+
+    sendData();
+  } );
+} );
+</script>
 
 
 

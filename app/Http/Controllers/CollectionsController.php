@@ -14,7 +14,10 @@ class CollectionsController extends Controller
         $collection = ContentType::where('collection_name', $table)->first();
         $config_fields = json_decode(json_encode(json_decode($collection->configure_fields)), true);
         $columns = json_decode($collection->fields);
-        $data = User::all();
+        $model = "App\Models\\" . $collection->model_name;
+
+
+        $data = $model::all();
         return view('admin.collections.manage', compact('table','config_fields', 'collection', 'columns', 'data'));
     }
 

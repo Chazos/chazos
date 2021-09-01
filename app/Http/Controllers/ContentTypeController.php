@@ -26,9 +26,67 @@ class ContentTypeController extends Controller
 
     }
 
-    public function create_entry(Request $request){
-        dd($request->all());
+    public function create_entry(Request $request, $table){
 
+        $collection = ContentType::where('collection_name', $table)->first();
+
+
+        $fields = json_decode($collection->fields);
+        $model_name = $collection->model_name;
+        $model = "App\Models\\". $model_name;
+        $new_entry = new $model;
+
+        foreach($fields as $field){
+            $field_name = $field->field_name;
+            $field_type = $field->field_type;
+
+
+            if (array_key_exists($field_name, $request->all())){
+
+                $add_field_data = "\$new_entry->$field_name = \$request->$field_name;";
+                eval($add_field_data);
+            }
+
+        }
+
+
+
+        $new_entry->save();
+
+        // Attach files
+        foreach($fields as $field){
+            $field_name = $field->field_name;
+            $field_type = $field->field_type;
+            $accepts_file = $field->accepts_file;
+            $file_type = $field->file_type;
+
+
+
+            if($accepts_file == "true"){
+                if (array_key_exists($field_name, $request->all())){
+                    if ($file_type == "image"){
+
+                        if($request->hasFile( $field->field_name) && $request->file($field->field_name)->isValid()){
+
+                            $new_entry->addMediaFromRequest( $field->field_name)->toMediaCollection($field->field_name);
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+
+
+
+
+
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Entry created successfully'
+        ]);
     }
 
     public function delete($id){
@@ -91,25 +149,45 @@ class ContentTypeController extends Controller
 
     }
 
+    public function addIdField($table_name){
+
+        $table_string = "Schema::create('$table_name', function (\$table) {";
+        $table_string .= "\$table->id();";
+        $table_string .= "});";
+        eval($table_string);
+    }
+
+    public function addTimestamps($table_name){
+
+        $table_string = "Schema::table('$table_name', function (\$table) {";
+        $table_string .= "\$table->timestamps();";
+        $table_string .= "});";
+        eval($table_string);
+    }
+
     public function create(Request $request){
 
         $fields = $request->fields;
         $configure_fields = $request->configure_fields;
         $table_name = $request->name;
         $display_name = $request->display_name;
+        $model_name = ucfirst($table_name);
 
-        $action = "create";
-
+        $this->addIdField($table_name);
+        
         foreach ($fields as $field){
-            $this->addColumn($table_name, $field, $action);
-            $action = "table";
+            $this->addColumn($table_name, $field, 'table');
+
         }
+
+        $this->addTimestamps($table_name);
 
         // Save collection details to the
 
         $new_content_type = new ContentType();
 
         $new_content_type->display_name = $display_name;
+        $new_content_type->model_name = $model_name;
         $new_content_type->collection_name = $table_name;
         $new_content_type->slug = $table_name;
         $new_content_type->fields = json_encode($fields);
@@ -119,7 +197,7 @@ class ContentTypeController extends Controller
 
         // Create model for table
         $table_accepts_media = supports_media($fields);
-        $model_name = ucfirst($table_name);
+
 
         create_model($model_name, $table_name, $table_accepts_media);
 

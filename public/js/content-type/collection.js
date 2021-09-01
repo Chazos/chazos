@@ -162,7 +162,7 @@ const addCollectionField = (storeName="newCollection") => {
         }
 
 
-        collection.configure_fields[newField.field_name] = false
+        collection.configure_fields[newField.field_name] = true
         collection.fields.push(newField)
         localStorage.setItem(storeName, JSON.stringify(collection))
         appendFieldToConfigure(storeName)

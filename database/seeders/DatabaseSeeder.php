@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\ContentType::create([
             'display_name' => 'users',
             'collection_name' => 'users',
+            'model_name' => 'User',
             'slug' => 'users',
             'fields' => json_encode([
                 [
@@ -79,6 +80,7 @@ class DatabaseSeeder extends Seeder
             'configure_fields' => json_encode([
                 "id" => true,
                 "name" => true,
+
                 "email" => true,
                 "email_verified_at" => false,
                 "password" => false,

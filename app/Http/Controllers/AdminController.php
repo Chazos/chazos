@@ -12,9 +12,7 @@ class AdminController extends Controller
     //
 
     public function index(){
-        // $model_name = 'App\Models\User';
-
-        // dd($model_name::all());
+       
         return view('admin.index');
     }
 }

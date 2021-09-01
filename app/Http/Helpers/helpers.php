@@ -42,6 +42,16 @@ if (! function_exists('supports_media')) {
     }
 }
 
+if (! function_exists('delete_model')) {
+    function delete_model( $table_name ) {
+        $model_name = ucfirst($table_name);
+        $model_file = base_path() . '/app/Models/' . $model_name . '.php';
+        File::delete($model_file);
+    }
+}
+
+
+
 if (! function_exists('create_model')) {
     function create_model( $model_name, $table_name, $accept_media=false ) {
 

@@ -291,7 +291,7 @@ const deleteCollection = (id) => {
         })
         .then(response => response.json())
         .then(response => {
-            if (response.status == true){
+            if (response.status == 'success'){
                 window.location.href = "/content-types"
             }
         })

@@ -36,9 +36,11 @@ class ContentTypeController extends Controller
         $collection = ContentType::where('id', $id)->first();
         $table_name = $collection->collection_name;
         eval("Schema::dropIfExists('$table_name');");
+        delete_model($table_name);
+        $collection->delete();
 
         return response()->json([
-            'success' => true,
+            'status' => 'success',
             'message' => 'Content Type Deleted Successfully'
         ]);
     }

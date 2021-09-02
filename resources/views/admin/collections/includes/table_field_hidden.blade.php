@@ -2,7 +2,7 @@
                     @if ($column->file_type == 'image')
 
                         <td class="px-4 py-3 text-sm  column_{{ $column->field_name }}">
-                            <img src="{{ $item->getFirstMediaUrl('avatar', 'thumb') }}" alt="" class="w-1/4">
+                            <img src="{{ $item->getFirstMediaUrl('avatar', 'thumb') }}" alt="" class="w-20">
                         </td>
 
                     @else

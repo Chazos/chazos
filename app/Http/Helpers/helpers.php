@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\ContentType;
+use App\Models\Table;
 use Illuminate\Support\Facades\File;
 
 if (! function_exists('cg_get_collections')) {
     function cg_get_collections()
     {
-        return ContentType::all();
+        return Table::all();
     }
 }
 

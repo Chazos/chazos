@@ -1,7 +1,7 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Windmill
+            Chazos
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -28,7 +28,7 @@
                     @click="togglePagesMenu" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <span class="ml-4">Collections</span>
+                        <span class="ml-4">Tables</span>
                     </span>
                     <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
@@ -51,7 +51,7 @@
                         <li
                             class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
-                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->collection_name ]) }}">{{ ucfirst($item->collection_name) }}</a>
+                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->table_name ]) }}">{{ ucfirst($item->table_name) }}</a>
                         </li>
                             @endforeach
 
@@ -62,7 +62,7 @@
 
             <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    href="{{ route('admin.content-types') }}">
+                    href="{{ route('admin.tables') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wand h-6 w-6" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <polyline points="6 21 21 6 18 3 3 18 6 21" />
@@ -70,7 +70,7 @@
                         <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
                         <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
                       </svg>
-                    <span class="ml-4">Content Builder</span>
+                    <span class="ml-4">Table Builder</span>
                 </a>
             </li>
             <li class="relative px-6 py-3">
@@ -105,7 +105,7 @@
             @keydown.escape="closeSideMenu">
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                    Windmill
+                    Chazos
                 </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">

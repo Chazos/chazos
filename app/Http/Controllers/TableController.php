@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContentType;
+use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
-class ContentTypeController extends Controller
+class TableController extends Controller
 {
     //
 
     public function index(){
-        $collections = ContentType::all();
-        return view('admin.content_types.index', ['collections' => $collections]);
+        $tables = Table::all();
+        return view('admin.tables.index', ['tables' => $tables]);
     }
 
     public function fields(Request $request, $table){
-        $collection = ContentType::where('collection_name', $table)->first();
-        $fields = json_decode($collection->fields);
+        $table = Table::where('table_name', $table)->first();
+        $fields = json_decode($table->fields);
 
         return response()->json([
             'status' => 'success',
@@ -28,29 +28,29 @@ class ContentTypeController extends Controller
 
     public function delete($id){
 
-        $collection = ContentType::where('id', $id)->first();
-        $table_name = $collection->collection_name;
+        $table = Table::where('id', $id)->first();
+        $table_name = $table->table_name;
         eval("Schema::dropIfExists('$table_name');");
         delete_model($table_name);
-        $collection->delete();
+        $table->delete();
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Content Type Deleted Successfully'
+            'message' => 'Table Deleted Successfully'
         ]);
     }
 
     public function details(Request $request, $id){
-        $collection = ContentType::where("id", $id)->first();
+        $table = Table::where("id", $id)->first();
         $status = "failed";
 
-        if ($collection != null){
+        if ($table != null){
             $status = "success";
         }
 
         return response()->json([
             'status' => $status,
-            'data' => $collection
+            'data' => $table
         ]);
     }
 
@@ -80,17 +80,17 @@ class ContentTypeController extends Controller
 
         ct_add_timestamps($table_name);
 
-        // Save collection details to the
+        // Save table details to the
 
-        $new_content_type = new ContentType();
+        $new_table = new Table();
 
-        $new_content_type->display_name = $display_name;
-        $new_content_type->model_name = $model_name;
-        $new_content_type->collection_name = $table_name;
-        $new_content_type->slug = $table_name;
-        $new_content_type->fields = json_encode($fields);
-        $new_content_type->configure_fields = json_encode($configure_fields);
-        $new_content_type->save();
+        $new_table->display_name = $display_name;
+        $new_table->model_name = $model_name;
+        $new_table->table_name = $table_name;
+        $new_table->slug = $table_name;
+        $new_table->fields = json_encode($fields);
+        $new_table->configure_fields = json_encode($configure_fields);
+        $new_table->save();
 
 
         // Create model for table
@@ -103,7 +103,7 @@ class ContentTypeController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Content Type Created',
+            'message' => 'Table Created',
             'details' => $request]);
 
 
@@ -113,7 +113,7 @@ class ContentTypeController extends Controller
     public function update(Request $request, $id){
 
         $table_id = $id;
-        $table_name = $request->collection_name;
+        $table_name = $request->table_name;
         $fields = $request->fields;
         $configure_fields = $request->configure_fields;
         $display_name = $request->display_name;
@@ -146,11 +146,11 @@ class ContentTypeController extends Controller
         }
 
         // Finally Save the data
-        $update_collection = ContentType::where('id', $id)->first();
+        $update_collection = Table::where('id', $id)->first();
 
         if ($update_collection != null){
             $update_collection->display_name = $display_name;
-            $update_collection->collection_name = $table_name;
+            $update_collection->table_name = $table_name;
             $update_collection->slug = $table_name;
             $update_collection->fields = json_encode($fields);
             $update_collection->configure_fields = json_encode($configure_fields);
@@ -158,7 +158,7 @@ class ContentTypeController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'message' => 'Content Type Updated',
+                'message' => 'Table Updated',
                 'details' => $request]);
         }
 

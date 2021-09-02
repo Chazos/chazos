@@ -4,7 +4,10 @@ Chazos is headless CMS built with Laravel. It is a simple CMS that allows you to
 
 It should be used as a backend for websites, web apps and mobile apps.
 
-Chazos is a greek work for stupid. Someone who is stupid is someone who is brainless or headless :).
+Chazos is a greek work for stupid. Someone who is stupid is someone who is brainless or headless 😁. 
+
+### TL;DR
+Chazos is a chazos CMS😅🤣🤣🤣
 
 ### How to install
 
@@ -16,26 +19,45 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
     `cd chazos`
 
-3. Install dependencies
+3. Modify .env file or create one
+    
 
-    `composure install`
+4.  Run install
 
-4. Modify the .env file
-    - Database
+    `./install.sh`  or `install.bat`
 
-5. Run the server
+    **Note:** Which file you run depends on which system or  environment you are in
 
-    `php artisan config:cache && php artisan serve`
+8. Serve it
+
+    `php artisan serve`
 
 
 ### Todo
 
-- [ ] Allow admin to add, edit and delete content
-- [ ] Add pagination in manage
-- [ ] Remove stock styles from the frontend
-- [ ] Allow admin to add, edit and delete collections/documents
-- [ ] Add relationships between documents
-- [ ] Add API for the frontend
-- [ ] Add media library
-- [ ] Add settings
+✅ Allow admin to add content
+
+✅ Allow admin to edit content
+
+✅ Allow admin to delete content
+
+⏳ Add pagination in manage content
+
+✅ Remove stock styles from the frontend
+
+✅ Allow admin to add tables
+
+✅ Allow admin to delete tables
+
+⏳ Allow admin to edit tables
+
+⏳ Add relationships between documents
+
+⏳ Add API for the frontend
+
+✅ Add media library
+
+⏳ Add media section
+
+⏳ Add settings
 

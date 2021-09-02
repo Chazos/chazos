@@ -4,14 +4,14 @@
     <main class="h-full pb-16 overflow-y-auto">
         <div class="container grid px-6 mx-auto">
             <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-                {{ ucfirst($table) }}
+                {{ ucfirst($table->table_name) }}
             </h2>
 
             <div class="flex justify-end py-3">
 
-                <a href="{{ route('admin.add_entry', ['table_name' => $table]) }}"
+                <a href="{{ route('admin.add_entry', ['table_name' => $table->table_name]) }}"
                     class="bg-purple-600 px-3 mx-3 text-white ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
-                    New Field
+                    New Entry
                 </a>
                 <div x-data="{ dropdownOpen: false }" class="relative">
 
@@ -77,13 +77,13 @@
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
-                                @include('admin.collections.includes.manage_table_header')
+                                @include('admin.table_data.includes.manage_table_header')
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                        @include('admin.collections.includes.manage_table_rows')
+                        @include('admin.table_data.includes.manage_table_rows')
 
 
 
@@ -183,15 +183,23 @@
             }
         }
 
-        function deleteRow(className, rowId) {
-            fetch('/manage/table_name/id', {
+        function deleteRow(rowId,tableName, rowId) {
+            fetch(`/manage/${tableName}/delete/${rowId}`, {
                     method: 'POST',
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
                     body: {
-                        _method: 'DELETE',
+
                     }
                 })
-                .then(() => {
-                    this.message = 'Form sucessfully submitted!'
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                    // TODO: Handle success
                 })
                 .catch(() => {
                     this.message = 'Ooops! Something went wrong!'

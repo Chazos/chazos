@@ -8,13 +8,13 @@
 <main class="h-full pb-16 overflow-y-auto">
     <div class="container px-6 mx-auto grid">
       <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Add a {{ $table }}
+        Add a {{ $table->table_name }}
       </h2>
       <!-- CTA -->
 
       <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-     <form id="myForm" action="{{ route('admin.create_entry', ['table_name' => $table]) }}" method="POST" enctype="multipart/form-data">
+     <form id="myForm" action="{{ route('admin.create_entry', ['table_name' => $table->table_name]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @foreach ($columns as $column)
             @if ($column->field_type == 'string')
@@ -106,9 +106,12 @@ const initEditors = async () => {
 
 }
 
-document.onload = function() {
-    initEditors()
-}
+(function() {
+   // your page initialization code here
+   // the DOM will be available here
+   initEditors()
+})();
+
 
 </script>
 

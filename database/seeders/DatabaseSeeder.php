@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
 
 
 
-        \App\Models\ContentType::create([
+        \App\Models\Table::create([
             'display_name' => 'users',
-            'collection_name' => 'users',
+            'table_name' => 'users',
             'model_name' => 'User',
             'slug' => 'users',
             'fields' => json_encode([

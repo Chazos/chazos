@@ -15,21 +15,21 @@ const changeTableHeader = (tableName) => {
 }
 
 const addItemsToTable = (storeName) => {
-    let collection =  localStorage.getItem(storeName);
+    let table =  localStorage.getItem(storeName);
 
-    if (collection != null && collection != undefined) {
-        collection = JSON.parse(collection);
-        let tableName = collection.display_name.toLowerCase()
-        let fields = collection.fields
+    if (table != null && table != undefined) {
+        table = JSON.parse(table);
+        let tableName = table.display_name.toLowerCase()
+        let fields = table.fields
 
        changeTableHeader(tableName)
 
-        document.getElementById('active-collection-fields').innerHTML = ''
+        document.getElementById('active-table-fields').innerHTML = ''
 
         for (let i = 0; i < fields.length; i++) {
             const field = fields[i];
 
-            document.getElementById('active-collection-fields').innerHTML += `
+            document.getElementById('active-table-fields').innerHTML += `
 
             <tr id="x-row-${field.field_name}" class="text-gray-700 dark:text-gray-400">
                 <td class="px-4 py-3 ">
@@ -63,30 +63,30 @@ const addItemsToTable = (storeName) => {
 const draftCollection = () =>{
     newCollection = {}
     newCollection.display_name = document.getElementById('display_name').value
-    newCollection.name = document.getElementById('collection_name').value
+    newCollection.name = document.getElementById('table_name').value
     newCollection.fields = []
     newCollection.configure_fields = {}
 
     localStorage.setItem('newCollection', JSON.stringify(newCollection))
 
     changeElementAttr(
-            "#save-collection-button",
+            "#save-table-button",
             "onclick",
             "createNewCollection()"
         )
 }
 
 const deleteUnsavedCollection = () => {
-    // Todo: Implement delete unsaved collection
+    // Todo: Implement delete unsaved table
 }
 
 const createNewCollection = () => {
-    let collection = localStorage.getItem("newCollection")
+    let table = localStorage.getItem("newCollection")
 
-    if (collection != null && collection != undefined) {
-        collection = JSON.parse(collection);
+    if (table != null && table != undefined) {
+        table = JSON.parse(table);
 
-        fetch('/content-types/create',
+        fetch('/tables/create',
         {
                 method: 'POST',
                 headers: {
@@ -95,13 +95,13 @@ const createNewCollection = () => {
                     "X-Requested-With": "XMLHttpRequest",
                     "X-CSRF-Token": document.querySelector('input[name="_token"]').value
                 },
-                body: JSON.stringify(collection)
+                body: JSON.stringify(table)
         })
         .then(response => response.json())
         .then(response => {
             if (response.status == 'success') {
                 localStorage.removeItem('newCollection')
-                window.location.href = '/content-types'
+                window.location.href = '/tables'
             }
         })
     }
@@ -110,12 +110,12 @@ const createNewCollection = () => {
 const appendFieldToConfigure = (storeName) => {
   let configFieldsViewElem =  document.getElementById("configure-fields-view")
     configFieldsViewElem.innerHTML = ""
-    let collection = localStorage.getItem(storeName)
+    let table = localStorage.getItem(storeName)
 
-    if (collection != null && collection != undefined) {
-        collection = JSON.parse(collection);
+    if (table != null && table != undefined) {
+        table = JSON.parse(table);
 
-        let fields = collection.configure_fields
+        let fields = table.configure_fields
         let fieldKeys = Object.keys(fields)
         for (let fieldKey of fieldKeys){
 
@@ -135,9 +135,9 @@ const appendFieldToConfigure = (storeName) => {
 }
 
 const addCollectionField = (storeName="newCollection") => {
-    let collection = JSON.parse(localStorage.getItem(storeName))
+    let table = JSON.parse(localStorage.getItem(storeName))
 
-    if (collection != null && collection != undefined){
+    if (table != null && table != undefined){
 
         let newField = {
                 'field_name' : document.getElementById('field_name').value,
@@ -151,9 +151,9 @@ const addCollectionField = (storeName="newCollection") => {
         }
 
 
-        collection.configure_fields[newField.field_name] = true
-        collection.fields.push(newField)
-        localStorage.setItem(storeName, JSON.stringify(collection))
+        table.configure_fields[newField.field_name] = true
+        table.fields.push(newField)
+        localStorage.setItem(storeName, JSON.stringify(table))
         appendFieldToConfigure(storeName)
 
         // Clear forms

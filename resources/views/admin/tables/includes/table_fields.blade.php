@@ -2,7 +2,7 @@
 
     <div x-show="showCollectionTable == false" class="flex items-center  w-full h-full">
         <div class="px-10 text-gray-600 text-5xl font-bold text-center">
-            Click a collection to view its fields or create one
+            Click a table to view its fields or create one
         </div>
     </div>
 
@@ -55,7 +55,7 @@
                 <button x-on:click="deleteUnsavedCollection()" class="bg-red-400 ml-4 hover:bg-red-600 w-20 text-white relative z-10 block rounded-md  p-2 focus:outline-none">
                     Cancel
                   </button>
-                  <button id="save-collection-button" onclick="createNewCollection()" class="bg-purple-600 ml-5 text-white hover:bg-purple-400 w-20 relative z-10 block rounded-md  p-2 focus:outline-none">
+                  <button id="save-table-button" onclick="createNewCollection()" class="bg-purple-600 ml-5 text-white hover:bg-purple-400 w-20 relative z-10 block rounded-md  p-2 focus:outline-none">
                     Save
                   </button>
 
@@ -76,7 +76,7 @@
                     <th class="px-4 py-3">Actions</th>
                   </tr>
                 </thead>
-                <tbody id="active-collection-fields" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+                <tbody id="active-table-fields" class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
 
 

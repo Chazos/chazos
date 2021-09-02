@@ -53,7 +53,10 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ⏳ Add relationships between documents
 
-⏳ Add API for the frontend
+✅ Add API for the frontend
+    - Get content
+    - Get particular content
+    - Delete item
 
 ✅ Add media library
 

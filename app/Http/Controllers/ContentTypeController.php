@@ -26,62 +26,6 @@ class ContentTypeController extends Controller
 
     }
 
-    public function create_entry(Request $request, $table){
-
-        $collection = ContentType::where('collection_name', $table)->first();
-
-
-        $fields = json_decode($collection->fields);
-        $model_name = $collection->model_name;
-        $model = "App\Models\\". $model_name;
-        $new_entry = new $model;
-
-        foreach($fields as $field){
-            $field_name = $field->field_name;
-            $field_type = $field->field_type;
-
-
-            if (array_key_exists($field_name, $request->all())){
-
-                $add_field_data = "\$new_entry->$field_name = \$request->$field_name;";
-                eval($add_field_data);
-            }
-
-        }
-
-
-
-        $new_entry->save();
-
-        // Attach files
-        foreach($fields as $field){
-            $field_name = $field->field_name;
-            $field_type = $field->field_type;
-            $accepts_file = $field->accepts_file;
-            $file_type = $field->file_type;
-
-
-
-            if($accepts_file == "true"){
-                if (array_key_exists($field_name, $request->all())){
-                    if ($file_type == "image"){
-
-                        if($request->hasFile( $field->field_name) && $request->file($field->field_name)->isValid()){
-
-                            $new_entry->addMediaFromRequest( $field->field_name)->toMediaCollection($field->field_name);
-                        }
-                    }
-                }
-            }
-
-        }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Entry created successfully'
-        ]);
-    }
-
     public function delete($id){
 
         $collection = ContentType::where('id', $id)->first();

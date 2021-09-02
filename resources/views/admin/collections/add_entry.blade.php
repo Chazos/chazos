@@ -14,7 +14,7 @@
 
       <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-     <form id="myForm" action="{{ route('admin.content-types.create_entry', ['table' => $table]) }}" method="POST" enctype="multipart/form-data">
+     <form id="myForm" action="{{ route('admin.create_entry', ['table_name' => $table]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @foreach ($columns as $column)
             @if ($column->field_type == 'string')

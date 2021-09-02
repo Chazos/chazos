@@ -77,18 +77,7 @@
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
-                                @foreach ($columns as $column)
-
-
-                                    @if ($config_fields[$column->field_name] == true)
-                                        <th class="px-4 py-3 column_{{ $column->field_name }}">{{ $column->field_name }}
-                                        </th>
-                                    @else
-                                        <th class="px-4 py-3 hidden column_{{ $column->field_name }}">
-                                            {{ $column->field_name }}</th>
-                                    @endif
-
-                                @endforeach
+                                @include('admin.collections.includes.manage_table_header')
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
                         </thead>

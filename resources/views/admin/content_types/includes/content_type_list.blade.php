@@ -1,7 +1,7 @@
 <div class="lg:w-1/4 py-10  bg-gray-200">
 
     <div class="ml-5">
-        <p class="font-bold uppercase text-xs text-gray-600">Collection type</p>
+        <p class="font-bold uppercase text-xs text-gray-600">Table List</p>
     <div class="xl:h-60 overflow-y-scroll">
 
         <ul class="ml-5">
@@ -27,7 +27,7 @@
     </div>
     <div class="pr-12 my-6">
         <button @click="showAddCollectionModel = !showAddCollectionModel" class="flex items-center justify-between w-full px-4 py-2 text-sm font-medium leading-5 text-white bg-blue-600 hover:bg-blue-400 transition-colors duration-15border border-transparent rounded-lg active:bg-purple-600 hover:underline focus:outline-none focus:shadow-outline-purple">
-            Create Collection
+            Create Table
             <span class="ml-2" aria-hidden="true">+</span>
         </button>
     </div>

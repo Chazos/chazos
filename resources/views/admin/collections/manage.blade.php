@@ -11,7 +11,7 @@
 
                 <a href="{{ route('admin.add_entry', ['table_name' => $table]) }}"
                     class="bg-purple-600 px-3 mx-3 text-white ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
-                    New Field
+                    New Entry
                 </a>
                 <div x-data="{ dropdownOpen: false }" class="relative">
 
@@ -183,15 +183,23 @@
             }
         }
 
-        function deleteRow(className, rowId) {
-            fetch('/manage/table_name/id', {
+        function deleteRow(rowId,tableName, rowId) {
+            fetch(`/manage/${tableName}/delete/${rowId}`, {
                     method: 'POST',
+                    headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
                     body: {
-                        _method: 'DELETE',
+
                     }
                 })
-                .then(() => {
-                    this.message = 'Form sucessfully submitted!'
+                .then(response => response.json())
+                .then(response => {
+                    console.log(response)
+                    // TODO: Handle success
                 })
                 .catch(() => {
                     this.message = 'Ooops! Something went wrong!'

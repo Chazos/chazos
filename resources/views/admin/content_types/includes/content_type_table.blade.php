@@ -2,7 +2,7 @@
 
     <div x-show="showCollectionTable == false" class="flex items-center  w-full h-full">
         <div class="px-10 text-gray-600 text-5xl font-bold text-center">
-            Click a collection to view its fields or create one
+            Click a table to view its fields or create one
         </div>
     </div>
 

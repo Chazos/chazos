@@ -21,8 +21,15 @@ class CollectionsController extends Controller
         return view('admin.collections.manage', compact('table','config_fields', 'collection', 'columns', 'data'));
     }
 
-    public function delete_item(Request $request, $table, $id){
-        DB::table($table)->where('id', $id)->delete();
+    public function delete_item(Request $request, $table_name, $id){
+
+        $collection = ContentType::where('collection_name', $table_name)->first();
+        $model = "App\Models\\" . $collection->model_name;
+        $item = $model::where('id', $id)->first();
+
+        $item->media()->delete();
+        $item->delete();
+
         return response()->json([
             'success' => true,
             'message' => 'Record has been deleted successfully.']);
@@ -145,7 +152,7 @@ class CollectionsController extends Controller
                     if ($file_type == "image"){
 
                         if($request->hasFile( $field->field_name) && $request->file($field->field_name)->isValid()){
-                          
+
                             $current_entry->media()->delete();
                             $current_entry->addMediaFromRequest( $field->field_name)->toMediaCollection($field->field_name);
                         }

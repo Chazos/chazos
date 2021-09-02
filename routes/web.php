@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/manage/{table_name}/add',  [CollectionsController::class, 'add_entry'])->name('admin.add_entry');
     Route::post('/manage/{table_name}/create',  [CollectionsController::class, 'create_entry'])->name('admin.create_entry');
     Route::get('/manage/{table_name}',  [CollectionsController::class, 'manage'])->name('admin.manage');
-    Route::get('/manage/{table_name}/delete/{id}',  [CollectionsController::class, 'delete_item'])->name('admin.delete_item');
+    Route::post('/manage/{table_name}/delete/{id}',  [CollectionsController::class, 'delete_item'])->name('admin.delete_item');
     Route::get('/manage/{table_name}/edit/{id}',  [CollectionsController::class, 'edit_item'])->name('admin.edit_item');
     Route::post('/manage/{table_name}/update/{id}',  [CollectionsController::class, 'update_item'])->name('admin.update_item');
 

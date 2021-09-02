@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Role;
 
 class TableController extends Controller
 {
@@ -44,6 +45,36 @@ class TableController extends Controller
     public function details(Request $request, $id){
         $table = Table::where("id", $id)->first();
         $status = "failed";
+        $role_perms = [];
+        $filter_roles = [];
+        $perms = array(
+            "read",
+            "delete",
+            "edit",
+            "update"
+        );
+
+
+        $roles = Role::all();
+
+        foreach ($roles as $role){
+            $role_perms[$role->name] = [];
+            $filter_roles[] = $role->name;
+
+            foreach ($perms as $perm){
+                $full_perm = "can ". $perm. " ". $table->table_name;
+
+                try{
+                if($role->hasPermissionTo($full_perm)){
+                    $role_perms[$role->name][$perm] = true;
+                }else{
+                    $role_perms[$role->name][$perm] = false;
+                }
+            }catch (\Exception $e){
+                $role_perms[$role->name][$perm] = false;
+            }
+            }
+        }
 
         if ($table != null){
             $status = "success";
@@ -51,7 +82,9 @@ class TableController extends Controller
 
         return response()->json([
             'status' => $status,
-            'data' => $table
+            'data' => $table,
+            'roles' => $filter_roles,
+            'role_perms' => $role_perms
         ]);
     }
 
@@ -119,6 +152,11 @@ class TableController extends Controller
         $fields = $request->fields;
         $configure_fields = $request->configure_fields;
         $display_name = $request->display_name;
+        $perms = $request->perms;
+
+        // dd($perms);
+
+        // TODO: Save Perms
 
 
         // Delete fields if any

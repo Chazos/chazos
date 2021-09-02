@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<main class="h-full overflow-y-auto " x-data="{ showCollectionTable: false, acceptsData: 'false', showAddCollectionModel : false,showAddField : false, showCollectionNameForm: true, editCollectionField : false }">
+<main class="h-full overflow-y-auto " x-data="{ showCollectionTable: false, showPermissionTable: false, acceptsData: 'false', showAddCollectionModel : false,showAddField : false, showCollectionNameForm: true, editCollectionField : false }">
 
   <div class="lg:flex h-full">
     @include('admin.tables.includes.table_list')
@@ -19,6 +19,7 @@
 
 @include('admin.modals.add_field')
 @include('admin.modals.edit_column')
+@include('admin.modals.table_permissions')
   </main>
 
 

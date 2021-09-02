@@ -41,6 +41,10 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Allow admin to delete content
 
+✅ Allow admin to view and modify permissions
+
+⏳ Save and effect permissions
+
 ⏳ Add pagination in manage content
 
 ✅ Remove stock styles from the frontend

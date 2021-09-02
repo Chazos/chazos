@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\DataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+
+Route::get('/{table_name}', [DataController::class, 'index']);
+Route::get('/{table_name}/{id}', [DataController::class, 'show']);
+Route::post('/{table_name}/delete/{id}', [DataController::class, 'delete']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

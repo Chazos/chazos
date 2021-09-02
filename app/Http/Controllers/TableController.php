@@ -31,7 +31,8 @@ class TableController extends Controller
         $table = Table::where('id', $id)->first();
         $table_name = $table->table_name;
         eval("Schema::dropIfExists('$table_name');");
-        delete_model($table_name);
+        cg_delete_model($table_name);
+        cg_delete_resource($table_name);
         $table->delete();
 
         return response()->json([
@@ -97,7 +98,8 @@ class TableController extends Controller
         $table_accepts_media = cg_supports_media($fields);
 
 
-        create_model($model_name, $table_name, $table_accepts_media);
+        cg_create_model($model_name, $table_name, $table_accepts_media);
+        cg_create_resource($table_name, $fields);
 
 
 
@@ -155,6 +157,10 @@ class TableController extends Controller
             $update_collection->fields = json_encode($fields);
             $update_collection->configure_fields = json_encode($configure_fields);
             $update_collection->save();
+
+
+            cg_delete_model($table_name);
+            cg_create_resource($table_name, $fields);
 
             return response()->json([
                 'status' => 'success',

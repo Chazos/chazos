@@ -56,7 +56,7 @@ class TableDataController extends Controller
 
         $table = Table::where('table_name', $table_name)->first();
 
-    
+
 
         $fields = json_decode($table->fields);
         $model_name = $table->model_name;
@@ -95,7 +95,8 @@ class TableDataController extends Controller
 
                         if($request->hasFile( $field->field_name) && $request->file($field->field_name)->isValid()){
 
-                            $new_entry->addMediaFromRequest( $field->field_name)->toMediaCollection($field->field_name);
+                            $new_entry->addMediaFromRequest( $field->field_name)
+                                      ->toMediaCollection($field->field_name);
                         }
                     }
                 }
@@ -155,7 +156,8 @@ class TableDataController extends Controller
                         if($request->hasFile( $field->field_name) && $request->file($field->field_name)->isValid()){
 
                             $current_entry->media()->delete();
-                            $current_entry->addMediaFromRequest( $field->field_name)->toMediaCollection($field->field_name);
+                            $current_entry->addMediaFromRequest( $field->field_name)
+                                          ->toMediaCollection($field->field_name);
                         }
                     }
                 }

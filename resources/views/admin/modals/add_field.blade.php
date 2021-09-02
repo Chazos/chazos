@@ -18,10 +18,10 @@
                               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="display_name" type="text" placeholder="Display Name">
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="collection_name">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="table_name">
                                   Table Name
                                 </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="collection_name" type="text" placeholder="Table Name">
+                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="table_name" type="text" placeholder="Table Name">
                               </div>
 
                           </form>
@@ -47,7 +47,7 @@
                               <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="field_name" type="text" placeholder="Field Name">
                             </div>
                             <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="collection_name">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="table_name">
                                   Field Type
                                 </label>
                                 <select id="field_type" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="field_type">
@@ -125,7 +125,7 @@
                         <!-- Buttons -->
                         <div class="text-right space-x-5 mt-5">
                             <button @click="showAddCollectionModel = !showAddCollectionModel" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Finish</button>
-                            <button id="add-field-to-collection" onclick="addCollectionField('newCollection')" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Add Another Field</button>
+                            <button id="add-field-to-table" onclick="addCollectionField('newCollection')" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Add Another Field</button>
                         </div>
                     </div>
 

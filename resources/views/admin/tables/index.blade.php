@@ -10,9 +10,9 @@
 <main class="h-full overflow-y-auto " x-data="{ showCollectionTable: false, acceptsData: 'false', showAddCollectionModel : false,showAddField : false, showCollectionNameForm: true, editCollectionField : false }">
 
   <div class="lg:flex h-full">
-    @include('admin.content_types.includes.content_type_list')
+    @include('admin.tables.includes.table_list')
 
-    @include('admin.content_types.includes.content_type_table')
+    @include('admin.tables.includes.table_fields')
 
 </div>
 
@@ -27,7 +27,7 @@
 @endsection
 
 @section('custom-js')
-<script src="{{ asset('js/content-type/collection.js') }}"></script>
-<script src="{{ asset('js/content-type/manage.js') }}"></script>
+<script src="{{ asset('js/tables/table.js') }}"></script>
+<script src="{{ asset('js/tables/manage.js') }}"></script>
 
 @endsection

@@ -2,9 +2,9 @@
     <tr class="text-gray-700 dark:text-gray-400" id="row-{{ $item->id }}">
         @foreach ($columns as $column)
             @if ($config_fields[$column->field_name] == true)
-                @include('admin.collections.includes.table_field_shown')
+                @include('admin.table_data.includes.table_field_shown')
             @else
-                @include('admin.collections.includes.table_field_hidden')
+                @include('admin.table_data.includes.table_field_hidden')
             @endif
 
 
@@ -12,7 +12,7 @@
         <td class="px-4 py-3">
             <div class="flex items-center space-x-4 text-sm">
                 <a
-                    href="{{ route('admin.edit_item', ['table_name' => $table, 'id' => $item->id]) }}"
+                    href="{{ route('admin.edit_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Edit">
                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -22,7 +22,7 @@
                     </svg>
                 </a>
                 <button
-                    onclick="deleteRow('#row-{{ $item->id }}','{{ $table }}', {{ $item->id }})"
+                    onclick="deleteRow('#row-{{ $item->id }}','{{ $table->table_name }}', {{ $item->id }})"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
                     aria-label="Delete">
                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">

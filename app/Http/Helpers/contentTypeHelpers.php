@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\ContentType;
+use App\Models\Table;
 use Illuminate\Support\Facades\Schema;
 
 if (! function_exists('ct_add_column')) {

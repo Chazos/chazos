@@ -2,29 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ContentType;
+use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CollectionsController extends Controller
+class TableDataController extends Controller
 {
     public function manage(Request $request, $table){
-        $collection = ContentType::where('collection_name', $table)->first();
-        $config_fields = json_decode(json_encode(json_decode($collection->configure_fields)), true);
-        $columns = json_decode($collection->fields);
-        $model = "App\Models\\" . $collection->model_name;
+        $table = Table::where('table_name', $table)->first();
+        $config_fields = json_decode(json_encode(json_decode($table->configure_fields)), true);
+        $columns = json_decode($table->fields);
+        $model = "App\Models\\" . $table->model_name;
 
 
         $data = $model::all();
-        return view('admin.collections.manage', compact('table','config_fields', 'collection', 'columns', 'data'));
+        return view('admin.table_data.manage', compact('table','config_fields', 'table', 'columns', 'data'));
     }
 
     public function delete_item(Request $request, $table_name, $id){
 
-        $collection = ContentType::where('collection_name', $table_name)->first();
-        $model = "App\Models\\" . $collection->model_name;
+        $table = Table::where('table_name', $table_name)->first();
+        $model = "App\Models\\" . $table->model_name;
         $item = $model::where('id', $id)->first();
 
         $item->media()->delete();
@@ -35,30 +35,31 @@ class CollectionsController extends Controller
             'message' => 'Record has been deleted successfully.']);
     }
 
-    public function add_entry(Request $request, $table){
-        $collection = ContentType::where('collection_name', $table)->first();
-        $columns = json_decode($collection->fields);
-        return view('admin.collections.add_entry', compact('table', 'collection', 'columns'));
+    public function add_entry(Request $request, $table_name){
+        $table = Table::where('table_name', $table_name)->first();
+        $columns = json_decode($table->fields);
+        return view('admin.table_data.add_entry', compact('table', 'table', 'columns'));
 
     }
 
     public function edit_item(Request $request, $table, $id){
-        $collection =  ContentType::where('collection_name', $table)->first();
-        $model = "App\Models\\" . $collection->model_name;
+        $table =  Table::where('table_name', $table)->first();
+        $model = "App\Models\\" . $table->model_name;
         $item = $model::where('id', $id)->first();
-        $fields = json_decode($collection->fields);
-        return view('admin.collections.edit', compact('table','item', 'collection', 'fields'));
+        $fields = json_decode($table->fields);
+        return view('admin.table_data.edit', compact('table','item', 'table', 'fields'));
     }
 
 
 
     public function create_entry(Request $request, $table_name){
 
-        $collection = ContentType::where('collection_name', $table_name)->first();
+        $table = Table::where('table_name', $table_name)->first();
 
+    
 
-        $fields = json_decode($collection->fields);
-        $model_name = $collection->model_name;
+        $fields = json_decode($table->fields);
+        $model_name = $table->model_name;
         $model = "App\Models\\". $model_name;
         $new_entry = new $model;
 
@@ -110,9 +111,9 @@ class CollectionsController extends Controller
 
     public function update_item(Request $request, $table_name, $id){
 
-        $collection = ContentType::where('collection_name', $table_name)->first();
-        $fields = json_decode($collection->fields);
-        $model_name = $collection->model_name;
+        $table = Table::where('table_name', $table_name)->first();
+        $fields = json_decode($table->fields);
+        $model_name = $table->model_name;
         $model = "App\Models\\". $model_name;
         $current_entry = $model::where('id', $id)->first();
 

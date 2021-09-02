@@ -1,9 +1,9 @@
 const editCollectionField = (storeName, fieldName) => {
-    let collection = localStorage.getItem(storeName);
+    let table = localStorage.getItem(storeName);
 
-    if (collection) {
-        collection = JSON.parse(collection);
-        let field = collection[fieldName];
+    if (table) {
+        table = JSON.parse(table);
+        let field = table[fieldName];
 
         injectDetailsIntoModal(storeName, field);
     }
@@ -16,7 +16,7 @@ const injectDetailsIntoModal = (storeName, field) => {
 
 const deleteCollection = (id) => {
 
-    fetch(`/content-types/delete/${id}`,
+    fetch(`/tables/delete/${id}`,
         {
                 method: 'POST',
                 headers: {
@@ -30,7 +30,7 @@ const deleteCollection = (id) => {
         .then(response => response.json())
         .then(response => {
             if (response.status == 'success'){
-                window.location.href = "/content-types"
+                window.location.href = "/tables"
             }
         })
 
@@ -40,13 +40,13 @@ const deleteCollection = (id) => {
 
 const saveCurrentCollection = (storeName, id) => {
 
-    collection = localStorage.getItem(storeName)
+    table = localStorage.getItem(storeName)
 
-    if (collection != undefined && collection != undefined){
-        collection = JSON.parse(collection)
+    if (table != undefined && table != undefined){
+        table = JSON.parse(table)
 
 
-        fetch(`/content-types/update/${id}`,
+        fetch(`/tables/update/${id}`,
         {
                 method: 'POST',
                 headers: {
@@ -55,7 +55,7 @@ const saveCurrentCollection = (storeName, id) => {
                     "X-Requested-With": "XMLHttpRequest",
                     "X-CSRF-Token": document.querySelector('input[name="_token"]').value
                 },
-                body: JSON.stringify(collection)
+                body: JSON.stringify(table)
         })
         .then(response => response.json())
         .then(response => {
@@ -68,7 +68,7 @@ const saveCurrentCollection = (storeName, id) => {
 
 
 const getCollectionDetails = (id) => {
-    fetch(`/content-types/${id}`,
+    fetch(`/tables/${id}`,
         {
                 method: 'GET',
                 headers: {
@@ -91,13 +91,13 @@ const getCollectionDetails = (id) => {
                 appendFieldToConfigure(storeName)
                 addItemsToTable(storeName)
                 changeElementAttr(
-                    "#save-collection-button",
+                    "#save-table-button",
                     "onclick",
                     `saveCurrentCollection('${storeName}', ${data.id})`
                 )
 
                 changeElementAttr(
-                    "#add-field-to-collection",
+                    "#add-field-to-table",
                     "onclick",
                     `addCollectionField('${storeName}')`
                 )
@@ -106,25 +106,25 @@ const getCollectionDetails = (id) => {
 }
 
 const addConfigField = (storeName, fieldName, checkedStatus) => {
-    let collection = localStorage.getItem(storeName);
+    let table = localStorage.getItem(storeName);
 
-    if (collection != null && collection != undefined) {
-        collection = JSON.parse(collection);
-        collection.configure_fields[fieldName] = checkedStatus;
-        localStorage.setItem(storeName, JSON.stringify(collection));
+    if (table != null && table != undefined) {
+        table = JSON.parse(table);
+        table.configure_fields[fieldName] = checkedStatus;
+        localStorage.setItem(storeName, JSON.stringify(table));
     }
 }
 
 const deleteCollectionField = (storeName, field_name) => {
-    collection = localStorage.getItem(storeName)
+    table = localStorage.getItem(storeName)
 
-    if (collection != undefined && collection != null){
-        collection = JSON.parse(collection)
-        let fields = collection.fields
+    if (table != undefined && table != null){
+        table = JSON.parse(table)
+        let fields = table.fields
 
 
-        if (collection.delete_fields == undefined){
-            collection.delete_fields = []
+        if (table.delete_fields == undefined){
+            table.delete_fields = []
         }
 
         // Remove delete field from fields
@@ -133,16 +133,16 @@ const deleteCollectionField = (storeName, field_name) => {
 
             if (field.field_name == field_name){
                 fields.splice(index, 1)
-                collection.fields = fields
+                table.fields = fields
                 break
             }
         }
 
 
 
-        collection.delete_fields.push(field_name)
+        table.delete_fields.push(field_name)
         document.getElementById(`x-row-${field_name}`).remove()
-        localStorage.setItem(storeName, JSON.stringify(collection))
+        localStorage.setItem(storeName, JSON.stringify(table))
 
     }
 }

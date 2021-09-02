@@ -1,7 +1,7 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Windmill
+            Chazos
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -51,7 +51,7 @@
                         <li
                             class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
-                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->collection_name ]) }}">{{ ucfirst($item->collection_name) }}</a>
+                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->table_name ]) }}">{{ ucfirst($item->table_name) }}</a>
                         </li>
                             @endforeach
 
@@ -62,7 +62,7 @@
 
             <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    href="{{ route('admin.content-types') }}">
+                    href="{{ route('admin.tables') }}">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-wand h-6 w-6" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#2c3e50" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
                         <polyline points="6 21 21 6 18 3 3 18 6 21" />
@@ -105,7 +105,7 @@
             @keydown.escape="closeSideMenu">
             <div class="py-4 text-gray-500 dark:text-gray-400">
                 <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-                    Windmill
+                    Chazos
                 </a>
                 <ul class="mt-6">
                     <li class="relative px-6 py-3">

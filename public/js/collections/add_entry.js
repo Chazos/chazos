@@ -1,20 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    fetchTableFields()
-})
 
-
-const fetchTableFields = () => {
-
-    fetch('/content-types/{{ $table }}/fields')
-        .then(response => response.json())
-        .then(data => {
-            if (data.status == "success") {
-                let fields = data.fields
-                localStorage.setItem('currentTableFields', JSON.stringify(fields))
-            }
-        })
-        .catch(error => console.error(error));
-}
 
 
 window.addEventListener("load", function () {

@@ -7,7 +7,7 @@
         <ul class="ml-5">
             @foreach ( $tables as $table )
                 <li  class="py-3 hover:bg-purple-400 flex flex-row">
-                  <button x-on:click="getCollectionDetails({{ $table->id }}); showCollectionTable = true" class="">{{ ucfirst($table->display_name)  }}</button>
+                  <button x-on:click="getCollectionDetails({{ $table->id }}); showCollectionTable = true; showAddField = false; showCollectionNameForm =true" class="">{{ ucfirst($table->display_name)  }}</button>
 
 
                   @if ($table->table_name != 'users')

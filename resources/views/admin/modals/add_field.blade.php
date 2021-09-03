@@ -81,7 +81,7 @@
                                     </label>
                                     <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nullable">
                                         <option value="true">True</option>
-                                        <option value="false">False</option>
+                                        <option value="false" selected>False</option>
                                       </select>
                                   </div>
 
@@ -91,7 +91,7 @@
                                     </label>
                                     <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="unique">
                                         <option value="true">True</option>
-                                        <option value="false">False</option>
+                                        <option value="false" selected>False</option>
                                       </select>
                                   </div>
 
@@ -100,7 +100,7 @@
                                     Accepts File
                                     </label>
                                     <select x-on:change="acceptsData = document.getElementById('accepts-file').value"  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="accepts-file">
-                                        <option value="false">False</option>
+                                        <option value="false" selected>False</option>
                                         <option value="true">True</option>
                                       </select>
                                   </div>
@@ -124,7 +124,7 @@
                           </form>
                         <!-- Buttons -->
                         <div class="text-right space-x-5 mt-5">
-                            <button @click="showAddCollectionModel = !showAddCollectionModel" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Finish</button>
+                            <button @click="showAddCollectionModel = !showAddCollectionModel; showAddField = false; showCollectionNameForm =true" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Finish</button>
                             <button id="add-field-to-table" onclick="addCollectionField('newCollection')" class="px-4 py-2 text-sm bg-white rounded-xl border transition-colors duration-150 ease-linear border-gray-200 text-gray-500 focus:outline-none focus:ring-0 font-bold hover:bg-gray-50 focus:bg-indigo-50 focus:text-indigo">Add Another Field</button>
                         </div>
                     </div>

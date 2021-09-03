@@ -61,18 +61,33 @@ const addItemsToTable = (storeName) => {
 }
 
 const draftCollection = () =>{
+
+    document.querySelector('#active-table-name').innerText = ""
+    document.querySelector('#active-table-fields').innerHTML = ""
+    document.querySelector('#modify-table-perms-btn').classList.add('hidden')
+
+
+
     newCollection = {}
     newCollection.display_name = document.getElementById('display_name').value
     newCollection.name = document.getElementById('table_name').value
     newCollection.fields = []
     newCollection.configure_fields = {}
 
+
     localStorage.setItem('newCollection', JSON.stringify(newCollection))
+    changeTableHeader(document.getElementById('table_name').value)
 
     changeElementAttr(
             "#save-table-button",
             "onclick",
             "createNewCollection()"
+        )
+
+    changeElementAttr(
+            "#add-field-to-table",
+            "onclick",
+            "addCollectionField('newCollection')"
         )
 }
 

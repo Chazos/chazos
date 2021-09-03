@@ -2,9 +2,11 @@
 
 use App\Models\Table;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-if (! function_exists('ct_add_column')) {
-    function ct_add_column($table_name, $field, $action = "create")
+if (! function_exists('tb_add_column')) {
+    function tb_add_column($table_name, $field, $action = "create")
     {
         $field_name = $field['field_name'];
         $field_type = $field['field_type'];
@@ -36,8 +38,8 @@ if (! function_exists('ct_add_column')) {
     }
 }
 
-if (! function_exists('ct_add_id_field')) {
-    function ct_add_id_field($table_name)
+if (! function_exists('tb_add_id_field')) {
+    function tb_add_id_field($table_name)
     {
 
         $table_string = "Schema::create('$table_name', function (\$table) {";
@@ -47,8 +49,8 @@ if (! function_exists('ct_add_id_field')) {
     }
 }
 
-if (! function_exists('ct_add_timestamps')) {
-    function ct_add_timestamps($table_name)
+if (! function_exists('tb_add_timestamps')) {
+    function tb_add_timestamps($table_name)
     {
 
         $table_string = "Schema::table('$table_name', function (\$table) {";
@@ -58,8 +60,8 @@ if (! function_exists('ct_add_timestamps')) {
     }
 }
 
-if (! function_exists('ct_rename_column')) {
-    function ct_rename_column($table_name, $old_name, $new_name){
+if (! function_exists('tb_rename_column')) {
+    function tb_rename_column($table_name, $old_name, $new_name){
         $table_string = "Schema::table('$table_name', function (\$table)";
         $table_string .= "{\$table->renameColumn('$old_name', '$new_name');});";
 
@@ -68,8 +70,8 @@ if (! function_exists('ct_rename_column')) {
     }
 }
 
-if (! function_exists('ct_delete_column')) {
-    function ct_delete_column($table_name, $field ){
+if (! function_exists('tb_delete_column')) {
+    function tb_delete_column($table_name, $field ){
         $field_name = $field['field_name'];
 
         $table_string = "Schema::table('$table_name', function (\$table) {";
@@ -80,8 +82,61 @@ if (! function_exists('ct_delete_column')) {
     }
 }
 
-if (! function_exists('ct_drop_foreign')) {
-    function ct_drop_foreign($table_name, $column_name){
+if (! function_exists('tb_add_perms')) {
+    function tb_add_perms($table_name, $perms ){
+        $roles = Role::all();
+
+            foreach ($roles as $role) {
+                foreach (array_keys($perms[$role->name]) as $perm) {
+                    try{
+                        $whole_perm = "can " . $perm . " " . $table_name;
+
+                        if ($perms[$role->name][$perm] == true) {
+                            $role->givePermissionTo($whole_perm);
+                        } else {
+                            $role->revokePermissionTo($whole_perm);
+                        }
+                    }catch(\Exception $e){
+                        continue;
+                    }
+                }
+
+                $role->save();
+            }
+
+
+
+    }
+
+
+}
+
+if (! function_exists('tb_create_perms')) {
+    function tb_create_perms($table_name){
+        $roles = Role::all();
+        $perms = array("read", "edit", "delete", "update");
+
+        foreach ($perms as $perm) {
+            $whole_perm = "can " . $perm . " " . $table_name;
+            Permission::create(['name' => $whole_perm]);
+        }
+    }
+}
+
+if (! function_exists('tb_delete_perms')) {
+    function tb_delete_perms($table_name){
+        $roles = Role::all();
+        $perms = array("read", "edit", "delete", "update");
+
+        foreach ($perms as $perm) {
+            $whole_perm = "can " . $perm . " " . $table_name;
+            Permission::where('name', $whole_perm)->delete();
+        }
+    }
+}
+
+if (! function_exists('tb_drop_foreign')) {
+    function tb_drop_foreign($table_name, $column_name){
         $foreign_column_name = $table_name . '_';
         $foreign_column_name .= $column_name . '_foreign';
         $table_string = "Schema::table('$table_name', function(\$table)";
@@ -91,8 +146,8 @@ if (! function_exists('ct_drop_foreign')) {
     }
 }
 
-if (! function_exists('ct_add_foreign_key')) {
-        function ct_add_foreign_key($table_name, $column_name, $foreign_table, $foreign_column_name, $on_delete=""){
+if (! function_exists('tb_add_foreign_key')) {
+        function tb_add_foreign_key($table_name, $column_name, $foreign_table, $foreign_column_name, $on_delete=""){
         $table_string = "Schema::table('$table_name', function(\$table){";
         $table_string .= "\$table->foreign('$column_name')";
         $table_string .= "->references('$foreign_column_name')";

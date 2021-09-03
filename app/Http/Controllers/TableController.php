@@ -34,6 +34,7 @@ class TableController extends Controller
         eval("Schema::dropIfExists('$table_name');");
         cg_delete_model($table_name);
         cg_delete_resource($table_name);
+        tb_delete_perms($table_name);
         $table->delete();
 
         return response()->json([
@@ -54,6 +55,8 @@ class TableController extends Controller
             "update"
         );
 
+        // Role::where('name', 'admin')->first()->givePermissionTo("can edit blog");
+
 
         $roles = Role::all();
 
@@ -64,21 +67,24 @@ class TableController extends Controller
             foreach ($perms as $perm){
                 $full_perm = "can ". $perm. " ". $table->table_name;
 
+
                 try{
-                if($role->hasPermissionTo($full_perm)){
-                    $role_perms[$role->name][$perm] = true;
-                }else{
+                    if($role->hasPermissionTo($full_perm)){
+                        $role_perms[$role->name][$perm] = true;
+                    }else{
+                        $role_perms[$role->name][$perm] = false;
+                    }
+                }catch (\Exception $e){
                     $role_perms[$role->name][$perm] = false;
                 }
-            }catch (\Exception $e){
-                $role_perms[$role->name][$perm] = false;
-            }
             }
         }
 
         if ($table != null){
             $status = "success";
         }
+
+
 
         return response()->json([
             'status' => $status,
@@ -98,7 +104,7 @@ class TableController extends Controller
         $display_name = $request->display_name;
         $model_name = ucfirst($table_name);
 
-        ct_add_id_field($table_name);
+        tb_add_id_field($table_name);
 
         foreach ($fields as $field){
 
@@ -108,11 +114,11 @@ class TableController extends Controller
                 continue;
             }
 
-            ct_add_column($table_name, $field, 'table');
+            tb_add_column($table_name, $field, 'table');
 
         }
 
-        ct_add_timestamps($table_name);
+        tb_add_timestamps($table_name);
 
         // Save table details to the
 
@@ -133,6 +139,7 @@ class TableController extends Controller
 
         cg_create_model($model_name, $table_name, $table_accepts_media);
         cg_create_resource($table_name, $fields);
+        tb_create_perms($table_name);
 
 
 
@@ -154,7 +161,10 @@ class TableController extends Controller
         $display_name = $request->display_name;
         $perms = $request->perms;
 
-        // dd($perms);
+        // Save perms
+        tb_add_perms($table_name, $perms);
+
+
 
         // TODO: Save Perms
 
@@ -165,7 +175,7 @@ class TableController extends Controller
 
         if ($delete_fields != null){
             foreach($delete_fields as $field){
-                ct_delete_column($table_name, $field);
+                tb_delete_column($table_name, $field);
             }
         }
 
@@ -182,7 +192,7 @@ class TableController extends Controller
 
         // Add new fields if any
         foreach ($fields as $field){
-            ct_add_column($table_name, $field, 'table');
+            tb_add_column($table_name, $field, 'table');
         }
 
         // Finally Save the data

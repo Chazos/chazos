@@ -46,6 +46,8 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ⏳ Refactor the code(bi-weekly)
 
+✅ Add `project:deploy command which everything not core to the system`
+
 ##### Dashboard
 ✅ Add something stupid and simple
 

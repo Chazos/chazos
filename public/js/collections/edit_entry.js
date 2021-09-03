@@ -9,6 +9,11 @@ window.addEventListener("load", function () {
         XHR.addEventListener("load", function (event) {
             response = JSON.parse(event.target.responseText)
 
+            if (response.status == "success") {
+                setSuccessAlert(response.message)
+            }
+
+
         });
 
         // Define what happens in case of error

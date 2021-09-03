@@ -64,6 +64,8 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Add media library
 
+✅ Add alerts
+
 ⏳ Add media section
 
 ⏳ Add settings

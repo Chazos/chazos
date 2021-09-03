@@ -12,11 +12,16 @@ window.addEventListener("load", function () {
         XHR.addEventListener("load", function (event) {
             response = JSON.parse(event.target.responseText)
 
+            if (response.status == "success") {
+                setSuccessAlert(response.message)
+                document.getElementById("myForm").reset()
+            }
+
         });
 
         // Define what happens in case of error
         XHR.addEventListener("error", function (event) {
-            console.log('Oops! Something went wrong.');
+            setErrorAlert('Oops! Something went wrong.');
         });
 
         // Set up our request

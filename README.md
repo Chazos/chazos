@@ -35,42 +35,94 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ### Todo
 
-✅ Allow admin to add content
+#### Features
 
-✅ Allow admin to edit content
-
-✅ Allow admin to delete content
-
-✅ Allow admin to view and modify permissions
-
-✅ Save and effect permissions
-
-⏳ Add pagination in manage content
-
-✅ Remove stock styles from the frontend
-
-✅ Allow admin to add tables
-
-✅ Allow admin to delete tables
-
-⏳ Allow admin to edit tables
-
-⏳ Add relationships between documents
-
-✅ Add API for the frontend
-    - Get content
-    - Get particular content
-    - Delete item
-
-✅ Add media library
-
+##### Overrally
 ✅ Add alerts
-
-⏳ Add media section
-
-⏳ Add settings
 
 ⏳ Populate seeder with 
      - create all roles 
      - CRUD permissions for user table
+
+⏳ Refactor the code(bi-weekly)
+
+##### Dashboard
+✅ Add something stupid and simple
+
+##### Content Section 
+✅ View content
+
+✅ Add content
+
+✅ Edit content
+
+✅ Delete Content
+
+⏳ Add pagination in manage content
+
+⏳ Specify amount to show in pagination
+
+⏳ Search through content
+
+⏳ Allow users to bulk import data(CSV)
+
+⏳ Allow users to export data(CSV, JSON)
+
+⏳ Bulk delete content
+
+
+##### Table Builder
+✅ Create Table
+
+✅ Specifiy Table Fields
+
+⏳ Allow admin to edit tables
+
+⏳ Allow admin to edit table columns
+
+⏳ Add relationships between documents
+
+
+##### API
+✅ Get Content
+
+✅ Get Content Detail
+
+✅ Delete Item
+
+
+##### Media
+⏳ Add media section
+
+⏳ Show Media
+
+⏳ Upload Media
+
+⏳ Get Media Link
+
+
+#### Payments
+⏳ View Payments
+
+⏳ Integrate Stripe
+
+⏳ Integrate Paypal
+
+⏳ Integrate Paynow
+
+
+#### Settings
+⏳ Add settings
+
+⏳ Allow admin to add roles
+
+⏳ Allow admin change colors
+
+⏳ Allow admin to change email templates
+
+⏳ Email configuration settings
+
+
+
+
 

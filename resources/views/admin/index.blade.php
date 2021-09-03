@@ -14,526 +14,72 @@
             Dashboard
         </h2>
 
-
-
-        
-
-        <!-- Cards -->
-        <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-            <!-- Card -->
-            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div
-                    class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-100 dark:bg-orange-500">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z">
-                        </path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Total clients
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        6389
-                    </p>
-                </div>
-            </div>
-            <!-- Card -->
-            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div
-                    class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Account balance
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        $ 46,760.89
-                    </p>
-                </div>
-            </div>
-            <!-- Card -->
-            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div
-                    class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path
-                            d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
-                        </path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        New sales
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        376
-                    </p>
-                </div>
-            </div>
-            <!-- Card -->
-            <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <div
-                    class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd"
-                            d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <div>
-                    <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
-                        Pending contacts
-                    </p>
-                    <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
-                        35
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- New Table -->
-        <div class="w-full overflow-hidden rounded-lg shadow-xs">
-            <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
-                    <thead>
-                        <tr
-                            class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
-                            <th class="px-4 py-3">Client</th>
-                            <th class="px-4 py-3">Amount</th>
-                            <th class="px-4 py-3">Status</th>
-                            <th class="px-4 py-3">Date</th>
-                        </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            10x Developer
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&facepad=3&fit=facearea&s=707b9c33066bf8808c934c8ab394dff6"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Jolina Angelie</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Unemployed
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 369.95
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-orange-700 bg-orange-100 rounded-full dark:text-white dark:bg-orange-600">
-                                    Pending
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1551069613-1904dbdcda11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Sarah Curry</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Designer
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 86.00
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-red-700 bg-red-100 rounded-full dark:text-red-100 dark:bg-red-700">
-                                    Denied
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1551006917-3b4c078c47c9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Rulia Joberts</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Actress
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 1276.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1546456073-6712f79251bb?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Wenzel Dashington</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Actor
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-gray-700 bg-gray-100 rounded-full dark:text-gray-100 dark:bg-gray-700">
-                                    Expired
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1502720705749-871143f0e671?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&s=b8377ca9f985d80264279f277f3a67f5"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Dave Li</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Influencer
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Maria Ramovic</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Runner
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/photo-1566411520896-01e7ca4726af?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hitney Wouston</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            Singer
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-
-                        <tr class="text-gray-700 dark:text-gray-400">
-                            <td class="px-4 py-3">
-                                <div class="flex items-center text-sm">
-                                    <!-- Avatar with inset shadow -->
-                                    <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
-                                        <img class="object-cover w-full h-full rounded-full"
-                                            src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                                            alt="" loading="lazy" />
-                                        <div class="absolute inset-0 rounded-full shadow-inner"
-                                            aria-hidden="true"></div>
-                                    </div>
-                                    <div>
-                                        <p class="font-semibold">Hans Burger</p>
-                                        <p class="text-xs text-gray-600 dark:text-gray-400">
-                                            10x Developer
-                                        </p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                $ 863.45
-                            </td>
-                            <td class="px-4 py-3 text-xs">
-                                <span
-                                    class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                                    Approved
-                                </span>
-                            </td>
-                            <td class="px-4 py-3 text-sm">
-                                6/10/2020
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div
-                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                <span class="flex items-center col-span-3">
-                    Showing 21-30 of 100
-                </span>
-                <span class="col-span-2"></span>
-                <!-- Pagination -->
-                <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
-                    <nav aria-label="Table navigation">
-                        <ul class="inline-flex items-center">
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
-                                    aria-label="Previous">
-                                    <svg aria-hidden="true" class="w-4 h-4 fill-current"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-                                            clip-rule="evenodd" fill-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    1
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    2
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 text-white transition-colors duration-150 bg-purple-600 border border-r-0 border-purple-600 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    3
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    4
-                                </button>
-                            </li>
-                            <li>
-                                <span class="px-3 py-1">...</span>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    8
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple">
-                                    9
-                                </button>
-                            </li>
-                            <li>
-                                <button
-                                    class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
-                                    aria-label="Next">
-                                    <svg class="w-4 h-4 fill-current" aria-hidden="true"
-                                        viewBox="0 0 20 20">
-                                        <path
-                                            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                            clip-rule="evenodd" fill-rule="evenodd"></path>
-                                    </svg>
-                                </button>
-                            </li>
-                        </ul>
-                    </nav>
-                </span>
-            </div>
-        </div>
-
-        <!-- Charts -->
-        <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Charts
-        </h2>
         <div class="grid gap-6 mb-8 md:grid-cols-2">
             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                    Revenue
-                </h4>
-                <canvas id="pie"></canvas>
-                <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                    <!-- Chart legend -->
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                        <span>Shirts</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                        <span>Shoes</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                        <span>Bags</span>
-                    </div>
-                </div>
+              <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
+                Hello user!👋
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                We hope you are making progress on your project... Feel free to read the latest news about Strapi. We are giving our best to improve the product based on your feedback.
+              </p>
             </div>
             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-                <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-                    Traffic
-                </h4>
-                <canvas id="line"></canvas>
-                <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-                    <!-- Chart legend -->
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                        <span>Organic</span>
+              <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
+                Get in touch🤙
+              </h4>
+              <p class="text-gray-600 dark:text-gray-400">
+                Do you want to conribute something to the project? Do you want to report a bug? Do you want to suggest a new feature?
+                <br><br>
+                Discuss with team members, contributors and developers on different channels.
+
+                <div class="flex py-5">
+                  <a href="https://github.com/takumade/chazos" class="px-5">
+                    <div class="contact-info flex flex-row items-center">
+
+                            <svg class="h-7 w-7 mr-1" enable-background="new -1163 1657.697 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="-1163 1657.697 56.693 56.693" width="56.693px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g><path clip-rule="evenodd" d="M-1134.6598,1662.9163c-13.601,0-24.63,11.0267-24.63,24.6299   c0,10.8821,7.0573,20.1144,16.8435,23.3713c1.2308,0.2279,1.6829-0.5345,1.6829-1.1849c0-0.587-0.0227-2.5276-0.0334-4.5857   c-6.8521,1.4901-8.2979-2.906-8.2979-2.906c-1.1205-2.8467-2.7347-3.6039-2.7347-3.6039   c-2.2349-1.5287,0.1685-1.4972,0.1685-1.4972c2.473,0.1737,3.7755,2.5385,3.7755,2.5385c2.1967,3.7651,5.7618,2.6765,7.1675,2.0472   c0.2211-1.5917,0.8591-2.6786,1.5637-3.2936c-5.4707-0.6226-11.2218-2.7347-11.2218-12.1722c0-2.6888,0.9623-4.8861,2.538-6.611   c-0.2557-0.6206-1.0989-3.1255,0.2386-6.5183c0,0,2.0684-0.6616,6.7747,2.525c1.9648-0.5458,4.0719-0.8195,6.165-0.829   c2.093,0.0095,4.2017,0.2832,6.17,0.829c4.7012-3.1866,6.7665-2.525,6.7665-2.525c1.3406,3.3928,0.4974,5.8977,0.2417,6.5183   c1.5793,1.7249,2.5348,3.9221,2.5348,6.611c0,9.4602-5.7618,11.5428-11.2465,12.1527c0.8834,0.7644,1.6704,2.2632,1.6704,4.561   c0,3.2955-0.0282,5.9479-0.0282,6.7592c0,0.6556,0.4432,1.4236,1.6915,1.1818c9.7812-3.2605,16.8296-12.4896,16.8296-23.3682   C-1110.0299,1673.943-1121.0574,1662.9163-1134.6598,1662.9163z" fill-rule="evenodd"/><path d="M-1149.9611,1698.2793c-0.0542,0.1227-0.2469,0.1593-0.4222,0.0753c-0.1788-0.0804-0.2788-0.2473-0.2211-0.37   c0.053-0.126,0.2457-0.161,0.4242-0.0769C-1150.0013,1697.9882-1149.8993,1698.1566-1149.9611,1698.2793L-1149.9611,1698.2793z    M-1150.2642,1698.0547"/><path d="M-1148.9634,1699.3922c-0.1174,0.1086-0.3473,0.0581-0.5031-0.1139c-0.1613-0.1718-0.1912-0.4016-0.072-0.5118   c0.1211-0.1088,0.3438-0.0579,0.505,0.1139C-1148.8721,1699.0541-1148.8407,1699.2819-1148.9634,1699.3922L-1148.9634,1699.3922z    M-1149.1984,1699.14"/><path d="M-1147.9922,1700.8105c-0.151,0.1051-0.3979,0.0067-0.5505-0.2123c-0.151-0.2191-0.151-0.4819,0.0035-0.5872   c0.1526-0.1051,0.396-0.0104,0.5505,0.2068C-1147.8381,1700.4406-1147.8381,1700.7034-1147.9922,1700.8105L-1147.9922,1700.8105z    M-1147.9922,1700.8105"/><path d="M-1146.6619,1702.1812c-0.1351,0.1489-0.4227,0.1086-0.6329-0.0945c-0.2155-0.1984-0.2753-0.4803-0.1403-0.6293   c0.1371-0.149,0.4263-0.1072,0.6381,0.0944C-1146.5831,1701.7501-1146.5182,1702.0337-1146.6619,1702.1812L-1146.6619,1702.1812z    M-1146.6619,1702.1812"/><path d="M-1144.8265,1702.9769c-0.0597,0.1927-0.3365,0.2804-0.6154,0.1984c-0.2788-0.0845-0.4608-0.3103-0.4047-0.5051   c0.0577-0.1943,0.3361-0.2855,0.6169-0.1979C-1144.9512,1702.5563-1144.7688,1702.7805-1144.8265,1702.9769L-1144.8265,1702.9769z    M-1144.8265,1702.9769"/><path d="M-1142.8107,1703.1243c0.0067,0.2031-0.2299,0.3716-0.5226,0.3752c-0.2944,0.0067-0.533-0.1577-0.5361-0.3577   c0-0.2052,0.2313-0.3717,0.5258-0.3768C-1143.0509,1702.7594-1142.8107,1702.9227-1142.8107,1703.1243L-1142.8107,1703.1243z    M-1142.8107,1703.1243"/><path d="M-1140.9351,1702.8052c0.035,0.198-0.1686,0.4015-0.4594,0.4557c-0.2859,0.0526-0.5504-0.0701-0.587-0.2665   c-0.0354-0.2031,0.1716-0.4066,0.4573-0.4592C-1141.233,1702.4846-1140.9722,1702.6036-1140.9351,1702.8052L-1140.9351,1702.8052z    M-1140.9351,1702.8052"/></g></svg>
+
+                        <span class="text-md">GitHub</span>
+
                     </div>
-                    <div class="flex items-center">
-                        <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                        <span>Paid</span>
+                  </a>
+                  <a href="#" class="px-5">
+                    <div class="contact-info flex flex-row items-center">
+
+                      <svg class="h-7 w-7 mr-1"  xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/" xmlns:xlink="http://www.w3.org/1999/xlink" height="100%" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;" version="1.1" viewBox="0 0 512 512" width="100%" xml:space="preserve"><path d="M449.446,0c34.525,0 62.554,28.03 62.554,62.554l0,386.892c0,34.524 -28.03,62.554 -62.554,62.554l-106.468,0l0,-192.915l66.6,0l12.672,-82.621l-79.272,0l0,-53.617c0,-22.603 11.073,-44.636 46.58,-44.636l36.042,0l0,-70.34c0,0 -32.71,-5.582 -63.982,-5.582c-65.288,0 -107.96,39.569 -107.96,111.204l0,62.971l-72.573,0l0,82.621l72.573,0l0,192.915l-191.104,0c-34.524,0 -62.554,-28.03 -62.554,-62.554l0,-386.892c0,-34.524 28.029,-62.554 62.554,-62.554l386.892,0Z"/></svg>
+
+                        <span class="text-md">Facebook</span>
+
                     </div>
+                  </a>
+                  <a href="#" class="px-5">
+                    <div class="contact-info flex flex-row items-center">
+
+                      <svg class="h-7 w-7 mr-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 56.693 56.693" height="56.693px" id="Layer_1" version="1.1" viewBox="0 0 56.693 56.693" width="56.693px" xml:space="preserve"><path d="M28.348,5.157c-13.6,0-24.625,11.027-24.625,24.625c0,13.6,11.025,24.623,24.625,24.623c13.6,0,24.623-11.023,24.623-24.623  C52.971,16.184,41.947,5.157,28.348,5.157z M40.752,24.817c0.013,0.266,0.018,0.533,0.018,0.803c0,8.201-6.242,17.656-17.656,17.656  c-3.504,0-6.767-1.027-9.513-2.787c0.486,0.057,0.979,0.086,1.48,0.086c2.908,0,5.584-0.992,7.707-2.656  c-2.715-0.051-5.006-1.846-5.796-4.311c0.378,0.074,0.767,0.111,1.167,0.111c0.566,0,1.114-0.074,1.635-0.217  c-2.84-0.57-4.979-3.08-4.979-6.084c0-0.027,0-0.053,0.001-0.08c0.836,0.465,1.793,0.744,2.811,0.777  c-1.666-1.115-2.761-3.012-2.761-5.166c0-1.137,0.306-2.204,0.84-3.12c3.061,3.754,7.634,6.225,12.792,6.483  c-0.106-0.453-0.161-0.928-0.161-1.414c0-3.426,2.778-6.205,6.206-6.205c1.785,0,3.397,0.754,4.529,1.959  c1.414-0.277,2.742-0.795,3.941-1.506c-0.465,1.45-1.448,2.666-2.73,3.433c1.257-0.15,2.453-0.484,3.565-0.977  C43.018,22.849,41.965,23.942,40.752,24.817z"/></svg>
+
+                        <span class="text-md">Twitter</span>
+
+                    </div>
+                  </a>
+                  <a href="#" class="px-5">
+                    <div class="contact-info flex flex-row items-center">
+
+                      <svg class="h-7 w-7 mr-1" xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24"><title/><path d="M20.222 0c1.406 0 2.54 1.137 2.607 2.475V24l-2.677-2.273-1.47-1.338-1.604-1.398.67 2.205H3.71c-1.402 0-2.54-1.065-2.54-2.476V2.48C1.17 1.142 2.31.003 3.715.003h16.5L20.222 0zm-6.118 5.683h-.03l-.202.2c2.073.6 3.076 1.537 3.076 1.537-1.336-.668-2.54-1.002-3.744-1.137-.87-.135-1.74-.064-2.475 0h-.2c-.47 0-1.47.2-2.81.735-.467.203-.735.336-.735.336s1.002-1.002 3.21-1.537l-.135-.135s-1.672-.064-3.477 1.27c0 0-1.805 3.144-1.805 7.02 0 0 1 1.74 3.743 1.806 0 0 .4-.533.805-1.002-1.54-.468-2.14-1.404-2.14-1.404s.134.066.335.2h.06c.03 0 .044.015.06.03v.006c.016.016.03.03.06.03.33.136.66.27.93.4.466.202 1.065.403 1.8.536.93.135 1.996.2 3.21 0 .6-.135 1.2-.267 1.8-.535.39-.2.87-.4 1.397-.737 0 0-.6.936-2.205 1.404.33.466.795 1 .795 1 2.744-.06 3.81-1.8 3.87-1.726 0-3.87-1.815-7.02-1.815-7.02-1.635-1.214-3.165-1.26-3.435-1.26l.056-.02zm.168 4.413c.703 0 1.27.6 1.27 1.335 0 .74-.57 1.34-1.27 1.34-.7 0-1.27-.6-1.27-1.334.002-.74.573-1.338 1.27-1.338zm-4.543 0c.7 0 1.266.6 1.266 1.335 0 .74-.57 1.34-1.27 1.34-.7 0-1.27-.6-1.27-1.334 0-.74.57-1.338 1.27-1.338z"/></svg>
+
+                        <span class="text-md">Discord</span>
+
+                    </div>
+                  </a>
+
                 </div>
+              </p>
             </div>
-        </div>
+
+          </div>
+
+
+
+
+
     </div>
 </main>
 

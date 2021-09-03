@@ -183,7 +183,7 @@
             }
         }
 
-        function deleteRow(rowId,tableName, rowId) {
+        function deleteRow(elRowId,tableName, rowId) {
             fetch(`/manage/${tableName}/delete/${rowId}`, {
                     method: 'POST',
                     headers: {
@@ -198,11 +198,18 @@
                 })
                 .then(response => response.json())
                 .then(response => {
-                    console.log(response)
-                    // TODO: Handle success
+                    console.log(response);
+                    if (response.status == 'success') {
+                        setSuccessAlert(response.message);
+                        setTimeout(() => {
+                            $(elRowId).fadeTo(2000, 0).slideUp(1000, function(){
+                                $(this).remove();
+                            });
+                        }, 1000);
+                    }
                 })
                 .catch(() => {
-                    this.message = 'Ooops! Something went wrong!'
+                    setSuccessAlert('Ooops! Something went wrong!')
                 })
         }
     </script>

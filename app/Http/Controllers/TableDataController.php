@@ -23,15 +23,19 @@ class TableDataController extends Controller
 
     public function delete_item(Request $request, $table_name, $id){
 
-        $table = Table::where('table_name', $table_name)->first();
-        $model = "App\Models\\" . $table->model_name;
-        $item = $model::where('id', $id)->first();
+        try{
+            $table = Table::where('table_name', $table_name)->first();
+            $model = "App\Models\\" . $table->model_name;
+            $item = $model::where('id', $id)->first();
 
-        $item->media()->delete();
-        $item->delete();
+            $item->media()->delete();
+            $item->delete();
+        }catch (\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         return response()->json([
-            'success' => true,
+            'status' => 'success',
             'message' => 'Record has been deleted successfully.']);
     }
 

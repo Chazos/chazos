@@ -61,7 +61,7 @@ const saveCurrentCollection = (storeName, id) => {
         .then(response => response.json())
         .then(response => {
             if (response.status == "success"){
-                console.log(response.message)
+                setSuccessAlert(response.message)
             }
         })
     }

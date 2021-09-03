@@ -2,6 +2,7 @@
 
 use App\Models\Table;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Schema;
 
 if (! function_exists('cg_get_collections')) {
     function cg_get_collections()
@@ -47,6 +48,20 @@ if (! function_exists('cg_delete_model')) {
         $model_name = ucfirst($table_name);
         $model_file = base_path() . '/app/Models/' . $model_name . '.php';
         File::delete($model_file);
+    }
+}
+
+if (! function_exists('cg_delete_model')) {
+    function cg_delete_model( $table_name ) {
+        $model_name = ucfirst($table_name);
+        $model_file = base_path() . '/app/Models/' . $model_name . '.php';
+        File::delete($model_file);
+    }
+}
+
+if (! function_exists('cg_delete_table')) {
+    function cg_delete_table( $table_name ) {
+        Schema::dropIfExists($table_name);
     }
 }
 

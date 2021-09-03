@@ -40,7 +40,7 @@ Chazos is a chazos CMS😅🤣🤣🤣
 ##### Overrally
 ✅ Add alerts
 
-⏳ Populate seeder with 
+✅ Populate seeder with 
      - create all roles 
      - CRUD permissions for user table
 

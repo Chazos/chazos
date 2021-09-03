@@ -42,14 +42,6 @@ class RegisteredUserController extends Controller
 
         $users = User::all();
 
-        if (count($users) == 0 && Role::all()->count() == 0) {
-            Role::create(['name' => 'admin']);
-            Role::create(['name' => 'user']);
-            Role::create(['name' => 'writer']);
-            Role::create(['name' => 'everyone']);
-
-        }
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,

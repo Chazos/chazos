@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,7 +18,14 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
 
+        // Create roles
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'user']);
+        Role::create(['name' => 'writer']);
+        Role::create(['name' => 'everyone']);
 
+
+        // Create user table
         \App\Models\Table::create([
             'display_name' => 'users',
             'table_name' => 'users',
@@ -88,5 +98,11 @@ class DatabaseSeeder extends Seeder
             ])
 
         ]);
+
+        // Create users table permissions
+        Permission::create(['name' => 'can create users']);
+        Permission::create(['name' => 'can read users']);
+        Permission::create(['name' => 'can edit users']);
+        Permission::create(['name' => 'can update users']);
     }
 }

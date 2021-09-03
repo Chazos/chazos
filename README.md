@@ -43,7 +43,7 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Allow admin to view and modify permissions
 
-⏳ Save and effect permissions
+✅ Save and effect permissions
 
 ⏳ Add pagination in manage content
 
@@ -67,4 +67,8 @@ Chazos is a chazos CMS😅🤣🤣🤣
 ⏳ Add media section
 
 ⏳ Add settings
+
+⏳ Populate seeder with 
+     - create all roles 
+     - CRUD permissions for user table
 

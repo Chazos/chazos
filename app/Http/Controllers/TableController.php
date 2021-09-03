@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class TableController extends Controller
@@ -12,6 +13,10 @@ class TableController extends Controller
     //
 
     public function index(){
+
+
+
+
         $tables = Table::all();
         return view('admin.tables.index', ['tables' => $tables]);
     }
@@ -75,6 +80,7 @@ class TableController extends Controller
                         $role_perms[$role->name][$perm] = false;
                     }
                 }catch (\Exception $e){
+                    Permission::create(['name' => $full_perm]);
                     $role_perms[$role->name][$perm] = false;
                 }
             }
@@ -160,6 +166,8 @@ class TableController extends Controller
         $configure_fields = $request->configure_fields;
         $display_name = $request->display_name;
         $perms = $request->perms;
+        $model_name = ucfirst($table_name);
+        $table_accepts_media = cg_supports_media($fields);
 
         // Save perms
         tb_add_perms($table_name, $perms);
@@ -207,7 +215,8 @@ class TableController extends Controller
             $update_collection->save();
 
 
-            cg_delete_model($table_name);
+
+            cg_create_model($model_name, $table_name, $table_accepts_media);
             cg_create_resource($table_name, $fields);
 
             return response()->json([

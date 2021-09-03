@@ -46,6 +46,7 @@ class RegisteredUserController extends Controller
             Role::create(['name' => 'admin']);
             Role::create(['name' => 'user']);
             Role::create(['name' => 'writer']);
+            Role::create(['name' => 'everyone']);
 
         }
 

@@ -24,7 +24,8 @@
 
             <li class="relative px-6 py-3">
                 <button
-                    class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+
+                    class="tables-sidebar-button inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     @click="togglePagesMenu" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -51,7 +52,7 @@
                         <li
                             class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
-                            <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->table_name ]) }}">{{ ucfirst($item->table_name) }}</a>
+                            <a class="w-full sidebar-tbl-item-{{ $item->id }}" href="{{ route('admin.manage', ['id' => $item->id ]) }}">{{ ucfirst($item->table_name) }}</a>
                         </li>
                             @endforeach
 
@@ -122,7 +123,7 @@
 
                     <li class="relative px-6 py-3">
                         <button
-                            class="inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                            class="tables-sidebar-button inline-flex items-center justify-between w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                             @click="togglePagesMenu" aria-haspopup="true">
                             <span class="inline-flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
@@ -149,7 +150,7 @@
                                 <li
                                     class=" py-1 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200">
 
-                                    <a class="w-full" href="{{ route('admin.manage', ['table_name' => $item->table_name ]) }}">{{ ucfirst($item->table_name) }}</a>
+                                    <a class="w-full sidebar-tbl-item-{{ $item->id }}" href="{{ route('admin.manage', ['id' => $item->id ]) }}">{{ ucfirst($item->table_name) }}</a>
                                 </li>
                                     @endforeach
 

@@ -40,12 +40,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     Route::get('/manage/{table_name}/add',  [TableDataController::class, 'add_entry'])->name('admin.add_entry');
     Route::post('/manage/{table_name}/create',  [TableDataController::class, 'create_entry'])->name('admin.create_entry');
-    Route::get('/manage/{table_name}',  [TableDataController::class, 'manage'])->name('admin.manage');
+    Route::get('/manage/{id}',  [TableDataController::class, 'manage'])->name('admin.manage');
     Route::post('/manage/{table_name}/delete/{id}',  [TableDataController::class, 'delete_item'])->name('admin.delete_item');
     Route::get('/manage/{table_name}/edit/{id}',  [TableDataController::class, 'edit_item'])->name('admin.edit_item');
     Route::post('/manage/{table_name}/update/{id}',  [TableDataController::class, 'update_item'])->name('admin.update_item');
 
     Route::get('/tables',  [TableController::class, 'index'])->name('admin.tables');
+    Route::post('/tables/{table}/rename',  [TableController::class, 'rename_table'])->name('admin.tables.rename');
     Route::get('/tables/{table}/fields',  [TableController::class, 'fields'])->name('admin.tables.fields');
     Route::get('/tables/{id}',  [TableController::class, 'details'])->name('admin.tables.detail');
     Route::post('/tables/update/{id}',  [TableController::class, 'update'])->name('admin.tables.update');

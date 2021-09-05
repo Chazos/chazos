@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Schema;
 
 class TableDataController extends Controller
 {
-    public function manage(Request $request, $table){
-        $table = Table::where('table_name', $table)->first();
+    public function manage(Request $request, $id){
+        $table = Table::where('id', $id)->first();
         $config_fields = json_decode(json_encode(json_decode($table->configure_fields)), true);
         $columns = json_decode($table->fields);
         $model = "App\Models\\" . $table->model_name;

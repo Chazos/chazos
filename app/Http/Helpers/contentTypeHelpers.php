@@ -117,8 +117,12 @@ if (! function_exists('tb_create_perms')) {
         $perms = array("read", "edit", "delete", "update");
 
         foreach ($perms as $perm) {
-            $whole_perm = "can " . $perm . " " . $table_name;
-            Permission::create(['name' => $whole_perm]);
+            try{
+                $whole_perm = "can " . $perm . " " . $table_name;
+                Permission::create(['name' => $whole_perm]);
+            }catch(\Exception $e){
+                continue;
+            }
         }
     }
 }

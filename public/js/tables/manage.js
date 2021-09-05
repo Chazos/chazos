@@ -1,15 +1,18 @@
-const editCollectionField = (storeName, fieldName) => {
-    let table = localStorage.getItem(storeName);
+const editCollectionField = ( fieldName) => {
+
+
+    let table = localStorage.getItem(getCurrentTableObjectName());
 
     if (table) {
         table = JSON.parse(table);
         let field = table[fieldName];
 
-        injectDetailsIntoModal(storeName, field);
+        injectDetailsIntoModal(tableObjectName, field);
     }
 }
 
-const injectDetailsIntoModal = (storeName, field) => {
+const injectDetailsIntoModal = (field) => {
+    tableObjectName = getCurrentTableObjectName()
 
 
 }
@@ -37,10 +40,10 @@ const deleteCollection = (id) => {
 
 }
 
+const saveCurrentCollection = ( id) => {
 
-const saveCurrentCollection = (storeName, id) => {
-
-    table = localStorage.getItem(storeName)
+    let tableObjectName =  getCurrentTableObjectName()
+    table = localStorage.getItem(tableObjectName)
 
     if (table != undefined && table != undefined){
         table = JSON.parse(table)
@@ -67,8 +70,7 @@ const saveCurrentCollection = (storeName, id) => {
     }
 }
 
-
-const getCollectionDetails = (id) => {
+const getTableDetails = (id) => {
     fetch(`/tables/${id}`,
         {
                 method: 'GET',
@@ -82,29 +84,37 @@ const getCollectionDetails = (id) => {
         .then(response => response.json())
         .then(response => {
             if (response.status == "success"){
-                let storeName = "currentCollection"
+                let tableObjectName = "editTable"
                 let data = response.data
-                let role_perms = response.role_perms
+                let rolePerms = response.role_perms
                 data.configure_fields = JSON.parse(data.configure_fields)
                 data.fields = JSON.parse(data.fields)
-                localStorage.setItem(storeName, JSON.stringify(data))
-                localStorage.setItem("currentTablePerms", JSON.stringify(role_perms))
+                localStorage.setItem(tableObjectName, JSON.stringify(data))
+                localStorage.setItem("currentTablePerms", JSON.stringify(rolePerms))
+                localStorage.setItem("currentTableObjectName", tableObjectName)
 
 
-                injectPermsToModal(role_perms)
-                appendFieldToConfigure(storeName)
-                addItemsToTable(storeName)
+                injectPermsToModal(rolePerms)
+                appendFieldToConfigure()
+                addItemsToTable()
                 changeElementAttr(
                     "#save-table-button",
                     "onclick",
-                    `saveCurrentCollection('${storeName}', ${data.id})`
+                    `saveCurrentCollection(${data.id})`
                 )
 
                 changeElementAttr(
                     "#add-field-to-table",
                     "onclick",
-                    `addCollectionField('${storeName}')`
+                    `addCollectionField()`
                 )
+
+                if (data.table_name != "users"){
+                    $('#edit-table-name-button').removeClass('hidden')
+
+                }
+
+
             }
         })
 }
@@ -173,18 +183,20 @@ const injectPermsToModal = (rolePerms) => {
     document.querySelector('#modify-table-perms-btn').classList.remove('hidden')
 }
 
-const addConfigField = (storeName, fieldName, checkedStatus) => {
-    let table = localStorage.getItem(storeName);
+const addConfigField = (fieldName, checkedStatus) => {
+    let tableObjectName = getCurrentTableObjectName()
+    let table = localStorage.getItem(tableObjectName);
 
     if (table != null && table != undefined) {
         table = JSON.parse(table);
         table.configure_fields[fieldName] = checkedStatus;
-        localStorage.setItem(storeName, JSON.stringify(table));
+        localStorage.setItem(tableObjectName, JSON.stringify(table));
     }
 }
 
-const deleteCollectionField = (storeName, field_name) => {
-    table = localStorage.getItem(storeName)
+const deleteCollectionField = (field_name) => {
+    let tableObjectName = getCurrentTableObjectName()
+    table = localStorage.getItem(tableObjectName)
 
     if (table != undefined && table != null){
         table = JSON.parse(table)
@@ -210,7 +222,63 @@ const deleteCollectionField = (storeName, field_name) => {
 
         table.delete_fields.push(field_name)
         document.getElementById(`x-row-${field_name}`).remove()
-        localStorage.setItem(storeName, JSON.stringify(table))
+        localStorage.setItem(tableObjectName, JSON.stringify(table))
 
     }
+}
+
+const populateEditTableModal = () => {
+
+    let tableObjectName =  getCurrentTableObjectName()
+
+    table = localStorage.getItem(tableObjectName)
+
+    if (table != undefined && table != null){
+        table = JSON.parse(table)
+
+        console.log(table)
+
+        let tableName = table.table_name
+        let displayName = table.display_name
+
+        document.querySelector('#edit-table-name #table_name').value = tableName
+        document.querySelector('#edit-table-name #display_name').value = displayName
+    }
+}
+
+const renameTableName = () => {
+    tableName = document.querySelector('#edit-table-name #table_name').value
+    displayName = document.querySelector('#edit-table-name #display_name').value
+    tableObjectName = getCurrentTableObjectName()
+    table = JSON.parse(localStorage.getItem(tableObjectName))
+
+
+    request = $.ajax({
+        url: `/tables/${table.table_name}/rename`,
+        type: "POST",
+        data: {
+            "_token": document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            "table_name": tableName,
+            "display_name": displayName
+        }
+    });
+
+     // Callback handler that will be called on success
+     request.done(function (response, textStatus, jqXHR){
+        if (response.status == "success"){
+            setSuccessAlert(response.message)
+            changeTableHeader(tableName)
+            updateTableNameFields(table.table_name, tableName, response.data.id)
+
+            // Change table object data
+            table.table_name = tableName
+            table.display_name = displayName
+            localStorage.setItem(tableObjectName, JSON.stringify(table))
+        }
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        setErrorAlert("OOps! something went wrong")
+    });
 }

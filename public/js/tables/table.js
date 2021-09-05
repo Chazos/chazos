@@ -7,6 +7,10 @@ const changeElementAttr = (selector, attr, value) => {
     document.querySelector(selector).setAttribute(attr, value)
 }
 
+const getCurrentTableObjectName = () => {
+    return localStorage.getItem("currentTableObjectName")
+}
+
 
 const changeTableHeader = (tableName) => {
 
@@ -14,8 +18,22 @@ const changeTableHeader = (tableName) => {
  document.getElementById('active-table-name').innerText = tableName
 }
 
-const addItemsToTable = (storeName) => {
-    let table =  localStorage.getItem(storeName);
+
+
+const updateTableNameFields = (oldTableName, newTableName, id) => {
+    let finalTableName = capitalize(newTableName)
+
+    $(".sidebar-tbl-item-" + id).text(finalTableName)
+    $("#tbl-item-" + id).text(finalTableName)
+}
+
+
+
+const addItemsToTable = () => {
+
+
+
+    let table =  localStorage.getItem(getCurrentTableObjectName());
 
     if (table != null && table != undefined) {
         table = JSON.parse(table);
@@ -41,12 +59,12 @@ const addItemsToTable = (storeName) => {
                 <td class="px-4 py-3">
 
                   <div class="flex items-center space-x-4 text-sm">
-                    <button onclick="editCollectionField('${storeName}', '${field.field_name}')"  class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
+                    <button onclick="editCollectionField('${field.field_name}')"  class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Edit">
                       <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path>
                       </svg>
                     </button>
-                    <button onclick="deleteCollectionField('${storeName}', '${field.field_name}')" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                    <button onclick="deleteCollectionField('${field.field_name}')" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
                       <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
                       </svg>
@@ -65,6 +83,7 @@ const draftCollection = () =>{
     document.querySelector('#active-table-name').innerText = ""
     document.querySelector('#active-table-fields').innerHTML = ""
     document.querySelector('#modify-table-perms-btn').classList.add('hidden')
+    let tableObjectName = "newTable"
 
 
 
@@ -75,19 +94,20 @@ const draftCollection = () =>{
     newCollection.configure_fields = {}
 
 
-    localStorage.setItem('newCollection', JSON.stringify(newCollection))
+    localStorage.setItem(tableObjectName, JSON.stringify(newCollection))
+    localStorage.setItem("currentTableObjectName", tableObjectName)
     changeTableHeader(document.getElementById('table_name').value)
 
     changeElementAttr(
             "#save-table-button",
             "onclick",
-            "createNewCollection()"
+            "createNewTable()"
         )
 
     changeElementAttr(
             "#add-field-to-table",
             "onclick",
-            "addCollectionField('newCollection')"
+            `addTableField('${tableObjectName}')`
         )
 }
 
@@ -95,8 +115,8 @@ const deleteUnsavedCollection = () => {
     // Todo: Implement delete unsaved table
 }
 
-const createNewCollection = () => {
-    let table = localStorage.getItem("newCollection")
+const createNewTable = () => {
+    let table = localStorage.getItem(getCurrentTableObjectName())
 
     if (table != null && table != undefined) {
         table = JSON.parse(table);
@@ -122,10 +142,12 @@ const createNewCollection = () => {
     }
 }
 
-const appendFieldToConfigure = (storeName) => {
+const appendFieldToConfigure = () => {
   let configFieldsViewElem =  document.getElementById("configure-fields-view")
     configFieldsViewElem.innerHTML = ""
-    let table = localStorage.getItem(storeName)
+
+
+    let table = localStorage.getItem(getCurrentTableObjectName())
 
     if (table != null && table != undefined) {
         table = JSON.parse(table);
@@ -142,15 +164,17 @@ const appendFieldToConfigure = (storeName) => {
 
           configFieldsViewElem.innerHTML += `
           <a href="#" class="block px-4 py-2 text-sm capitalize text-gray-700 hover:bg-blue-500 hover:text-white">
-                <input onchange="addConfigField('${storeName}','${fieldKey.toLowerCase()}', this.checked)" type="checkbox" name="" id="checkbox-hide-field" ${checked}>  <span class="ml-3">${fieldKey}</span>
+                <input onchange="addConfigField('${fieldKey.toLowerCase()}', this.checked)" type="checkbox" name="" id="checkbox-hide-field" ${checked}>  <span class="ml-3">${fieldKey}</span>
           </a>`
 
         }
     }
 }
 
-const addCollectionField = (storeName="newCollection") => {
-    let table = JSON.parse(localStorage.getItem(storeName))
+const addTableField = () => {
+    let tableObjectName = getCurrentTableObjectName()
+    let table = JSON.parse(localStorage.getItem(tableObjectName))
+
 
     if (table != null && table != undefined){
 
@@ -168,8 +192,8 @@ const addCollectionField = (storeName="newCollection") => {
 
         table.configure_fields[newField.field_name] = true
         table.fields.push(newField)
-        localStorage.setItem(storeName, JSON.stringify(table))
-        appendFieldToConfigure(storeName)
+        localStorage.setItem(tableObjectName, JSON.stringify(table))
+        appendFieldToConfigure()
 
         // Clear forms
         document.getElementById('field_name').value = ''
@@ -178,7 +202,7 @@ const addCollectionField = (storeName="newCollection") => {
         document.getElementById('nullable').value = false
     }
 
-    addItemsToTable(storeName)
+    addItemsToTable()
 }
 
 

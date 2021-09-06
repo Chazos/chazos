@@ -17,7 +17,7 @@
         <div class="grid gap-6 mb-8 md:grid-cols-2">
             <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
               <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
-                Hello user!👋
+                Hello {{ auth()->user()->name }}!👋
               </h4>
               <p class="text-gray-600 dark:text-gray-400">
                 We hope you are making progress on your project... Feel free to read the latest news about Strapi. We are giving our best to improve the product based on your feedback.

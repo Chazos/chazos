@@ -54,8 +54,14 @@ class deploy extends Command
                 cg_delete_resource($table_name);
                 cg_delete_table($table_name);
                 tb_delete_perms($table_name);
+
+                $table->delete();
             }
+
+
         }
+
+
 
         return 0;
     }

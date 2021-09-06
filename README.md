@@ -78,7 +78,7 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Specifiy Table Fields
 
-⏳ Allow admin to edit tables
+✅ Allow admin to edit tables
 
 ⏳ Allow admin to edit table columns
 

@@ -13,12 +13,51 @@ class TableController extends Controller
     //
 
     public function index(){
-
-
-
-
         $tables = Table::all();
         return view('admin.tables.index', ['tables' => $tables]);
+    }
+
+    public function rename_table(Request $request, $table_name){
+
+        $new_table_name = $request->input('table_name');
+        $new_display_name = $request->input('display_name');
+
+        $table = Table::where('table_name', $table_name)->first();
+        $fields = json_decode(json_encode(json_decode($table->fields)), true);
+
+
+
+        $table_name = $table->table_name;
+        $model_name = ucfirst($new_table_name);
+        $table_accepts_media = cg_supports_media($fields);
+
+        // Delete table model, resource and perms
+        cg_delete_model($table_name);
+        cg_delete_resource($table_name);
+        tb_delete_perms($table_name);
+
+        // Rename table
+        Schema::rename($table_name, $new_table_name);
+        $table->table_name = $new_table_name;
+        $table->display_name = $new_display_name;
+        $table->model_name = $model_name;
+        $table->save();
+
+        $table_name = $new_table_name;
+
+        // Recreate models, resource and perms
+        cg_create_model($model_name, $table_name, $table_accepts_media);
+        cg_create_resource($table_name, $fields);
+        tb_create_perms($table_name);
+
+        return response()->json([
+
+            'status' => 'success',
+            'message' => 'Table renamed successfully',
+            'data' => [
+                'id' => $table->id,
+            ]
+        ]);
     }
 
     public function fields(Request $request, $table){

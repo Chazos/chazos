@@ -19,7 +19,7 @@
 
     {{-- Start Alerts   --}}
 
-    <div id="system-alerts" class="absolute right-10 bottom-5 z-100">
+    <div id="system-alerts" class="absolute right-10 bottom-5 z-50">
     </div>
 
     {{-- End Alerts --}}

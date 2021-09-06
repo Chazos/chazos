@@ -60,7 +60,7 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Delete Content
 
-⏳ Add pagination in manage content
+✅ Add pagination in manage content
 
 ⏳ Specify amount to show in pagination
 

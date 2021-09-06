@@ -17,7 +17,7 @@ class TableDataController extends Controller
         $model = "App\Models\\" . $table->model_name;
 
 
-        $data = $model::all();
+        $data = $model::simplePaginate(15);
         return view('admin.table_data.manage', compact('table','config_fields', 'table', 'columns', 'data'));
     }
 

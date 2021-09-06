@@ -1,6 +1,8 @@
 @foreach ($data as $item)
     <tr class="text-gray-700 dark:text-gray-400" id="row-{{ $item->id }}">
+        <td class="px-4 py-2"> {{ $item->id }} </td>
         @foreach ($columns as $column)
+
             @if ($config_fields[$column->field_name] == true)
                 @include('admin.table_data.includes.table_field_shown')
             @else

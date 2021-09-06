@@ -6,7 +6,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 if (! function_exists('tb_add_column')) {
-    function tb_add_column($table_name, $field, $action = "create")
+    function tb_add_column($table_name, $field, $action = "create", $change =false)
     {
         $field_name = $field['field_name'];
         $field_type = $field['field_type'];
@@ -29,6 +29,10 @@ if (! function_exists('tb_add_column')) {
 
         if ($nullable == "true") {
             $table_string .= "->nullable()";
+        }
+
+        if ($change == true) {
+            $table_string .= "->change()";
         }
 
         $table_string .= ";";
@@ -64,7 +68,6 @@ if (! function_exists('tb_rename_column')) {
     function tb_rename_column($table_name, $old_name, $new_name){
         $table_string = "Schema::table('$table_name', function (\$table)";
         $table_string .= "{\$table->renameColumn('$old_name', '$new_name');});";
-
         eval($table_string);
 
     }

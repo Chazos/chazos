@@ -228,6 +228,17 @@ class TableController extends Controller
 
         // Rename fields if any
         // TODO implemenent
+        $edit_fields = $request->edit_fields;
+
+
+        if ($edit_fields != null){
+            foreach($edit_fields as $field){
+                $old_name = $field['old_field_name'];
+                $new_name = $field['field_name'];
+                tb_rename_column($table_name, $old_name, $new_name);
+                tb_add_column($table_name, $field, 'table', true);
+            }
+        }
 
         // Drop foreing keys if any
         // TODO implement
@@ -238,9 +249,9 @@ class TableController extends Controller
 
 
         // Add new fields if any
-        foreach ($fields as $field){
-            tb_add_column($table_name, $field, 'table');
-        }
+        // foreach ($fields as $field){
+        //     tb_add_column($table_name, $field, 'table');
+        // }
 
         // Finally Save the data
         $update_collection = Table::where('id', $id)->first();

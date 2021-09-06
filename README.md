@@ -80,7 +80,7 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ✅ Allow admin to edit tables
 
-⏳ Allow admin to edit table columns
+✅ Allow admin to edit table columns
 
 ⏳ Add relationships between documents
 

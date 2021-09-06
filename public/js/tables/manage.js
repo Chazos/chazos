@@ -5,15 +5,27 @@ const editCollectionField = ( fieldName) => {
 
     if (table) {
         table = JSON.parse(table);
-        let field = table[fieldName];
+        let fields = table.fields
 
-        injectDetailsIntoModal(tableObjectName, field);
+        for (let index = 0; index < fields.length; index++) {
+            const field = fields[index];
+            if (field.field_name == fieldName) {
+                injectDetailsIntoModal(getCurrentTableObjectName(), field);
+                break
+            }
+        }
     }
 }
 
-const injectDetailsIntoModal = (field) => {
-    tableObjectName = getCurrentTableObjectName()
-
+const injectDetailsIntoModal = (tableObjectName, field) => {
+    $('#edit-table-column #old_field_name').val(field.field_name)
+    $('#edit-table-column #field_name').val(field.field_name)
+    $('#edit-table-column #field_type').val(field.field_type)
+    $('#edit-table-column #default_value').val(field.default)
+    $('#edit-table-column #nullable').val(field.nullable)
+    $('#edit-table-column #unique').val(field.unique)
+    $('#edit-table-column #accepts-file').val(field.accepts_file)
+    $('#edit-table-column #file-type').val(field.file_type)
 
 }
 
@@ -106,7 +118,7 @@ const getTableDetails = (id) => {
                 changeElementAttr(
                     "#add-field-to-table",
                     "onclick",
-                    `addCollectionField()`
+                    `addTableField()`
                 )
 
                 if (data.table_name != "users"){
@@ -281,4 +293,50 @@ const renameTableName = () => {
     request.fail(function (jqXHR, textStatus, errorThrown){
         setErrorAlert("OOps! something went wrong")
     });
+}
+
+const editTableField = () => {
+    let tableObjectName = getCurrentTableObjectName()
+    let table = JSON.parse(localStorage.getItem(tableObjectName))
+
+
+    if (table != null && table != undefined){
+
+        table.edit_fields = []
+
+        let newField = {
+                'old_field_name' : $('#edit-table-column #old_field_name').val(),
+                'field_name' : $('#edit-table-column #field_name').val(),
+                'field_type' : $('#edit-table-column #field_type').val(),
+                'unique' : $('#edit-table-column #unique').val(),
+                'default' : $('#edit-table-column #default_value').val(),
+                'nullable' : $('#edit-table-column #nullable').val(),
+                'accepts_file' : $('#edit-table-column #accepts-file').val(),
+                'file_type' : $('#edit-table-column #file-type').val()
+        }
+
+
+        table.configure_fields[newField.field_name] = true
+
+
+        for (let i = 0; i < table.fields.length; i++){
+                if (table.fields[i].field_name == newField.old_field_name){
+                    table.fields[i] = newField
+                    if (tableObjectName != "newTable"){
+                        table.edit_fields.push(newField)
+                    }
+                }
+        }
+
+        localStorage.setItem(tableObjectName, JSON.stringify(table))
+        addItemsToTable()
+
+        // Clear forms
+        document.getElementById('field_name').value = ''
+        document.getElementById('unique').value = false
+        document.getElementById('default_value').value = ''
+        document.getElementById('nullable').value = false
+    }
+
+
 }

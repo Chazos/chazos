@@ -19,7 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::post('contact', [DataController::class, 'contact']);
+Route::post('subscribe', [DataController::class, 'susbcribe']);
 
+// Auth Routes for API
 Route::post('register', [AuthenticationController::class, 'register']);
 Route::post('login', [AuthenticationController::class, 'authenticate']);
 Route::get('/logout', [AuthenticationController::class, 'logout']);

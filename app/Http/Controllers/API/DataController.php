@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Events\ContactSaved;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Subscribe;
 use App\Models\Table;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -60,6 +61,21 @@ class DataController extends Controller
             return response()->json(['error' => $e->getMessage()], 401);
         }
     }
+
+    public function susbcribe(Request $request){
+
+        try{
+            $data = $request->all();
+            Subscribe::create($data);
+
+            return response()->json(['status' => 'success', 'message' => 'Subscribed successfully!']);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+
+    }
+
+
 
 
     public function index(Request $request, $table_name){

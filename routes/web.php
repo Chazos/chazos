@@ -18,19 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-    Route::get('/dashboard',  function () {
-        return view('welcome');
-    })->name('admin.dashboard');
-
-
-
-
-
-
-
-Route::get('/test-database', [TestController::class, 'test_database'])->name('home');
-
-
 
 
 // Admin Routes

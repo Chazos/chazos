@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contact;
 use App\Models\Table;
 use App\Models\User;
+use App\Providers\ContactSaved;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -45,6 +47,21 @@ class DataController extends Controller
 
         return $status;
     }
+
+    public function contact(Request $request){
+        $data = $request->all();
+
+
+        try{
+            $contact = Contact::create($data);
+            ContactSaved::dispatch($contact);
+
+            return response()->json(['status' => 'success', 'message' => 'Message sent successfully!']);
+        }catch(\Exception $e){
+            return response()->json(['error' => $e->getMessage()], 401);
+        }
+    }
+
 
     public function index(Request $request, $table_name){
         $table = Table::where('table_name', $table_name)->first();

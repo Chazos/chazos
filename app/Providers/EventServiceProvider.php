@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\ContactSaved;
+use App\Listeners\SendContactEmail;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,9 +22,11 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         ContactSaved::class => [
-            SendContactEmail::class,
+            SendContactEmail::class
         ]
     ];
+
+
 
     /**
      * Register any events for your application.

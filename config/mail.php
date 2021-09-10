@@ -107,6 +107,7 @@ return [
         ],
     ],
 
-    'admin_email' => env('MAIL_ADMIN_EMAIL', null)
+    'admin_email' => env('MAIL_ADMIN_EMAIL', null),
+    'from_address' => env('MAIL_FROM_ADDRESS', null)
 
 ];

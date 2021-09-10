@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TableDataController;
@@ -47,9 +48,15 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/tables/create',  [TableController::class, 'create'])->name('admin.tables.create');
 
     Route::get('/settings',  [SettingsController::class, 'index'])->name('admin.settings');
+
+    // Role Settings
     Route::get('/roles',  [RoleController::class, 'roles'])->name('admin.settings.roles');
     Route::post('/create-role',  [RoleController::class, 'create_role'])->name('admin.settings.create_role');
     Route::post('/save-settings',  [SettingsController::class, 'save_settings'])->name('admin.settings.save');
+
+    // Email Settings
+    Route::get('/email',  [EmailController::class, 'index'])->name('admin.settings.email');
+    Route::post('/save-email-settings',  [EmailController::class, 'save_email_settings'])->name('admin.settings.save_email');
 });
 
 

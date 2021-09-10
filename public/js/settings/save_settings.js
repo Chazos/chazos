@@ -1,23 +1,30 @@
 $('.save-settings-button').on('click', (event) => {
     let destination = $(event.target).attr('data-route-name')
 
-    let inputs = $('.settings_inputs')
-    let form_data = {}
+    let form = $('.save-settings-form')
 
-    inputs.map((el) => {
-        setting_name = $(el).attr('name')
-        setting_value = $(el).val()
-        form_data[setting_name] = setting_value
-    })
-        axios({
-            url: destination,
-            method: 'POST',
+    let formData = new FormData(form[0])
+
+
+    // inputs.map((el) => {
+    //     let settingName = $(el).attr('name')
+
+    //     console.log("Test: " + settingName)
+    //     console.log("Shit test")
+
+    //     if ($(el).attr('type') == 'file') {
+    //         formData.append(settingName, $(el)[0].files[0])
+    //     }else{
+    //         setting_value = $(el).val()
+    //         formData.append(settingName, settingValue)
+    //     }
+    // })
+
+
+        axios.post(destination, formData, {
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: form_data
-
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
       })
       .then(function (response) {
          if (response.data.status == 'success'){

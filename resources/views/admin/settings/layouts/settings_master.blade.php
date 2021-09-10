@@ -8,21 +8,18 @@
 @endsection
 
 @section('content')
-<main class=" overflow-y-auto">
-    <div class="container  mx-auto grid">
-        <h2 class="my-6 px-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
-            Settings
-        </h2>
+<main class=" overflow-y-auto h-full">
+    <div class="mx-auto grid h-full">
 
-        <div class="grid gap-6 md:grid-cols-5">
-            <div class="col-span-1 min-w-0 p-4 bg-white shadow-md dark:bg-gray-800">
+
+        <div class="lg:grid gap-6 md:grid-cols-5 ">
+            <div class="col-span-1 bg-gray-200 min-w-0 p-4 ">
               <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
                 General
               </h4>
 
               <ul>
-                  <li><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Site</a></li>
-                  <li><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Colors</a></li>
+                  <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a href="{{ route('admin.settings') }}">Site</a></li>
 
               </ul>
 
@@ -31,7 +28,7 @@
               </h4>
 
               <ul>
-                <li class="w-full"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="{{ route('admin.settings.roles') }}">Roles</a></li>
+                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="" href="{{ route('admin.settings.roles') }}">Roles</a></li>
               </ul>
 
               <h4 class="mb-4 mt-5 font-semibold text-gray-600 dark:text-gray-300">
@@ -39,8 +36,7 @@
               </h4>
 
               <ul>
-                <li class="w-full"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Email settings</a></li>
-                <li class="w-full"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Templates</a></li>
+                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Email settings</a></li>
               </ul>
 
             </div>

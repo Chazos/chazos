@@ -1,3 +1,8 @@
+@php
+    $current_link = "site_set";
+@endphp
+
+
 @extends('admin.settings.layouts.settings_master')
 
 
@@ -7,7 +12,7 @@
       Site Settings
     </h4>
 
-    <form id="saveSettingsForm" method="POST" action="{{ route('admin.settings.save') }}">
+    <form class="save-settings-form" method="POST" action="{{ route('admin.settings.save') }}">
 
 
         @csrf
@@ -28,6 +33,15 @@
                 name="project_name"
                 value="{{ cg_get_setting('project_name') }}"
                 placeholder="Project Name">
+        </label>
+        <label class="block text-sm mt-4">
+            <span
+                class="text-gray-700 dark:text-gray-400">Site Image</span>
+            <input
+                type="file"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                name="site_image"
+                placeholder="Site Image">
         </label>
 
         <div class="mt-5">

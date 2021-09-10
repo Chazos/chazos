@@ -22,6 +22,20 @@ if (! function_exists('cg_slugify')) {
     }
 }
 
+if (! function_exists('cg_get_project_logo')) {
+    function cg_get_project_logo(  ) {
+
+        $setting = Settings::where('name', 'site_image')->first();
+
+        if( $setting ) {
+            return $setting->value;
+        }else{
+            return '';
+        }
+
+    }
+}
+
 if (! function_exists('cg_unslugify')) {
     function cg_unslugify( $slug ) {
 

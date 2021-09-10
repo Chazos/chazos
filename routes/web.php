@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TableDataController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\TestController;
@@ -17,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+    Route::get('/dashboard',  function () {
+        return view('welcome');
+    })->name('admin.dashboard');
 
 
 
@@ -39,6 +45,11 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/tables/update/{id}',  [TableController::class, 'update'])->name('admin.tables.update');
     Route::post('/tables/delete/{id}',  [TableController::class, 'delete'])->name('admin.tables.delete');
     Route::post('/tables/create',  [TableController::class, 'create'])->name('admin.tables.create');
+
+    Route::get('/settings',  [SettingsController::class, 'index'])->name('admin.settings');
+    Route::get('/roles',  [RoleController::class, 'roles'])->name('admin.settings.roles');
+    Route::post('/create-role',  [RoleController::class, 'create_role'])->name('admin.settings.create_role');
+    Route::post('/save-settings',  [SettingsController::class, 'save_settings'])->name('admin.settings.save');
 });
 
 

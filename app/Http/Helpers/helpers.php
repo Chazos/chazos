@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Settings;
 use App\Models\Table;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
@@ -102,6 +103,18 @@ if (! function_exists('cg_delete_resource')) {
         $resource_name = ucfirst($table_name) . 'Resource';
         $resource_file = base_path() . '/app/Http/Resources/' . $resource_name . '.php';
         File::delete($resource_file);
+    }
+}
+
+if (! function_exists('cg_get_setting')) {
+    function cg_get_setting( $name ) {
+        $setting = Settings::where('name', $name)->first();
+
+        if ( $setting ) {
+            return $setting->value;
+        }else{
+            return '';
+        }
     }
 }
 

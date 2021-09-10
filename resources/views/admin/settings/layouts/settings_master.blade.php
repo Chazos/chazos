@@ -36,7 +36,7 @@
               </h4>
 
               <ul>
-                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="#">Email settings</a></li>
+                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="{{ route('admin.settings.email') }}">Email settings</a></li>
               </ul>
 
             </div>

@@ -2,6 +2,9 @@
 
 use App\Models\Settings;
 use App\Models\Table;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
 
@@ -165,3 +168,21 @@ if (! function_exists('cg_create_resource')) {
         File::put(base_path() . '/app/Http/Resources/' . $res_name . '.php', $res_string);
     }
 }
+
+if (! function_exists('cg_set_env_variable')) {
+    function cg_set_env_variable($env_name, $config_key, $new_value) {
+        file_put_contents(App::environmentFilePath(), str_replace(
+            $env_name . '=' . Config::get($config_key),
+            $env_name . '=' . $new_value,
+            file_get_contents(App::environmentFilePath())
+        ));
+
+        Config::set($config_key, $new_value);
+
+        // Reload the cached config
+        if (file_exists(App::getCachedConfigPath())) {
+            Artisan::call("config:cache");
+        }
+    }
+}
+

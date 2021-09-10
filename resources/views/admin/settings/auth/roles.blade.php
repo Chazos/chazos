@@ -1,5 +1,8 @@
-@extends('admin.settings.layouts.settings_master')
+@php
+    $current_link = "role_set";
+@endphp
 
+@extends('admin.settings.layouts.settings_master')
 
 @section('settings-content')
 <div class="col-span-4 min-w-0 p-4 px-10 bg-white shadow-md dark:bg-gray-800">

@@ -14,25 +14,38 @@ class SettingsController extends Controller
         return view('admin.settings.index');
     }
 
-    
-
     public function save_settings(Request $request){
         try{
+
             $data = $request->all();
             $keys = array_keys($data);
 
+
             foreach ($keys as $key){
+
+                $has_file = $request->hasFile($key);
                 $setting = Settings::where('name', $key)->first();
 
                 if($setting){
-                    $setting->value = $data[$key];
+                    $setting->value = $has_file ? "placeholder" : $data[$key];
                     $setting->save();
                 }else{
                     $setting = new Settings();
                     $setting->name = $key;
-                    $setting->value = $data[$key];
+                    $setting->value = $has_file ? "placeholder" : $data[$key];
                     $setting->save();
                 }
+
+                // Save file if it exists
+                if ($has_file){
+                    $setting->media()->delete();
+                    $setting->addMediaFromRequest($key)
+                            ->toMediaCollection($key);
+
+                    $setting->value = $setting->getFirstMedia($key)->getUrl();
+                    $setting->save();
+                }
+
             }
 
             return response()->json([

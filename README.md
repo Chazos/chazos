@@ -11,6 +11,8 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
 ### How to install
 
+0. Create you database first
+
 1. Clone the project
 
     `git clone https://github.com/takumade/chazos.git`
@@ -33,12 +35,32 @@ Chazos is a chazos CMS😅🤣🤣🤣
     `php artisan serve`
 
 
+### Deploy on share hosting 🚀
+
+1. Type the following
+
+`sh deploy_shared.sh`
+
+**Do this putting the file on server, since it also runs optimize commands**
+
+### Make develop ready 👨🏽‍💻
+
+1. Type the following
+
+`sh develop.sh`
+
+**If you want to make a pull request clean the project first**
+
+`php artisan project:clean`
+
 ### Todo
 
 #### Features
 
 ##### Overrally
 ✅ Add alerts
+
+✅ Add develop and deploy scripts
 
 ✅ Populate seeder with 
      - create all roles 

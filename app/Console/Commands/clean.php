@@ -6,21 +6,21 @@ use App\Models\Table;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
-class deploy extends Command
+class clean extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'project:deploy';
+    protected $signature = 'project:clean';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Make project ready for deployment';
+    protected $description = 'Clean project. Removed added tables, models, resources ect';
 
     /**
      * Create a new command instance.

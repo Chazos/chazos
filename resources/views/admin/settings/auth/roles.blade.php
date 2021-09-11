@@ -10,6 +10,10 @@
       Roles
     </h4>
 
+    <div class="my-5">
+        <p class="font-bold text-red-400">Warning: Do not touch anything here unless you know what you are doing. Infact dont touch anything.</p>
+    </div>
+
     <div class="w-full overflow-x-scroll">
         <table class="w-full whitespace-no-wrap border">
           <thead>

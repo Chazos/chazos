@@ -249,9 +249,9 @@ class TableController extends Controller
 
 
         // Add new fields if any
-        // foreach ($fields as $field){
-        //     tb_add_column($table_name, $field, 'table');
-        // }
+        foreach ($fields as $field){
+            tb_add_column($table_name, $field, 'table');
+        }
 
         // Finally Save the data
         $update_collection = Table::where('id', $id)->first();

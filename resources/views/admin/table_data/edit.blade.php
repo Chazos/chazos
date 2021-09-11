@@ -14,7 +14,7 @@
 
       <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-     <form id="myForm" action="{{ route('admin.update_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}" method="POST" enctype="multipart/form-data">
+     <form class="edit-entry" action="{{ route('admin.update_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @foreach ($fields as $field)
 
@@ -68,7 +68,10 @@
                 <button class="flex items-center justify-between px-4 ml-2  py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg hover:shadow  focus:outline-none focus:shadow-outline-purple">
                     Cancel
                 </button>
-                <button type="submit" class="flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                <button
+
+                data-route-name="{{ route('admin.update_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}"
+                type="button" class=" edit-entry-button flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                     Save
                 </button>
             </div>
@@ -107,6 +110,12 @@ const initEditors = async () => {
             editor = CKEDITOR.replace( '{{ $field->field_name }}' );
 
             editors["{{ $field->field_name}}"] = editor
+
+            CKEDITOR.instances[`editor-{{ $field->field_name }}`].on("instanceReady", function(){
+                        this.document.on("keyup", function(){
+                            $('[name="{{ $field->field_name }}"]').val(CKEDITOR.instances[`editor-{{ $field->field_name }}`].getData())
+                        });
+                    });
 
 
         @endif

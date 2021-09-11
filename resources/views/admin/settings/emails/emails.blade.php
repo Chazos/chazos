@@ -15,6 +15,13 @@
     <form class="save-mail-settings" method="POST" action="{{ route('admin.settings.save_email') }}">
 
 
+
+
+
+
+
+
+
         @csrf
         <label class="block text-sm mt-4">
             <span
@@ -22,7 +29,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_HOST"
-                value="{{ env('MAIL_HOST') }}"
+                value="{{ config('mail.mailers.smtp.host') }}"
                 placeholder="Mail Host">
         </label>
         <label class="block text-sm mt-4">
@@ -31,7 +38,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_PORT"
-                value="{{ env('MAIL_PORT') }}"
+                value="{{ config('mail.mailers.smtp.port') }}"
                 placeholder="Mail Port">
         </label>
         <label class="block text-sm mt-4">
@@ -40,7 +47,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_USERNAME"
-                value="{{ env('MAIL_USERNAME') }}"
+                value="{{ config('mail.mailers.smtp.username') }}"
                 placeholder="Mail Username">
         </label>
         <label class="block text-sm mt-4">
@@ -49,7 +56,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_PASSWORD"
-                value="{{ env('MAIL_PASSWORD') }}"
+                value="{{ config('mail.mailers.smtp.password') }}"
                 placeholder="Mail Password">
         </label>
         <label class="block text-sm mt-4">
@@ -58,7 +65,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_ADMIN_EMAIL"
-                value="{{ env('MAIL_ADMIN_EMAIL') }}"
+                value="{{ config('mail.admin_email') }}"
                 placeholder="Mail Admin Email">
         </label>
         <label class="block text-sm mt-4">
@@ -67,7 +74,7 @@
             <input type="text"
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_FROM_ADDRESS"
-                value="{{ env('MAIL_FROM_ADDRESS') }}"
+                value="{{ config('mail.from_address') }}"
                 placeholder="Mail From Address">
         </label>
         <label class="block text-sm mt-4">
@@ -76,7 +83,7 @@
             <select
                 class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 name="MAIL_ENCRYPTION"
-                value="{{ env('MAIL_ENCRYPTION') }}"
+                value="{{ config('mail.mailers.smtp.encryption')  }}"
                 placeholder="Mail Encryption">
 
                 <option value="">None</option>

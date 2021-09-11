@@ -4,6 +4,6 @@ sed -i "s#env('ASSET_URL', null)#env('ASSET_URL', 'public/')#g"  config/app.php
 sed -i "s#APP_DEBUG=true#APP_DEBUG=false#g"  .env
 sed -i "s#APP_ENV=local#APP_ENV=production#g" .env
 
-php artisan
+# php artisan optimize
 echo "🚀 Now in deploy mode[shared hosting]"
 

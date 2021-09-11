@@ -14,7 +14,7 @@
 
             <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
 
-                <form id="myForm" action="{{ route('admin.create_entry', ['table_name' => $table->table_name]) }}"
+                <form class="new-entry" action="{{ route('admin.create_entry', ['table_name' => $table->table_name]) }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     @foreach ($columns as $column)
@@ -84,8 +84,9 @@
                                 class="flex items-center justify-between px-4 ml-2  py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-red-600 border border-transparent rounded-lg hover:shadow  focus:outline-none focus:shadow-outline-purple">
                                 Cancel
                             </button>
-                            <button type="submit"
-                                class="flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+                            <button type="button"
+                                data-route-name="{{ route('admin.create_entry', ['table_name' => $table->table_name]) }}"
+                                class="add-entry-button flex items-center justify-between px-4 ml-2 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
                                 Save
                             </button>
                         </div>
@@ -122,6 +123,13 @@
                     editor = CKEDITOR.replace( '{{ $column->field_name }}' );
 
                     editors["{{ $column->field_name }}"] = editor
+
+
+                    CKEDITOR.instances[`editor-{{ $column->field_name }}`].on("instanceReady", function(){
+                        this.document.on("keyup", function(){
+                            $('[name="{{ $column->field_name }}"]').val(CKEDITOR.instances[`editor-{{ $column->field_name }}`].getData())
+                        });
+                    });
 
 
                 @endif

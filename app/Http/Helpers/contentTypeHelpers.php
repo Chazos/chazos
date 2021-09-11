@@ -74,11 +74,13 @@ if (! function_exists('tb_rename_column')) {
 }
 
 if (! function_exists('tb_delete_column')) {
-    function tb_delete_column($table_name, $field ){
-        $field_name = $field['field_name'];
+    function tb_delete_column($table_name, $field_name ){
+
 
         $table_string = "Schema::table('$table_name', function (\$table) {";
+        $table_string .= "if (Schema::hasColumn('$table_name', '$field_name') == true){";
         $table_string .= "\$table->dropColumn('$field_name');";
+        $table_string .= "}";
         $table_string .= "});";
 
         eval($table_string);

@@ -101,6 +101,12 @@ class TableDataController extends Controller
 
                             $new_entry->addMediaFromRequest( $field->field_name)
                                       ->toMediaCollection($field->field_name);
+
+                            $image_url = $new_entry->getFirstMedia($field->field_name)->getUrl();
+                            $add_field_data = "\$new_entry->$field_name = \$image_url;";
+                            eval($add_field_data);
+                            $new_entry->save();
+
                         }
                     }
                 }
@@ -162,6 +168,11 @@ class TableDataController extends Controller
                             $current_entry->media()->delete();
                             $current_entry->addMediaFromRequest( $field->field_name)
                                           ->toMediaCollection($field->field_name);
+
+                            $image_url = $current_entry->getFirstMedia($field->field_name)->getUrl();
+                            $add_field_data = "\$current_entry->$field_name = \$image_url;";
+                            eval($add_field_data);
+                            $current_entry->save();
                         }
                     }
                 }

@@ -7,6 +7,8 @@ class CatsResource extends JsonResource {
 			'id' => $this->id,
 			'name' => $this->name,
 			'breed' => $this->breed,
+			'avatar' => $this->getMedia('avatar'),
+			'desc' => $this->desc,
 			'created_at' => $this->created_at,
 			'updated_at' => $this->updated_at
 		];

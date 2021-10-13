@@ -101,13 +101,13 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 ✅ Add pagination in manage content
 
-⏳ Specify amount to show in pagination
+⏳ Specify amount to show in pagination(v2)
 
 ⏳ Search through content
 
 ⏳ Allow users to bulk import data(CSV)
 
-⏳ Allow users to export data(CSV, JSON)
+✅ Allow users to export data(CSV/JSON)
 
 ⏳ Bulk delete content
 

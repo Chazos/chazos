@@ -6,12 +6,10 @@ It should be used as a backend for websites, web apps and mobile apps.
 
 Chazos is a greek work for stupid. Someone who is stupid is someone who is brainless or headless 😁. 
 
-### TL;DR
-Chazos is a chazos CMS😅🤣🤣🤣
 
 ### How to install
 
-0. Create you database first
+0. Create your database first
 
 1. Clone the project
 
@@ -21,21 +19,19 @@ Chazos is a chazos CMS😅🤣🤣🤣
 
     `cd chazos`
 
-3. Modify .env file or create one
+3. Modify .env file or create one. **Make sure your have composer and PHP >= 7.4 installed.**
     
 
 4.  Run install
 
-    `./install.sh`  or `install.bat`
-
-    **Note:** Which file you run depends on which system or  environment you are in
+    `./install.sh` ( for Mac OS/Linux)  or `install.bat` ( for Windows)
 
 8. Serve it
 
     `php artisan serve`
 
 
-### Deploy on share hosting 🚀
+### Deploy on shared hosting 🚀
 
 1. Type the following
 
@@ -52,6 +48,27 @@ Chazos is a chazos CMS😅🤣🤣🤣
 **If you want to make a pull request clean the project first**
 
 `php artisan project:clean`
+
+
+### Screenshots
+
+**Dashbaord**
+![Chazos Dashbaord](./readme_images/chazos_dashboard.png)
+
+**Tables**
+![Chazos Tables](./readme_images/chazos_tables.png)
+
+**Table Builder**
+![Chazos Table Builder](./readme_images/chazos_tablebuilder.png)
+
+**Table Builder 2**
+![Chazos Table Builder 2](./readme_images/chazos_tablebuilder2.png)
+
+**Table Builder 1 Modal**
+![Chazos Modal](./readme_images/chazos_modal.png)
+
+**Settings**
+![Chazos Settings](./readme_images/chazos_settings.png)
 
 ### Todo
 
@@ -145,8 +162,3 @@ Chazos is a chazos CMS😅🤣🤣🤣
 ⏳ Allow admin to change email templates
 
 ⏳ Email configuration settings
-
-
-
-
-

@@ -9,8 +9,13 @@
 
             <div class="flex justify-end py-3">
 
+                <a href="javascript:void(0)"
+                    onclick="exportData('{{ $table->table_name }}')"
+                    class="bg-purple-600 px-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    Export
+                </a>
                 <a href="{{ route('admin.add_entry', ['table_name' => $table->table_name]) }}"
-                    class="bg-purple-600 px-3 mx-3 text-white ml-5 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    class="bg-purple-600 px-3 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     New Entry
                 </a>
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -136,6 +141,31 @@
                     element.classList.add('hidden');
                 }
             }
+        }
+
+        function exportData(tableName){
+            fetch(`/manage/${tableName}/export`, {
+                    method: 'POST',
+                    headers: {
+                    'Accept': 'text/csv',
+                    'Content-Type': 'application/json',
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                    body: {
+
+                    }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    let a = document.createElement('a');
+                    a.href = 'data:text/csv;base64, ' +  btoa(data);
+                    a.download = `${tableName}.csv`;
+                    a.click();
+                })
+                .catch((error) => {
+                    setSuccessAlert('Ooops! Something went wrong!')
+                })
         }
 
         function deleteRow(elRowId,tableName, rowId) {

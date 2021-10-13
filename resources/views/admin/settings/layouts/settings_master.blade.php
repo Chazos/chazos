@@ -19,7 +19,7 @@
               </h4>
 
               <ul>
-                  <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a href="{{ route('admin.settings') }}">Site</a></li>
+                  <li class="hover:bg-purple-500 hover:rounded-lg hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500 rounded-lg text-white' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a href="{{ route('admin.settings') }}">Site</a></li>
 
               </ul>
 
@@ -28,7 +28,7 @@
               </h4>
 
               <ul>
-                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="" href="{{ route('admin.settings.roles') }}">Roles</a></li>
+                <li class="hover:bg-purple-500 rounded-lg hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500 rounded-lg text-white' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="" href="{{ route('admin.settings.roles') }}">Roles</a></li>
               </ul>
 
               <h4 class="mb-4 mt-5 font-semibold text-gray-600 dark:text-gray-300">
@@ -36,7 +36,7 @@
               </h4>
 
               <ul>
-                <li class="hover:bg-purple-500 hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="{{ route('admin.settings.email') }}">Email settings</a></li>
+                <li class="hover:bg-purple-500 rounded-lg hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500 rounded-lg text-white' : '' }} hover:text-white pl-2 w-full my-5 py-2"><a class="hover:bg-purple-500 hover:underline hover:text-white pl-2 w-fullmy-5" href="{{ route('admin.settings.email') }}">Email settings</a></li>
               </ul>
 
             </div>

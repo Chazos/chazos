@@ -18,7 +18,7 @@ class TableDataController extends Controller
         $model = "App\Models\\" . $table->model_name;
 
 
-        $data = $model::simplePaginate(15);
+        $data = $model::simplePaginate(10);
         return view('admin.table_data.manage', compact('table', 'config_fields', 'table', 'columns', 'data'));
     }
 
@@ -66,11 +66,17 @@ class TableDataController extends Controller
 
         try {
             $table = Table::where('table_name', $table_name)->first();
-            $model = "App\Models\\" . $table->model_name;
+            $model = "App\\Models\\" . $table->model_name;
             $item = $model::where('id', $id)->first();
 
-            $item->media()->delete();
-            $item->delete();
+            try{
+                $item->media()->delete();
+            }catch (\Exception $e){
+                
+            }finally{
+                $item->delete();
+            }
+
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);
         }

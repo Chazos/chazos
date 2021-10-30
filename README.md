@@ -103,13 +103,13 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 ⏳ Specify amount to show in pagination(v2)
 
-⏳ Search through content
+✅ Search through content
 
 ⏳ Allow users to bulk import data(CSV)
 
 ✅ Allow users to export data(CSV/JSON)
 
-⏳ Bulk delete content
+✅  Bulk delete content
 
 
 ##### Table Builder
@@ -153,12 +153,12 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 
 #### Settings
-⏳ Add settings
+✅  Add settings
 
-⏳ Allow admin to add roles
+✅  Allow admin to add roles
 
 ⏳ Allow admin change colors
 
 ⏳ Allow admin to change email templates
 
-⏳ Email configuration settings
+✅  Email configuration settings

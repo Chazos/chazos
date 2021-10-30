@@ -3,7 +3,7 @@
 
         <td class="px-4 py-3">
             <div class="flex items-center space-x-4 text-sm">
-                <input type="checkbox">
+                <input class="table-data-check" type="checkbox" onclick="onCheckboxChecked(this, {{ $item->id }})">
             </div>
         </td>
 
@@ -44,3 +44,4 @@
     </tr>
 
 @endforeach
+

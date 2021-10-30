@@ -108,13 +108,29 @@
 
 
                         </tbody>
+
                     </table>
                 </div>
+
+
                 <div class=" font-semibold tracking-wide text-gray-500 text-center border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                     {{-- <span class="flex items-center col-span-3">
                         Showing 21-30 of 100
                     </span> --}}
+
+                    <div class="flex items-center space-x-4 text-sm ml-4 mt-3">
+                        <input id="check-all-box" type="checkbox" onclick="checkOnAllCheckbox()"> <span class="ml-2">Check All</span>
+                        <span class="w-10"></span>
+                        <span>With Selected: </span>
+                        <button onclick="deleteMultiple('{{ $table->table_name  }}')" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                            <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                    </div>
                     <span class="col-span-2 w-full"></span>
+
+
 
                     <div class="flex flex-row justify-end mt-5">
                         @if ($data->previousPageUrl() != null )
@@ -191,6 +207,80 @@
                 .catch((error) => {
                     setSuccessAlert('Ooops! Something went wrong!')
                 })
+        }
+
+        function checkOnAllCheckbox(){
+            let checkboxes = document.querySelectorAll('input.table-data-check');
+
+            for (const checkbox of checkboxes) {
+                if (checkbox.checked == false) {
+                    checkbox.click()
+                } else {
+                    checkbox.click()
+                    checkbox.click()
+                }
+            }
+
+            document.querySelector('#check-all-box').setAttribute('onclick', 'checkOffAllCheckbox()');
+
+
+        }
+
+        function checkOffAllCheckbox(){
+            let checkboxes = document.querySelectorAll('input.table-data-check');
+
+            for (const checkbox of checkboxes) {
+                if (checkbox.checked == true) {
+                    checkbox.click()
+                } else {
+                    checkbox.click()
+                    checkbox.click()
+                }
+            }
+
+            document.querySelector('#check-all-box').setAttribute('onclick', 'checkOnAllCheckbox()');
+        }
+
+        function onCheckboxChecked(element, id){
+
+            checkedData = localStorage.getItem('checkedData');
+
+            if (checkedData == null) {
+                checkedData = [];
+            } else {
+                checkedData = JSON.parse(checkedData);
+            }
+
+            if (element.checked == true) {
+                if (checkedData.includes(id) == false) {
+                    checkedData.push(id);
+                }
+            } else {
+                let index = checkedData.indexOf(id);
+
+                if (index > -1) {
+                    checkedData.splice(index, 1);
+                }
+            }
+
+            localStorage.setItem('checkedData', JSON.stringify(checkedData));
+
+
+        }
+
+        function deleteMultiple(tableName){
+            let checkedData = localStorage.getItem('checkedData');
+
+            if (checkedData == null) {
+                setSuccessAlert('Please select at least one row!')
+                return;
+            }else{
+                checkedData = JSON.parse(checkedData);
+
+                for (const id of checkedData) {
+                    deleteRow(`#row-${id}`, tableName, id);
+                }
+            }
         }
 
         function deleteRow(elRowId,tableName, rowId) {

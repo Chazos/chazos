@@ -7,15 +7,26 @@
                 {{ ucfirst($table->table_name) }}
             </h2>
 
+
+
+
             <div class="flex justify-end py-3">
+
+                <div class="relative mr-6 focus-within:text-purple-500">
+                    <input style="width: 240%" onkeyup="filterTable(this.value)" class=" pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md  dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input" type="text" placeholder="Search for projects" aria-label="Search">
+                </div>
+
+                <div class="w-full"></div>
+
+
 
                 <a href="javascript:void(0)"
                     onclick="exportData('{{ $table->table_name }}')"
-                    class="bg-purple-600 px-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    class="bg-purple-600 px-3 h-10 w-40 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     Export
                 </a>
                 <a href="{{ route('admin.add_entry', ['table_name' => $table->table_name]) }}"
-                    class="bg-purple-600 px-3 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    class="bg-purple-600 px-3 h-10 w-60 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     New Entry
                 </a>
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -82,7 +93,9 @@
                             <tr
                                 class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
 
-                                <th class="px-4 py-3">ID</th>
+                                <th class="px-4 py-3">
+
+                                </th>
                                 @include('admin.table_data.includes.manage_table_header')
                                 <th class="px-4 py-3">Actions</th>
                             </tr>
@@ -139,6 +152,18 @@
                     element.classList.remove('hidden');
                 } else {
                     element.classList.add('hidden');
+                }
+            }
+        }
+
+        function filterTable(value){
+            let rows = document.querySelectorAll('tbody tr');
+
+            for (const row of rows) {
+                if (row.innerText.toLowerCase().includes(value.toLowerCase())) {
+                    row.classList.remove('hidden');
+                } else {
+                    row.classList.add('hidden');
                 }
             }
         }

@@ -24,7 +24,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 4.  Run install
 
-    `./install.sh` ( for Mac OS/Linux)  or `install.bat` ( for Windows)
+    `python woof.py install`
 
 8. Serve it
 
@@ -35,15 +35,23 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 1. Type the following
 
-`sh deploy_shared.sh`
+`python woof.py shared`
 
 **Do this putting the file on server, since it also runs optimize commands**
+
+### Update ⬆️
+
+1. Type the following
+
+`python woof.py update`
+
+**Remember to save your data first**
 
 ### Make develop ready 👨🏽‍💻
 
 1. Type the following
 
-`sh develop.sh`
+`python woof dev`
 
 **If you want to make a pull request clean the project first**
 
@@ -70,95 +78,4 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 **Settings**
 ![Chazos Settings](./readme_images/chazos_settings.png)
 
-### Todo
 
-#### Features
-
-##### Overrally
-✅ Add alerts
-
-✅ Add develop and deploy scripts
-
-✅ Populate seeder with 
-     - create all roles 
-     - CRUD permissions for user table
-
-⏳ Refactor the code(bi-weekly)
-
-✅ Add `project:deploy command which everything not core to the system`
-
-##### Dashboard
-✅ Add something stupid and simple
-
-##### Content Section 
-✅ View content
-
-✅ Add content
-
-✅ Edit content
-
-✅ Delete Content
-
-✅ Add pagination in manage content
-
-⏳ Specify amount to show in pagination(v2)
-
-✅ Search through content
-
-✅ Allow users to bulk import data(CSV)
-
-✅ Allow users to export data(CSV/JSON)
-
-✅  Bulk delete content
-
-
-##### Table Builder
-✅ Create Table
-
-✅ Specifiy Table Fields
-
-✅ Allow admin to edit tables
-
-✅ Allow admin to edit table columns
-
-⏳ Add relationships between documents
-
-
-##### API
-✅ Get Content
-
-✅ Get Content Detail
-
-✅ Delete Item
-
-
-##### Media
-⏳ Add media section
-
-⏳ Show Media
-
-⏳ Upload Media
-
-⏳ Get Media Link
-
-
-#### Payments
-⏳ View Payments
-
-⏳ Integrate Stripe
-
-⏳ Integrate Paypal
-
-⏳ Integrate Paynow
-
-
-#### Settings
-✅  Add settings
-
-✅  Allow admin to add roles
-
-⏳ Allow admin change colors
-
-⏳ Allow admin to change email templates
-
-✅  Email configuration settings

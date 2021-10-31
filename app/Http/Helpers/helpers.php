@@ -108,10 +108,45 @@ if (! function_exists('cg_create_model')) {
 
 
         $model_string .= "\tprotected \$table = '$table_name';\n";
+        $model_string .= "\tprotected \$guarded = array();";
         $model_string .= "}\n";
 
 
         File::put(base_path() . '/app/Models/' . $model_name . '.php', $model_string);
+    }
+}
+
+if (! function_exists('cg_create_export')) {
+    function cg_create_export( $model_name) {
+        $export_name = $model_name . "Export";
+
+        $exitCode = Artisan::call("make:export $export_name --model=$model_name");
+    }
+}
+
+if (! function_exists('cg_create_import')) {
+    function cg_create_import( $model_name) {
+        $import_name = $model_name . "Import";
+
+        $exitCode = Artisan::call("make:import $import_name --model=$model_name");
+    }
+}
+
+if (! function_exists('cg_delete_import')) {
+    function cg_delete_import( $model_name ) {
+        $import_name = $model_name . "Import";
+
+        $resource_file = base_path() . '/app/Imports/' . $import_name . '.php';
+        File::delete($resource_file);
+    }
+}
+
+if (! function_exists('cg_delete_export')) {
+    function cg_delete_export( $model_name ) {
+        $export_name = $model_name . "Export";
+
+        $resource_file = base_path() . '/app/Exports/' . $export_name . '.php';
+        File::delete($resource_file);
     }
 }
 

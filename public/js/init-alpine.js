@@ -22,6 +22,10 @@ function data() {
       this.dark = !this.dark
       setThemeToLocalStorage(this.dark)
     },
+    showImportDataModal: false,
+    toggleImportDataModal() {
+        this.showImportDataModal = !this.showImportDataModal
+    },
     isSideMenuOpen: false,
     toggleSideMenu() {
       this.isSideMenuOpen = !this.isSideMenuOpen

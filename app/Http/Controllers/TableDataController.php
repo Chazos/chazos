@@ -22,43 +22,57 @@ class TableDataController extends Controller
         return view('admin.table_data.manage', compact('table', 'config_fields', 'table', 'columns', 'data'));
     }
 
+
+    public function import_data(Request $request, $table_name){
+
+        $table = Table::where('table_name', $table_name)->first();
+        $model_name = $table->model_name;
+        $columns = Schema::getColumnListing($table_name);
+        $model = "App\Models\\" . $table->model_name;
+
+
+
+
+        $import_model = "App\\Imports\\" . $model_name . "Import";
+        $array = \Excel::toArray(new $import_model, $request->import_file);
+
+        foreach($array[0] as $row){
+            $new_entry_array = [];
+            foreach($row as $key => $value){
+                $current_field = $columns[$key];
+
+                try{
+                    $new_entry_array[$current_field] = $value;
+                }catch (\Exception $e){
+                    $new_entry_array[$current_field] = "";
+                }
+
+            }
+
+            $model::create($new_entry_array);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Records have been imported sucessfully.'
+        ]);
+
+
+
+
+
+    }
+
     public function export_data(Request $request, $table_name)
     {
 
         $table = Table::where('table_name', $table_name)->first();
-        $fields = json_decode($table->fields);
         $model_name = $table->model_name;
-        $model = "App\Models\\" . $model_name;
-        $fileName = 'tasks.csv';
-        $data = $model::all();
-
-        $headers = array(
-            "Content-type"        => "text/csv",
-            "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma"              => "no-cache",
-            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
-            "Expires"             => "0"
-        );
-
-        $columns = array();
 
 
-        foreach($fields as $field){
-            $columns[] = ucfirst($field->field_name);
-        }
+        $export_model = "App\\Exports\\" . $model_name . "Export";
 
-        $callback = function () use ($data, $columns) {
-            $file = fopen('php://output', 'w');
-            fputcsv($file, $columns);
-
-            foreach ($data as $row) {
-                fputcsv($file, json_decode(json_encode($row), true));
-            }
-
-            fclose($file);
-        };
-
-        return response()->stream($callback, 200, $headers);
+        return \Excel::download(new $export_model, "$table_name.csv");
     }
 
     public function delete_item(Request $request, $table_name, $id)
@@ -72,7 +86,7 @@ class TableDataController extends Controller
             try{
                 $item->media()->delete();
             }catch (\Exception $e){
-                
+
             }finally{
                 $item->delete();
             }

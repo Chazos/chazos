@@ -25,6 +25,11 @@
                     class="bg-purple-600 px-3 h-10 w-40 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     Export
                 </a>
+                <button
+                    x-on:click="toggleImportDataModal"
+                    class="bg-purple-600 px-3 h-10 w-40 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    Import
+            </button>
                 <a href="{{ route('admin.add_entry', ['table_name' => $table->table_name]) }}"
                     class="bg-purple-600 px-3 h-10 w-60 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                     New Entry
@@ -153,6 +158,9 @@
             </div>
         </div>
     </main>
+
+
+    @include('admin.modals.manage_table')
 
 @endsection
 
@@ -312,6 +320,27 @@
                     setSuccessAlert('Ooops! Something went wrong!')
                 })
         }
+
+        $('#import-data-button').on('click', (event) => {
+    let destination = $(event.target).attr('data-route-name')
+    let form = $('.import-data-form')
+    let formData = new FormData(form[0])
+
+        axios.post(destination, formData, {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+      })
+      .then(function (response) {
+         if (response.data.status == 'success'){
+            setSuccessAlert(response.data.message)
+            window.location.reload()
+         }
+      })
+      .catch(function (error) {
+           setErrorAlert(error.toString())
+      });
+})
     </script>
 
 @endsection

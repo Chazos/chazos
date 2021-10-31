@@ -105,7 +105,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 ✅ Search through content
 
-⏳ Allow users to bulk import data(CSV)
+✅ Allow users to bulk import data(CSV)
 
 ✅ Allow users to export data(CSV/JSON)
 

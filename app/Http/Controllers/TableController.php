@@ -185,6 +185,8 @@ class TableController extends Controller
         cg_create_model($model_name, $table_name, $table_accepts_media);
         cg_create_resource($table_name, $fields);
         tb_create_perms($table_name);
+        cg_create_import($model_name);
+        cg_create_export($model_name);
 
 
 

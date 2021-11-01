@@ -20,7 +20,7 @@ class clean extends Command
      *
      * @var string
      */
-    protected $description = 'Clean project. Removed added tables, models, resources ect';
+    protected $description = 'Clean project. Removed added tables, models, resources, imports, exports ect';
 
     /**
      * Create a new command instance.
@@ -50,7 +50,11 @@ class clean extends Command
         foreach ($tables as $table) {
             if (!in_array($table->table_name, $whitelist)) {
                 $table_name = $table->table_name;
+                $model_name = $table->model_name;
+
                 cg_delete_model($table_name);
+                cg_delete_export($model_name);
+                cg_delete_import($model_name);
                 cg_delete_resource($table_name);
                 cg_delete_table($table_name);
                 tb_delete_perms($table_name);

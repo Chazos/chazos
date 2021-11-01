@@ -70,6 +70,9 @@ def install():
     print("🚀 Installing dependencies")
     ecode = subprocess.run(["composer", "update"], stdout=subprocess.DEVNULL)
 
+    print("🧹 Cleaning project")
+    ecode = subprocess.run(["php", "artisan", "project:clean"], stdout=subprocess.DEVNULL)
+
     print("🗃 Configuring caches")
     ecode = subprocess.run(["php", "artisan", "config:cache"], stdout=subprocess.DEVNULL)
 

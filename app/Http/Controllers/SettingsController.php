@@ -14,6 +14,11 @@ class SettingsController extends Controller
         return view('admin.settings.index');
     }
 
+    public function payments(Request $request){
+
+        return view('admin.settings.payments.index');
+    }
+
     public function save_settings(Request $request){
         try{
 

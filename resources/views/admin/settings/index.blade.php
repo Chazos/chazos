@@ -20,7 +20,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Site Name</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="site_name"
                 value="{{ cg_get_setting('site_name') }}"
                 placeholder="Site Name">
@@ -29,7 +29,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Project Name</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="project_name"
                 value="{{ cg_get_setting('project_name') }}"
                 placeholder="Project Name">
@@ -39,7 +39,7 @@
                 class="text-gray-700 dark:text-gray-400">Site Image</span>
             <input
                 type="file"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="site_image"
                 placeholder="Site Image">
         </label>

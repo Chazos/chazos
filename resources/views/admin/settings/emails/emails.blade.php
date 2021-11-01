@@ -27,7 +27,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Host</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_HOST"
                 value="{{ config('mail.mailers.smtp.host') }}"
                 placeholder="Mail Host">
@@ -36,7 +36,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Port</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_PORT"
                 value="{{ config('mail.mailers.smtp.port') }}"
                 placeholder="Mail Port">
@@ -45,7 +45,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Username</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_USERNAME"
                 value="{{ config('mail.mailers.smtp.username') }}"
                 placeholder="Mail Username">
@@ -54,7 +54,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Password</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_PASSWORD"
                 value="{{ config('mail.mailers.smtp.password') }}"
                 placeholder="Mail Password">
@@ -63,7 +63,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Admin Email</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_ADMIN_EMAIL"
                 value="{{ config('mail.admin_email') }}"
                 placeholder="Mail Admin Email">
@@ -72,7 +72,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail From Address</span>
             <input type="text"
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_FROM_ADDRESS"
                 value="{{ config('mail.from_address') }}"
                 placeholder="Mail From Address">
@@ -81,7 +81,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Mail Encryption</span>
             <select
-                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="settings-input shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="MAIL_ENCRYPTION"
                 value="{{ config('mail.mailers.smtp.encryption')  }}"
                 placeholder="Mail Encryption">

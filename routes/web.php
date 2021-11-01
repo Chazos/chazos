@@ -49,7 +49,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/tables/delete/{id}',  [TableController::class, 'delete'])->name('admin.tables.delete');
     Route::post('/tables/create',  [TableController::class, 'create'])->name('admin.tables.create');
 
+    // General Settings
     Route::get('/settings',  [SettingsController::class, 'index'])->name('admin.settings');
+    Route::get('/payments',  [SettingsController::class, 'payments'])->name('admin.settings.payments');
 
     // Role Settings
     Route::get('/roles',  [RoleController::class, 'roles'])->name('admin.settings.roles');

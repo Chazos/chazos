@@ -66,7 +66,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Role Name</span>
             <input type="text"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="role_name"
                 placeholder="Role Name">
         </label>
@@ -74,7 +74,7 @@
             <span
                 class="text-gray-700 dark:text-gray-400">Guard Name</span>
             <input type="text"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
                 name="guard_name"
                 value="web"
                 readonly

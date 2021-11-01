@@ -1,5 +1,5 @@
 @php
-    $current_link = "site_set";
+    $current_link = "email_set";
 @endphp
 
 

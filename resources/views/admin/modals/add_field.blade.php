@@ -40,83 +40,108 @@
                             Add a field
                           </h3>
                         <form class="bg-white px-8 pt-6 pb-8 mb-4">
-                            <div class="mb-4">
-                              <label class="block text-gray-700 text-sm font-bold mb-2" for="field_name">
-                                Field Name
-                              </label>
-                              <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="field_name" type="text" placeholder="Field Name">
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="table_name">
-                                  Field Type
-                                </label>
-                                <select id="field_type" class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="field_type">
-                                    <option value="char">Char</option>
-                                    <option value="string">String</option>
-                                    <option value="text">Text</option>
-                                    <option value="boolean">Boolean</option>
-                                    <option value="integer">Integer</option>
-                                    <option value="bigInteger">BigInteger</option>
-                                    <option value="bigIncrements">BigIncrements</option>
-                                    <option value="json">JSON</option>
-                                    <option value="integer">Integer</option>
-                                    <option value="double">Double</option>
-                                    <option value="float">Float</option>
-                                    <option value="timestamp">Timestamp</option>
-                                    <option value="float">Float</option>
-                                    <option value="date">Date</option>
-                                  </select>
-                            </div>
-                            <div class="mb-4">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="default_value">
-                                Default Value
-                                </label>
-                                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="default_value" type="text" placeholder="Default Value">
-                            </div>
+                            <div class="rounded  w-full mx-auto mt-4">
+                                <!-- Tabs -->
+                                <ul id="tabs" class="inline-flex pt-2 px-1 w-full border-b">
+                                  <li class="bg-white px-4 text-gray-800 font-semibold py-2 rounded-t border-t border-r border-l -mb-px"><a id="default-tab" href="#first">General</a></li>
+                                  <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#second">Values</a></li>
+                                  <li class="px-4 text-gray-800 font-semibold py-2 rounded-t"><a href="#third">File</a></li>
 
-                            <div class="flex flex-row">
-                                <div class="mb-4 w-full">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="default_value">
-                                    Nullable
-                                    </label>
-                                    <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="nullable">
-                                        <option value="true">True</option>
-                                        <option value="false" selected>False</option>
-                                      </select>
+                                </ul>
+
+                                <!-- Tab Contents -->
+                                <div id="tab-contents">
+                                  <div id="first" class="p-4">
+                                
+                                      <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="field_name">
+                                          Field Name
+                                        </label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="field_name" type="text" placeholder="Field Name">
+
+                                      </div>
+                                      <div class="mb-4">
+                                          <label class="block text-gray-700 text-sm font-bold mb-2" for="table_name">
+                                            Field Type
+                                          </label>
+                                          <select id="field_type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="field_type">
+                                              <option value="char">Char</option>
+                                              <option value="string">String</option>
+                                              <option value="text">Text</option>
+                                              <option value="boolean">Boolean</option>
+                                              <option value="integer">Integer</option>
+                                              <option value="bigInteger">BigInteger</option>
+                                              <option value="bigIncrements">BigIncrements</option>
+                                              <option value="json">JSON</option>
+                                              <option value="integer">Integer</option>
+                                              <option value="double">Double</option>
+                                              <option value="float">Float</option>
+                                              <option value="timestamp">Timestamp</option>
+                                              <option value="float">Float</option>
+                                              <option value="date">Date</option>
+                                            </select>
+                                      </div>
+
+
+
+                                  </div>
+                                  <div id="second" class="hidden p-4">
+                                    <div class="mb-4">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="default_value">
+                                        Default Value
+                                        </label>
+                                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="default_value" type="text" placeholder="Default Value">
+                                    </div>
+                                        <div class="mb-4 w-full">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="default_value">
+                                            Nullable
+                                            </label>
+                                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="nullable">
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                              </select>
+                                          </div>
+
+                                        <div class="mb-4 w-full">
+                                            <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
+                                            Unique
+                                            </label>
+                                            <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="unique">
+                                                <option value="true">True</option>
+                                                <option value="false">False</option>
+                                              </select>
+                                          </div>
+
+
+
+
                                   </div>
 
-                                <div class="mb-4 w-full mx-5">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
-                                    Unique
-                                    </label>
-                                    <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="unique">
-                                        <option value="true">True</option>
-                                        <option value="false" selected>False</option>
-                                      </select>
+                                  <div id="third" class="hidden p-4">
+                                    <div class="mb-4 w-full">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
+                                        Accepts File
+                                        </label>
+                                        <select x-on:change="acceptsData = document.getElementById('accepts-file').value"  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="accepts-file">
+                                            <option value="false">False</option>
+                                            <option value="true">True</option>
+                                          </select>
+                                      </div>
+                                      <div class="mb-4 w-full">
+                                        <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
+                                        File Type
+                                        </label>
+                                        <select class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200" id="file-type">
+                                            <option value="image">Image</option>
+                                            <option value="audio">Audio</option>
+                                            <option value="video">Video</option>
+                                            <option value="document">Document</option>
+                                            <option value="any">Any</option>
+                                          </select>
+                                      </div>
                                   </div>
 
-                                <div class="mb-4 w-full">
-                                    <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
-                                    Accepts File
-                                    </label>
-                                    <select x-on:change="acceptsData = document.getElementById('accepts-file').value"  class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="accepts-file">
-                                        <option value="false" selected>False</option>
-                                        <option value="true">True</option>
-                                      </select>
-                                  </div>
-                            </div>
-
-                            <div class="mb-4 w-full" x-show="acceptsData == 'true'">
-                                <label class="block text-gray-700 text-sm font-bold mb-2" for="unique">
-                                File Type
-                                </label>
-                                <select class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="file-type">
-                                    <option value="image">Image</option>
-                                    <option value="audio">Audio</option>
-                                    <option value="video">Video</option>
-                                    <option value="document">Document</option>
-                                    <option value="any">Any</option>
-                                  </select>
+                                </div>
                               </div>
 
 

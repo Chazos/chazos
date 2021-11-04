@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/manage/{table_name}/import',  [TableDataController::class, 'import_data'])->name('admin.import_table');
 
     Route::get('/tables',  [TableController::class, 'index'])->name('admin.tables');
+    Route::get('/all-tables',  [TableController::class, 'get_all_tables'])->name('admin.tables.all');
     Route::post('/tables/{table}/rename',  [TableController::class, 'rename_table'])->name('admin.tables.rename');
     Route::get('/tables/{table}/fields',  [TableController::class, 'fields'])->name('admin.tables.fields');
     Route::get('/tables/{id}',  [TableController::class, 'details'])->name('admin.tables.detail');

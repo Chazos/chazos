@@ -101,6 +101,8 @@ const getTableDetails = (id) => {
                 let rolePerms = response.role_perms
                 data.configure_fields = JSON.parse(data.configure_fields)
                 data.fields = JSON.parse(data.fields)
+                data.keys = JSON.parse(data.keys)
+
                 localStorage.setItem(tableObjectName, JSON.stringify(data))
                 localStorage.setItem("currentTablePerms", JSON.stringify(rolePerms))
                 localStorage.setItem("currentTableObjectName", tableObjectName)
@@ -109,6 +111,7 @@ const getTableDetails = (id) => {
                 injectPermsToModal(rolePerms)
                 appendFieldToConfigure()
                 addItemsToTable()
+                addKeysToTable()
                 changeElementAttr(
                     "#save-table-button",
                     "onclick",
@@ -125,8 +128,6 @@ const getTableDetails = (id) => {
                     $('#edit-table-name-button').removeClass('hidden')
 
                 }
-
-
             }
         })
 }

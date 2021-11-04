@@ -156,20 +156,37 @@ if (! function_exists('tb_drop_foreign')) {
 }
 
 if (! function_exists('tb_add_foreign_key')) {
-        function tb_add_foreign_key($table_name, $column_name, $foreign_table, $foreign_column_name, $on_delete=""){
+        function tb_add_foreign_key($table_name, $key){
+
+        $column_name = $key['column_name'];
+        $foreign_table_name = $key['foreign_table_column'];
+        $on_delete = $key['on_delete'];
+        $on_update = $key['on_update'];
+        $foreign_table = $key['foreign_table'];
+
         $table_string = "Schema::table('$table_name', function(\$table){";
         $table_string .= "\$table->foreign('$column_name')";
-        $table_string .= "->references('$foreign_column_name')";
+        $table_string .= "->references('$foreign_table_name')";
 
 
-        if ($on_delete == ""){
-            $table_string .= "->on('$foreign_table');";
+        if ($on_delete == "nothing"){
+            $table_string .= "->on('$foreign_table')";
         }else{
             $table_string .= "->on('$foreign_table')";
             $table_string .= "->onDelete('$on_delete')";
         }
 
+        if ($on_update == "nothing"){
+            // $table_string .= "->on('$foreign_table');";
+            $table_string .= ";";
+        }else{
+            // $table_string .= "->on('$foreign_table')";
+            $table_string .= "->onUpdate('$on_update');";
+        }
+
         $table_string .= "});";
+
+        // dd($table_string);
         eval($table_string);
 
     }

@@ -47,7 +47,7 @@
 
 ✅ Allow admin to edit table columns
 
-⏳ Add relationships between documents
+✅  Add relationships between documents
 
 
 ##### API
@@ -59,13 +59,13 @@
 
 
 ##### Media
-⏳ Add media section
+⏳ Add media section (v2)
 
-⏳ Show Media
+⏳ Show Media (v2)
 
-⏳ Upload Media
+⏳ Upload Media (v2)
 
-⏳ Get Media Link
+⏳ Get Media Link (v2)
 
 
 #### Payments
@@ -83,7 +83,7 @@
 
 ✅  Allow admin to add roles
 
-⏳ Allow admin change colors
+⏳ Allow admin change colors (v2)
 
 ⏳ Allow admin to change email templates
 

@@ -30,9 +30,6 @@ const updateTableNameFields = (oldTableName, newTableName, id) => {
 
 
 const addItemsToTable = () => {
-
-
-
     let table =  localStorage.getItem(getCurrentTableObjectName());
 
     if (table != null && table != undefined) {
@@ -75,6 +72,45 @@ const addItemsToTable = () => {
               </tr>
             `
         }
+    }
+}
+
+const addKeysToTable = () => {
+    let table =  localStorage.getItem(getCurrentTableObjectName());
+
+    if (table != null && table != undefined) {
+        table = JSON.parse(table);
+        let keys = table.keys
+
+        for (let key of keys){
+            let keyName = key.column_name + " -> " + key.foreign_table + "." + key.foreign_table_column
+
+            document.getElementById('active-table-fields').innerHTML += `
+
+            <tr id="x-row-${keyName}" class="text-gray-700 dark:text-gray-400">
+                <td class="px-4 py-3 ">
+                    ${keyName}
+                </td>
+                <td class="px-4 py-3">
+                    ${key.key_type}
+                </td>
+                <td class="px-4 py-3">
+
+                  <div class="flex items-center space-x-4 text-sm">
+
+                    <button onclick="deleteAKey('${key.column_name}', '${key.foreign_table}', '${key.foreign_table_column}')" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                      <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                      </svg>
+                    </button>
+                  </div>
+
+                </td>
+              </tr>
+            `
+        }
+
+
     }
 }
 
@@ -205,14 +241,183 @@ const addTableField = () => {
     addItemsToTable()
 }
 
+const deleteAKey = (column_name, foreign_table, foreign_table_column) => {
+    let tableObjectName = getCurrentTableObjectName()
+    let table = JSON.parse(localStorage.getItem(tableObjectName))
+    let keyName = column_name + " -> " + foreign_table + "." + foreign_table_column
+
+
+    if (table != null && table != undefined){
+
+        let table_keys = table.keys
+
+        for(let key of table_keys){
+            if (key.column_name == column_name &&
+                key.foreign_table == foreign_table &&
+                key.foreign_table_column == foreign_table_column){
+                    key.is_deleted = true
+                    key.is_new = false
+
+            }
+        }
+
+        table.keys = table_keys
+        localStorage.setItem(tableObjectName, JSON.stringify(table))
+        document.getElementById('x-row-' + keyName).remove()
+    }
+
+
+}
+
+const addKeyToTable = () => {
+    let tableObjectName = getCurrentTableObjectName()
+    let table = JSON.parse(localStorage.getItem(tableObjectName))
+
+
+    if (table != null && table != undefined){
+
+        let newKey = {
+                'key_type' : document.getElementById('key_type').value,
+                'column_name' : document.getElementById('column_name').value,
+                'foreign_table' : document.getElementById('foreign_table').value,
+                'foreign_table_column' : document.getElementById('foreign_table_column').value,
+                'on_delete' : document.getElementById('on_delete').value,
+                'on_update' : document.getElementById('on_update').value,
+                'is_new': true,
+                'is_deleted': false
+
+        }
+
+
+
+        let table_keys
+        if (table.keys == undefined){
+            table_keys = []
+        }else{
+            table_keys = table.keys
+        }
+
+
+        let obj = table_keys.find(obj =>
+            obj.column_name == newKey.column_name &&
+            obj.foreign_table == newKey.foreign_table &&
+            obj.foreign_table_column == newKey.foreign_table_column )
+
+
+        if (obj == undefined)
+            table_keys.push(newKey)
+        else
+            return
+
+        table.keys = table_keys
+        localStorage.setItem(tableObjectName, JSON.stringify(table))
+
+
+
+    }
+
+    addKeysToTable()
+}
+
+const injectNewKeyModal = () => {
+
+    let currentTableObj = getCurrentTableObjectName()
+    let table = JSON.parse(localStorage.getItem(currentTableObj))
+    let table_fields = table.fields
+
+    // Inject current table fields
+    let table_fields_html = ""
+
+    for (let field of table_fields){
+        table_fields_html += `
+            <option value="${field.field_name}">${capitalize(field.field_name)}</option>
+        `
+    }
+
+    document.getElementById('column_name').innerHTML = table_fields_html
+
+    // Inject all tables
+
+    let tables = JSON.parse(localStorage.getItem('allTables'))
+
+    let tables_html = ""
+
+    for (let table of tables){
+        tables_html += `
+            <option value="${table.table_name}">${capitalize(table.table_name)}</option>
+        `
+    }
+
+    document.getElementById('foreign_table').innerHTML = tables_html
+
+    // Get columns from selected table
+    injectTableColumns()
+
+}
+
+const injectTableColumns = () => {
+    selectedTable = document.getElementById('foreign_table').value
+    let tables = JSON.parse(localStorage.getItem('allTables'))
+
+    for (let table of tables){
+        if (table.table_name == selectedTable){
+            let table_fields = table.fields
+            let table_fields_html = ""
+
+            for (let field of table_fields){
+                table_fields_html += `
+                    <option value="${field.field_name}">${capitalize(field.field_name)}</option>
+                `
+            }
+
+            document.getElementById('foreign_table_column').innerHTML = table_fields_html
+            document.getElementsByClassName('foreign-table-column-block')[0].classList.remove('hidden')
+        }
+    }
 
 
 
 
+}
 
 
 
 
+const getAllTables = () => {
+
+    fetch(`/all-tables`,
+    {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRF-Token": document.querySelector('input[name="_token"]').value
+            }
+    })
+    .then(response => response.json())
+    .then(response => {
+
+        if (response.status == "success"){
+            let tables = response.tables
+
+            // Process tables
+            for (let index = 0; index < tables.length; index++) {
+                const table = tables[index];
+
+                table.keys = JSON.parse(table.keys)
+                table.fields = JSON.parse(table.fields)
+                table.configure_fields = JSON.parse(table.configure_fields)
+            }
+
+            localStorage.setItem("allTables", JSON.stringify(tables))
+        }
+     })
+}
+
+getAllTables()
 
 
 
+document.getElementById('new_key_button').addEventListener('click', injectNewKeyModal)
+document.getElementById('foreign_table').addEventListener('change', injectTableColumns)

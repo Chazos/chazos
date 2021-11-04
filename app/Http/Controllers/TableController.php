@@ -87,6 +87,14 @@ class TableController extends Controller
         ]);
     }
 
+    public function get_all_tables(){
+        $tables = Table::all();
+        return response()->json([
+            'status' => 'success',
+            'tables' => $tables
+        ]);
+    }
+
     public function details(Request $request, $id){
         $table = Table::where("id", $id)->first();
         $status = "failed";
@@ -148,25 +156,27 @@ class TableController extends Controller
         $table_name = $request->name;
         $display_name = $request->display_name;
         $model_name = ucfirst($table_name);
+        $table_keys = $request->keys;
 
+        // Add fields
         tb_add_id_field($table_name);
 
         foreach ($fields as $field){
-
             $skipFields = array("id", "created_at", "updated_at");
 
             if (in_array($field['field_name'], $skipFields)){
                 continue;
             }
-
             tb_add_column($table_name, $field, 'table');
-
         }
+
+
+        // Add foreign and delete
+        $table_keys = $this->add_and_drop_foreign_keys($table_keys, $table_name);
 
         tb_add_timestamps($table_name);
 
-        // Save table details to the
-
+        // Save table details to the database
         $new_table = new Table();
 
         $new_table->display_name = $display_name;
@@ -174,6 +184,7 @@ class TableController extends Controller
         $new_table->table_name = $table_name;
         $new_table->slug = $table_name;
         $new_table->fields = json_encode($fields);
+        $new_table->keys = json_encode($table_keys);
         $new_table->configure_fields = json_encode($configure_fields);
         $new_table->save();
 
@@ -207,15 +218,12 @@ class TableController extends Controller
         $configure_fields = $request->configure_fields;
         $display_name = $request->display_name;
         $perms = $request->perms;
+        $table_keys = $request->keys;
         $model_name = ucfirst($table_name);
         $table_accepts_media = cg_supports_media($fields);
 
         // Save perms
         tb_add_perms($table_name, $perms);
-
-
-
-        // TODO: Save Perms
 
 
         // Delete fields if any
@@ -229,9 +237,7 @@ class TableController extends Controller
         }
 
         // Rename fields if any
-        // TODO implemenent
         $edit_fields = $request->edit_fields;
-
 
         if ($edit_fields != null){
             foreach($edit_fields as $field){
@@ -242,12 +248,8 @@ class TableController extends Controller
             }
         }
 
-        // Drop foreing keys if any
-        // TODO implement
-
-
-        // Add foreign keys if any
-        // TODO implement
+        // Add foreign and delete
+        $table_keys = $this->add_and_drop_foreign_keys($table_keys, $table_name);
 
 
         // Add new fields if any
@@ -264,6 +266,7 @@ class TableController extends Controller
             $update_collection->slug = $table_name;
             $update_collection->fields = json_encode($fields);
             $update_collection->configure_fields = json_encode($configure_fields);
+            $update_collection->keys = json_encode($table_keys);
             $update_collection->save();
 
 
@@ -281,6 +284,27 @@ class TableController extends Controller
 
 
 
+    }
+
+    private function add_and_drop_foreign_keys($table_keys, $table_name){
+
+        for ($i=0; $i < count($table_keys); $i++) {
+            $key = $table_keys[$i];
+
+            if ($key['key_type'] == 'foreign_key'){
+                if ($key['is_new'] == true){
+                    tb_add_foreign_key($table_name, $key);
+                    $key['is_new'] = false;
+                }
+
+
+                if ($key['is_deleted'] == true)
+                    tb_drop_foreign($table_name, $key['column_name']);
+                    unset($table_keys[$i]);
+            }
+        }
+
+        return $table_keys;
     }
 
 

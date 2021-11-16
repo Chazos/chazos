@@ -29,6 +29,7 @@ Route::get('/logout', [AuthenticationController::class, 'logout']);
 
 Route::get('tbl/{table_name}', [DataController::class, 'index']);
 Route::get('tbl/{table_name}/{id}', [DataController::class, 'show']);
+Route::post('tbl/{table_name}/create', [DataController::class, 'create']);
 Route::post('tbl/{table_name}/delete/{id}', [DataController::class, 'delete']);
 Route::post('tbl/{table_name}/update/{id}', [DataController::class, 'update']);
 

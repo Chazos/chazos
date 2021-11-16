@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Schema;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+use App\Events\DashTableCreated;
+use App\Events\DashTableUpdated;
+use App\Events\DashTableDeleted;
+
 class TableController extends Controller
 {
     //
@@ -80,6 +84,9 @@ class TableController extends Controller
         cg_delete_resource($table_name);
         tb_delete_perms($table_name);
         $table->delete();
+
+        DashTableDeleted::dispatch($table);
+
 
         return response()->json([
             'status' => 'success',
@@ -199,6 +206,8 @@ class TableController extends Controller
         cg_create_import($model_name);
         cg_create_export($model_name);
 
+        DashTableCreated::dispatch($new_table);
+
 
 
         return response()->json([
@@ -273,6 +282,8 @@ class TableController extends Controller
 
             cg_create_model($model_name, $table_name, $table_accepts_media);
             cg_create_resource($table_name, $fields);
+
+            DashTableUpdated::dispatch($table_name, $update_collection);
 
             return response()->json([
                 'status' => 'success',

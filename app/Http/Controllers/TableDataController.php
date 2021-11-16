@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
+// Import Events
+use App\Events\DashDataCreated;
+use App\Events\DashDataUpdated;
+use App\Events\DashDataDeleted;
+
 class TableDataController extends Controller
 {
     public function manage(Request $request, $id)
@@ -88,6 +93,7 @@ class TableDataController extends Controller
             }catch (\Exception $e){
 
             }finally{
+                DashDataDeleted::dispatch($table_name, $item);
                 $item->delete();
             }
 
@@ -137,9 +143,7 @@ class TableDataController extends Controller
 
 
             if (array_key_exists($field_name, $request->all())) {
-
-                $add_field_data = "\$new_entry->$field_name = \$request->$field_name;";
-                eval($add_field_data);
+                $add_field_data = $new_entry->$field_name = $request->$field_name;
             }
         }
 
@@ -166,14 +170,15 @@ class TableDataController extends Controller
                                 ->toMediaCollection($field->field_name);
 
                             $image_url = $new_entry->getFirstMedia($field->field_name)->getUrl();
-                            $add_field_data = "\$new_entry->$field_name = \$image_url;";
-                            eval($add_field_data);
+                            $add_field_data = $new_entry->$field_name = $image_url;
                             $new_entry->save();
                         }
                     }
                 }
             }
         }
+
+        DashDataCreated::dispatch($table_name, $new_entry);
 
         return response()->json([
             'status' => 'success',
@@ -241,6 +246,7 @@ class TableDataController extends Controller
         }
 
         $current_entry->save();
+        DashDataUpdated::dispatch($table_name, $current_entry);
 
         return response()->json([
             'status' => 'success',

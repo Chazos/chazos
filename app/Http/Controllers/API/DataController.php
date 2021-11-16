@@ -8,6 +8,12 @@ use App\Models\Contact;
 use App\Models\Subscribe;
 use App\Models\Table;
 use App\Models\User;
+
+// Import events
+use App\Events\APIDataCreated;
+use App\Events\APIDataDeleted;
+use App\Events\APIDataUpdated;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
@@ -110,6 +116,43 @@ class DataController extends Controller
         ]);
     }
 
+    public function create(Request $request, $table_name){
+        $table = Table::where('table_name', $table_name)->first();
+
+        if ($table != null){
+            if ($this->user_can_perform_action($table_name, 'create')){
+                $resource_name = "App\Http\Resources\\" . ucfirst($table_name) . 'Resource';
+                $model = 'App\Models\\' . $table->model_name;
+                $new_data = $request->new_data;
+                $new_row = new $model;
+
+
+                foreach($new_data as $key => $value){
+                    $new_row->$key = $value;
+                }
+
+                $new_row->save();
+
+                APIDataCreated::dispatch($table_name, $new_row);
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data created successfully',
+                    'data' => $new_row
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You do not have permission to perform this action'], 403);
+            }
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Data not found'
+        ]);
+    }
+
     public function show(Request $request, $table_name, $id){
         $table = Table::where('table_name', $table_name)->first();
 
@@ -153,8 +196,8 @@ class DataController extends Controller
                 $model = 'App\Models\\' . $table->model_name;
                 $data = $model::where('id', $id)->first();
 
+                APIDataDeleted::dispatch($table_name, $data);
                 $data->delete();
-
 
                 return response()->json([
                     'status' => 'success',
@@ -195,6 +238,8 @@ class DataController extends Controller
                     }
 
                     $data->save();
+
+                    APIDataUpdated::dispatch($table_name, $data);
 
                 } catch (\Exception $e){
                     return response()->json([

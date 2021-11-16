@@ -178,6 +178,13 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
 
+
+        /*
+         * Plugin Service Providers...
+         */
+
+         App\Providers\PluginServiceProvider::class,
+
     ],
 
     /*

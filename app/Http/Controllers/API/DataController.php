@@ -9,9 +9,8 @@ use App\Models\Subscribe;
 use App\Models\Table;
 use App\Models\User;
 
-// import events
+// Import events
 use App\Events\APIDataCreated;
-use App\Events\APIDataEdited;
 use App\Events\APIDataDeleted;
 use App\Events\APIDataUpdated;
 
@@ -134,6 +133,7 @@ class DataController extends Controller
 
                 $new_row->save();
 
+                APIDataCreated::dispatch($table_name, $new_row);
 
                 return response()->json([
                     'status' => 'success',
@@ -196,8 +196,8 @@ class DataController extends Controller
                 $model = 'App\Models\\' . $table->model_name;
                 $data = $model::where('id', $id)->first();
 
+                APIDataDeleted::dispatch($table_name, $data);
                 $data->delete();
-
 
                 return response()->json([
                     'status' => 'success',
@@ -238,6 +238,8 @@ class DataController extends Controller
                     }
 
                     $data->save();
+
+                    APIDataUpdated::dispatch($table_name, $data);
 
                 } catch (\Exception $e){
                     return response()->json([

@@ -174,4 +174,54 @@ class DataController extends Controller
 
 
     }
+
+    public function update(Request $request, $table_name, $id){
+
+        $table = Table::where('table_name', $table_name)->first();
+
+
+
+        if ($table != null){
+            if ($this->user_can_perform_action($table_name, 'update')){
+                $model = "App\Models\\". $table->model_name;
+                $model = 'App\Models\\' . $table->model_name;
+                $data = $model::where('id', $id)->first();
+
+                $new_data = $request->new_data;
+
+                try{
+                    foreach ($new_data as $key => $value){
+                        $data->$key = $value;
+                    }
+
+                    $data->save();
+
+                } catch (\Exception $e){
+                    return response()->json([
+                        'status' => 'error',
+                        'message' => 'Key Error'
+                    ]);
+                }
+
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Data was updated successfully',
+                    'data' => $data
+                ]);
+            }else{
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'You do not have permission to perform this action'], 403);
+            }
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Data not found'
+        ]);
+
+
+
+    }
 }

@@ -4,9 +4,9 @@
         <p class="font-bold uppercase text-xs text-gray-600">Table List</p>
     <div class="xl:h-60 overflow-y-scroll">
 
-        <ul class="ml-5">
+        <ul>
             @foreach ( $tables as $table )
-                <li  class="py-3 hover:bg-purple-400 flex flex-row">
+                <li  class="py-3 hover:bg-purple-400 hover:text-white rounded-full mr-3 px-3 flex flex-row">
                   <button id="tbl-item-{{ $table->id }}" x-on:click="getTableDetails({{ $table->id }}); showCollectionTable = true; showAddField = false; showCollectionNameForm =true" class="">{{ ucfirst($table->display_name)  }}</button>
 
 

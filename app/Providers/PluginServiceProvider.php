@@ -46,10 +46,10 @@ class PluginServiceProvider extends ServiceProvider
 
                 try{
                     $this->app->register($provider_class_path);
-                    print("Registered $plugin_name provider\n");
+                    // print("Registered $plugin_name provider\n");
                 }catch(\Exception $e){
                     //
-                    print("Couldnt register $plugin_name a provider");
+                    // print("Couldnt register $plugin_name a provider");
                 }
 
             }

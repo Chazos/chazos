@@ -192,6 +192,7 @@ class TableController extends Controller
         $new_table->slug = $table_name;
         $new_table->fields = json_encode($fields);
         $new_table->keys = json_encode($table_keys);
+        $new_table->actions = json_encode(array());
         $new_table->configure_fields = json_encode($configure_fields);
         $new_table->save();
 
@@ -228,8 +229,10 @@ class TableController extends Controller
         $display_name = $request->display_name;
         $perms = $request->perms;
         $table_keys = $request->keys;
+        $table_actions = $request->actions;
         $model_name = ucfirst($table_name);
         $table_accepts_media = cg_supports_media($fields);
+
 
         // Save perms
         tb_add_perms($table_name, $perms);
@@ -276,6 +279,7 @@ class TableController extends Controller
             $update_collection->fields = json_encode($fields);
             $update_collection->configure_fields = json_encode($configure_fields);
             $update_collection->keys = json_encode($table_keys);
+            $update_collection->actions = $table_actions;
             $update_collection->save();
 
 
@@ -298,6 +302,9 @@ class TableController extends Controller
     }
 
     private function add_and_drop_foreign_keys($table_keys, $table_name){
+        if ($table_keys == NULL){
+            return [];
+        }
 
         for ($i=0; $i < count($table_keys); $i++) {
             $key = $table_keys[$i];

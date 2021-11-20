@@ -6,6 +6,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TableDataController;
 use App\Http\Controllers\TableController;
+use App\Http\Controllers\CustomActionController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,6 +63,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     // Email Settings
     Route::get('/email',  [EmailController::class, 'index'])->name('admin.settings.email');
     Route::post('/save-email-settings',  [EmailController::class, 'save_email_settings'])->name('admin.settings.save_email');
+
+    // Custom Action
+    Route::get('/actions/{table}',  [CustomActionController::class, 'get_actions'])->name('admin.actions');
 });
 
 

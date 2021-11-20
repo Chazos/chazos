@@ -112,6 +112,7 @@ const getTableDetails = (id) => {
                 appendFieldToConfigure()
                 addItemsToTable()
                 addKeysToTable()
+                addActionsToTable()
                 changeElementAttr(
                     "#save-table-button",
                     "onclick",

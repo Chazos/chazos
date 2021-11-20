@@ -20,6 +20,7 @@ class CreateTableListTable extends Migration
             $table->string('table_name');
             $table->string('slug');
             $table->text('fields');
+            $table->text('actions')->nullable();
             $table->text('configure_fields')->nullable();
             $table->timestamps();
         });

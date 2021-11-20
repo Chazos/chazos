@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<main class="h-full overflow-y-auto " x-data="{ showRenameTableModal: false, showCollectionTable: false, showPermissionTable: false, acceptsData: 'false', showAddCollectionModel : false, showCreateKeyModal: false, showAddField : false, showCollectionNameForm: true, editCollectionField : false}">
+<main class="h-full overflow-y-auto " x-data="{addTableActionModal: false, tableOptionsDropdown: false, showRenameTableModal: false, showCollectionTable: false, showPermissionTable: false, acceptsData: 'false', showAddCollectionModel : false, showCreateKeyModal: false, showAddField : false, showCollectionNameForm: true, editCollectionField : false}">
 
   <div class="lg:flex h-full">
     @include('admin.tables.includes.table_list')
@@ -22,6 +22,7 @@
 @include('admin.modals.edit_column')
 @include('admin.modals.table_permissions')
 @include('admin.modals.rename_table')
+@include('admin.modals.add_action')
 
   </main>
 

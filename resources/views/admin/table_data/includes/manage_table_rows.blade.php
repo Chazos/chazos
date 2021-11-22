@@ -19,6 +19,18 @@
         @endforeach
         <td class="px-4 py-3">
             <div class="flex items-center space-x-4 text-sm">
+                @foreach ($actions as $action)
+
+
+                <button
+                    data-destination="{{ route('admin.actions.create', ['table' => $table->table_name, 'id' => $item->id, 'action' => $action->identifier]) }}"
+                    data-row-id="#row-{{ $item->id }}"
+                    class="custom-action-button flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                    aria-label="{{ $action->display_name }}">
+                    {!! $action->svg_icon !!}
+            </button>
+
+                @endforeach
                 <a
                     href="{{ route('admin.edit_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}"
                     class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"

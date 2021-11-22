@@ -11,9 +11,11 @@ $('.add-entry-button').on('click', (event) => {
       .then(function (response) {
          if (response.data.status == 'success'){
             setSuccessAlert(response.data.message)
+            $('input').val("")
          }
       })
       .catch(function (error) {
            setErrorAlert(error.toString())
       });
 })
+

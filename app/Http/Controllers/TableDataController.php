@@ -20,11 +20,12 @@ class TableDataController extends Controller
         $table = Table::where('id', $id)->first();
         $config_fields = json_decode(json_encode(json_decode($table->configure_fields)), true);
         $columns = json_decode($table->fields);
+        $actions = json_decode($table->actions);
         $model = "App\Models\\" . $table->model_name;
 
 
         $data = $model::simplePaginate(10);
-        return view('admin.table_data.manage', compact('table', 'config_fields', 'table', 'columns', 'data'));
+        return view('admin.table_data.manage', compact('table', 'config_fields', 'table', 'columns', 'actions', 'data'));
     }
 
 

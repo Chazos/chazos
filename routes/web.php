@@ -65,7 +65,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/save-email-settings',  [EmailController::class, 'save_email_settings'])->name('admin.settings.save_email');
 
     // Custom Action
-    Route::get('/actions/{table}',  [CustomActionController::class, 'get_actions'])->name('admin.actions');
+    Route::get('/actions/{table}',  [CustomActionController::class, 'get_actions'])->name('admin.actions.get_action');
+    Route::post('/actions/{action}/{table}/{id}',  [CustomActionController::class, 'trigger_action'])->name('admin.actions.create');
 });
 
 

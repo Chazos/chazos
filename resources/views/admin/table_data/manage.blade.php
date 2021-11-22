@@ -167,6 +167,31 @@
 @section('custom-js')
 
     <script>
+        $('.custom-action-button').on('click', (event) => {
+    let destination = $(event.target).attr('data-destination')
+    let rowId = $(event.target).attr('data-row-id')
+
+    console.log(event.target)
+
+
+    axios.post(destination, {}, {
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+        }
+    }).then(function (response) {
+        if (response.data.status == 'success'){
+           setSuccessAlert(response.data.message)
+           window.location.reload()
+        }else if (response.data.status == 'failed'){
+            setErrorAlert(response.data.message)
+        }
+     })
+     .catch(function (error) {
+          setErrorAlert(error.toString())
+     });
+
+})
+
         function hideTableField(className) {
 
             let elements = document.getElementsByClassName(className);

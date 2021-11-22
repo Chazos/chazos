@@ -42,13 +42,14 @@ class PluginServiceProvider extends ServiceProvider
                 $provider_class_name = str_replace(".php", "", $provider_name);
                 $provider_class_path = "App\Plugins\\$plugin_name\Providers\\$provider_class_name";
 
-                require_once("$provider");
+                include_once("$provider");
+
+
 
                 try{
                     $this->app->register($provider_class_path);
                     // print("Registered $plugin_name provider\n");
                 }catch(\Exception $e){
-                    //
                     // print("Couldnt register $plugin_name a provider");
                 }
 

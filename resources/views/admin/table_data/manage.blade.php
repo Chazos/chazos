@@ -167,11 +167,10 @@
 @section('custom-js')
 
     <script>
-        $('.custom-action-button').on('click', (event) => {
-    let destination = $(event.target).attr('data-destination')
-    let rowId = $(event.target).attr('data-row-id')
+        const triggerCustomAction = (rowId, destination) => {
 
-    console.log(event.target)
+
+    console.log("hellow world")
 
 
     axios.post(destination, {}, {
@@ -190,7 +189,7 @@
           setErrorAlert(error.toString())
      });
 
-})
+}
 
         function hideTableField(className) {
 

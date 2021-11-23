@@ -7,6 +7,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TableDataController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\CustomActionController;
+use App\Http\Controllers\PluginController;
 use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     // Custom Action
     Route::get('/actions/{table}',  [CustomActionController::class, 'get_actions'])->name('admin.actions.get_action');
     Route::post('/actions/{action}/{table}/{id}',  [CustomActionController::class, 'trigger_action'])->name('admin.actions.create');
+
+
+    // Plugin
+    Route::get('/plugins',  [PluginController::class, 'index'])->name('admin.plugins.all');
+    Route::post('/activate-plugin/{plugin_name}',  [PluginController::class, 'activate'])->name('admin.plugins.activate');
+    Route::post('/deactivate-plugin/{plugin_name}',  [PluginController::class, 'deactivate'])->name('admin.plugins.deactivate');
+    Route::post('/delete-plugin/{plugin_name}',  [PluginController::class, 'delete'])->name('admin.plugins.delete');
+    Route::post('/install-plugin',  [PluginController::class, 'install'])->name('admin.plugins.install');
 });
 
 

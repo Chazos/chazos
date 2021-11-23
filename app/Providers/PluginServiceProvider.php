@@ -14,19 +14,25 @@ class PluginServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
-
         // Get file lists of all plugins
         $plugin_dirs = File::directories(base_path('app/Plugins'));
 
+
         foreach ($plugin_dirs as $plugin_dir) {
             $plugin_name = basename($plugin_dir);
+
+
+            // Jump plugin if installed is false/unknown
+            $plugin_details = base_path("app/Plugins/$plugin_name/$plugin_name.php");
+            require_once $plugin_details;
+            $plugin_info =  json_decode(json_encode($plugin_info));
+
+            if (!$plugin_info->installed) {
+               
+                continue;
+            }
+
             $plugin_providers = File::files($plugin_dir . '/Providers');
-
-
-
-
-
             // Register plugin providers
             foreach ($plugin_providers as $provider) {
                 $provider_name = basename($provider);

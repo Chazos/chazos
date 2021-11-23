@@ -24,7 +24,7 @@
 
 
         <div class="flex justify-end pb-3">
-            <div class=" inline-block ">
+            <div class=" ">
                 <!-- Dropdown toggle button -->
                 <button
                     x-on:click="tableOptionsDropdown = !tableOptionsDropdown"
@@ -38,7 +38,7 @@
                 </button>
 
                 <!-- Dropdown menu -->
-                <div x-show="tableOptionsDropdown" @click.away="tableOptionsDropdown = false" class="absolute z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
+                <div x-show="tableOptionsDropdown" @click.away="tableOptionsDropdown = false" class="absolute right-20 mt-2 py-2 w-64 bg-white rounded-md shadow-xl z-20">
                     <button
                         x-on:click="showAddField = true; showAddCollectionModel = true; showCollectionNameForm = false;"
                         class="flex w-full items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

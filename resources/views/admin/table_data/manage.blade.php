@@ -7,31 +7,41 @@
                 {{ ucfirst($table->table_name) }}
             </h2>
 
+            <div class="relative w-20 mr-6 focus-within:text-purple-500">
+                <input style="width: 240%" onkeyup="filterTable(this.value)"
+                    class=" pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md  dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                    type="text" placeholder="Search for projects" aria-label="Search">
+            </div>
+
+
 
 
 
             <div class="flex justify-end py-3">
 
-                <div class="relative mr-6 focus-within:text-purple-500">
-                    <input style="width: 240%" onkeyup="filterTable(this.value)" class=" pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md  dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input" type="text" placeholder="Search for projects" aria-label="Search">
-                </div>
-
-                <div class="w-full"></div>
 
 
 
-                <a href="javascript:void(0)"
-                    onclick="exportData('{{ $table->table_name }}')"
-                    class="bg-purple-600 px-3 h-10 w-40 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+
+
+
+                <a href="javascript:void(0)" onclick="exportData('{{ $table->table_name }}')"
+                    class="bg-purple-600 px-3 h-10 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    <svg class="w-6 h-6 mx-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                     Export
                 </a>
-                <button
-                    x-on:click="toggleImportDataModal"
-                    class="bg-purple-600 px-3 h-10 w-40 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                <button x-on:click="toggleImportDataModal"
+                    class="bg-purple-600 px-3 h-10 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    <svg class="w-6 h-6 mx-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                    </svg>
                     Import
-            </button>
+                </button>
                 <a href="{{ route('admin.add_entry', ['table_name' => $table->table_name]) }}"
-                    class="bg-purple-600 px-3 h-10 w-60 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    class="bg-purple-600 px-3 h-10 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
+                    <svg class="w-6 h-6 mx-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     New Entry
                 </a>
                 <div x-data="{ dropdownOpen: false }" class="relative">
@@ -39,17 +49,13 @@
 
 
                     <button @click="dropdownOpen = !dropdownOpen"
-                        class="relative z-10 block rounded-md bg-white p-2 focus:outline-none">
+                        class="relative z-10 block rounded-md bg-purple-600 p-2 focus:outline-none">
                         <div class="flex flex-row">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <svg class="h-5 w-5 text-gray-800" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+
+                            <div class="mx-1 text-white"> Show/Hide Fields</div>
+
+                            <svg class="h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path fill-rule="evenodd"
                                     d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
@@ -107,7 +113,7 @@
                         </thead>
                         <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
 
-                        @include('admin.table_data.includes.manage_table_rows')
+                            @include('admin.table_data.includes.manage_table_rows')
 
 
 
@@ -118,18 +124,24 @@
                 </div>
 
 
-                <div class=" font-semibold tracking-wide text-gray-500 text-center border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+                <div
+                    class=" font-semibold tracking-wide text-gray-500 text-center border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
                     {{-- <span class="flex items-center col-span-3">
                         Showing 21-30 of 100
                     </span> --}}
 
                     <div class="flex items-center space-x-4 text-sm ml-4 mt-3">
-                        <input id="check-all-box" type="checkbox" onclick="checkOnAllCheckbox()"> <span class="ml-2">Check All</span>
+                        <input id="check-all-box" type="checkbox" onclick="checkOnAllCheckbox()"> <span
+                            class="ml-2">Check All</span>
                         <span class="w-10"></span>
                         <span>With Selected: </span>
-                        <button onclick="deleteMultiple('{{ $table->table_name  }}')" class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray" aria-label="Delete">
+                        <button onclick="deleteMultiple('{{ $table->table_name }}')"
+                            class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600 rounded-lg dark:text-gray-400 focus:outline-none focus:shadow-outline-gray"
+                            aria-label="Delete">
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                                <path fill-rule="evenodd"
+                                    d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                    clip-rule="evenodd"></path>
                             </svg>
                         </button>
                     </div>
@@ -138,18 +150,20 @@
 
 
                     <div class="flex flex-row justify-end mt-5">
-                        @if ($data->previousPageUrl() != null )
-                        <a href="{{ $data->previousPageUrl()  }}" class="bg-purple-600 ml-4 hover:bg-purple-400 w-20 text-white relative  block rounded-md  p-2 focus:outline-none">
-                            Previous
-                        </a>
+                        @if ($data->previousPageUrl() != null)
+                            <a href="{{ $data->previousPageUrl() }}"
+                                class="bg-purple-600 ml-4 hover:bg-purple-400 w-20 text-white relative  block rounded-md  p-2 focus:outline-none">
+                                Previous
+                            </a>
                         @endif
 
 
-                          @if ($data->nextPageUrl()  != null)
-                            <a href="{{ $data->nextPageUrl() }}" id="save-table-button" class="bg-purple-600 ml-3 text-white hover:bg-purple-400 w-20 relative  block rounded-md  p-2 focus:outline-none">
+                        @if ($data->nextPageUrl() != null)
+                            <a href="{{ $data->nextPageUrl() }}" id="save-table-button"
+                                class="bg-purple-600 ml-3 text-white hover:bg-purple-400 w-20 relative  block rounded-md  p-2 focus:outline-none">
                                 Next
                             </a>
-                          @endif
+                        @endif
 
 
                     </div>
@@ -170,26 +184,23 @@
         const triggerCustomAction = (rowId, destination) => {
 
 
-    console.log("hellow world")
+            axios.post(destination, {}, {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    }
+                }).then(function(response) {
+                    if (response.data.status == 'success') {
+                        setSuccessAlert(response.data.message)
+                        window.location.reload()
+                    } else if (response.data.status == 'failed') {
+                        setErrorAlert(response.data.message)
+                    }
+                })
+                .catch(function(error) {
+                    setErrorAlert(error.toString())
+                });
 
-
-    axios.post(destination, {}, {
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         }
-    }).then(function (response) {
-        if (response.data.status == 'success'){
-           setSuccessAlert(response.data.message)
-           window.location.reload()
-        }else if (response.data.status == 'failed'){
-            setErrorAlert(response.data.message)
-        }
-     })
-     .catch(function (error) {
-          setErrorAlert(error.toString())
-     });
-
-}
 
         function hideTableField(className) {
 
@@ -204,7 +215,7 @@
             }
         }
 
-        function filterTable(value){
+        function filterTable(value) {
             let rows = document.querySelectorAll('tbody tr');
 
             for (const row of rows) {
@@ -216,15 +227,15 @@
             }
         }
 
-        function exportData(tableName){
+        function exportData(tableName) {
             fetch(`/manage/${tableName}/export`, {
                     method: 'POST',
                     headers: {
-                    'Accept': 'text/csv',
-                    'Content-Type': 'application/json',
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
+                        'Accept': 'text/csv',
+                        'Content-Type': 'application/json',
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
                     body: {
 
                     }
@@ -232,7 +243,7 @@
                 .then(response => response.text())
                 .then(data => {
                     let a = document.createElement('a');
-                    a.href = 'data:text/csv;base64, ' +  btoa(data);
+                    a.href = 'data:text/csv;base64, ' + btoa(data);
                     a.download = `${tableName}.csv`;
                     a.click();
                 })
@@ -241,7 +252,7 @@
                 })
         }
 
-        function checkOnAllCheckbox(){
+        function checkOnAllCheckbox() {
             let checkboxes = document.querySelectorAll('input.table-data-check');
 
             for (const checkbox of checkboxes) {
@@ -258,7 +269,7 @@
 
         }
 
-        function checkOffAllCheckbox(){
+        function checkOffAllCheckbox() {
             let checkboxes = document.querySelectorAll('input.table-data-check');
 
             for (const checkbox of checkboxes) {
@@ -273,7 +284,7 @@
             document.querySelector('#check-all-box').setAttribute('onclick', 'checkOnAllCheckbox()');
         }
 
-        function onCheckboxChecked(element, id){
+        function onCheckboxChecked(element, id) {
 
             checkedData = localStorage.getItem('checkedData');
 
@@ -300,13 +311,13 @@
 
         }
 
-        function deleteMultiple(tableName){
+        function deleteMultiple(tableName) {
             let checkedData = localStorage.getItem('checkedData');
 
             if (checkedData == null) {
                 setSuccessAlert('Please select at least one row!')
                 return;
-            }else{
+            } else {
                 checkedData = JSON.parse(checkedData);
 
                 for (const id of checkedData) {
@@ -315,15 +326,15 @@
             }
         }
 
-        function deleteRow(elRowId,tableName, rowId) {
+        function deleteRow(elRowId, tableName, rowId) {
             fetch(`/manage/${tableName}/delete/${rowId}`, {
                     method: 'POST',
                     headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                },
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
                     body: {
 
                     }
@@ -334,7 +345,7 @@
                     if (response.status == 'success') {
                         setSuccessAlert(response.message);
                         setTimeout(() => {
-                            $(elRowId).fadeTo(2000, 0).slideUp(1000, function(){
+                            $(elRowId).fadeTo(2000, 0).slideUp(1000, function() {
                                 $(this).remove();
                             });
                         }, 1000);
@@ -346,25 +357,25 @@
         }
 
         $('#import-data-button').on('click', (event) => {
-    let destination = $(event.target).attr('data-route-name')
-    let form = $('.import-data-form')
-    let formData = new FormData(form[0])
+            let destination = $(event.target).attr('data-route-name')
+            let form = $('.import-data-form')
+            let formData = new FormData(form[0])
 
-        axios.post(destination, formData, {
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-            }
-      })
-      .then(function (response) {
-         if (response.data.status == 'success'){
-            setSuccessAlert(response.data.message)
-            window.location.reload()
-         }
-      })
-      .catch(function (error) {
-           setErrorAlert(error.toString())
-      });
-})
+            axios.post(destination, formData, {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    }
+                })
+                .then(function(response) {
+                    if (response.data.status == 'success') {
+                        setSuccessAlert(response.data.message)
+                        window.location.reload()
+                    }
+                })
+                .catch(function(error) {
+                    setErrorAlert(error.toString())
+                });
+        })
     </script>
 
 @endsection

@@ -91,6 +91,9 @@ if (! function_exists('tb_add_perms')) {
     function tb_add_perms($table_name, $perms ){
         $roles = Role::all();
 
+
+      
+
             foreach ($roles as $role) {
                 foreach (array_keys($perms[$role->name]) as $perm) {
                     try{

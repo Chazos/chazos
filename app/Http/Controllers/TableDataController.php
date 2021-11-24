@@ -205,8 +205,9 @@ class TableDataController extends Controller
 
             if (array_key_exists($field_name, $request->all()) && $field->accepts_file == "false") {
 
-                $add_field_data = "\$current_entry->$field_name = \$request->$field_name;";
-                eval($add_field_data);
+                // $add_field_data = "\$current_entry->$field_name = \$request->$field_name;";
+                $add_field_data = $current_entry->$field_name = $request->$field_name;
+                // eval($add_field_data);
             }
         }
 

@@ -222,6 +222,7 @@ class TableController extends Controller
 
     public function update(Request $request, $id){
 
+
         $table_id = $id;
         $table_name = $request->table_name;
         $fields = $request->fields;
@@ -232,6 +233,7 @@ class TableController extends Controller
         $table_actions = $request->actions;
         $model_name = ucfirst($table_name);
         $table_accepts_media = cg_supports_media($fields);
+
 
 
         // Save perms

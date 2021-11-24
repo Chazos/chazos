@@ -24,11 +24,11 @@ class PluginServiceProvider extends ServiceProvider
 
             // Jump plugin if installed is false/unknown
             $plugin_details = base_path("app/Plugins/$plugin_name/$plugin_name.php");
-            require_once $plugin_details;
+            include($plugin_details);
             $plugin_info =  json_decode(json_encode($plugin_info));
 
             if (!$plugin_info->installed) {
-               
+
                 continue;
             }
 

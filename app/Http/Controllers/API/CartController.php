@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
-    protected function getUserCart()
+    public function getUserCart()
     {
         $cart = DB::table('cart')->where('user_id', Auth::id())->first();
         return $cart;

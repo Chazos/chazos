@@ -72,6 +72,9 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 **Table Builder 2**
 ![Chazos Table Builder 2](./readme_images/chazos_tablebuilder2.png)
 
+**Table Builder 3**
+![Chazos Table Builder 3](./readme_images/chazos_tablebuilder3.png)
+
 **Table Builder 1 Modal**
 ![Chazos Modal](./readme_images/chazos_modal.png)
 

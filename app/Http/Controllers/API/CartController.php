@@ -27,6 +27,27 @@ class CartController extends Controller
 
     public function addCartItem(Request $request)
     {
+        $product_id = $request->input('product_id');
+        $quantity = $request->input('quantity');
+
+        $cart = $this->getUserCart();
+
+        DB::table('cart_items')->insert([
+            'cart_id' => $cart->id,
+            'product_id' => $product_id,
+            'quantity' => $quantity,
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Item added to cart',
+            'data' => [
+                'cart' => $cart,
+                'cart_items' => DB::table('cart_items')->where('cart_id', $cart->id)->get()
+            ]
+        ]);
+
+
     }
 
     public function removeCartItem(Request $request, $id)

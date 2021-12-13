@@ -36,6 +36,8 @@ class CartController extends Controller
             'cart_id' => $cart->id,
             'product_id' => $product_id,
             'quantity' => $quantity,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
 
         return response()->json([
@@ -52,10 +54,46 @@ class CartController extends Controller
 
     public function removeCartItem(Request $request, $id)
     {
+        $cart = $this->getUserCart();
+        $result = DB::table('cart_items')->where('id', $id)->delete();
+
+        if ($result) {
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Item removed from cart',
+                'data' => [
+                    'cart' => $cart,
+                    'cart_items' => DB::table('cart_items')->where('cart_id', $cart->id)->get()
+                ]
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Item not removed from cart',
+                'data' => [
+                    'cart' => $cart,
+                    'cart_items' => DB::table('cart_items')->where('cart_id', $cart->id)->get()
+                ]
+            ]);
+        }
     }
 
     public function updateCartItem(Request $request, $id)
     {
+        $cart = $this->getUserCart();
+        $result = DB::table('cart_items')->where('id', $id)->update([
+            'quantity' => $request->input('quantity'),
+            'updated_at' => now()
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Item updated',
+            'data' => [
+                'cart' => $cart,
+                'cart_items' => DB::table('cart_items')->where('cart_id', $cart->id)->get()
+            ]
+        ]);
     }
 
     public function getAllCartItems()

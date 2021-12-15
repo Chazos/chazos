@@ -1,15 +1,17 @@
 @extends('layouts.master')
 
-@section('content') < main class = "h-full pb-16 overflow-y-auto" > <div class="container grid px-6 mx-auto">
+@section('content')
+
+<main class="h-full pb-16 overflow-y-auto"> <div class="container grid px-6 mx-auto">
     <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
         {{
-            ucfirst($table - > table_name)
+            ucfirst($table->table_name)
         }}
     </h2>
 
     <div class="relative w-20 mr-6 focus-within:text-purple-500">
         <input
-            style="width: 240%"
+            style="width: 240%;"
             onkeyup="filterTable(this.value)"
             class=" pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md  dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
             type="text"
@@ -54,9 +56,7 @@
                 Import
             </button>
             <a
-                href={{
-                route('admin.add_entry', ['table_name' => $table - > table_name])
-            }}
+                href={{route('admin.add_entry', ['table_name' => $table->table_name])}}
                 class="bg-purple-600 px-3 h-10 mx-3 text-white ml-2 hover:bg-purple-400 relative z-10 block rounded-md  p-2 focus:outline-none">
                 <svg
                     class="w-6 h-6 mx-1 inline-block"
@@ -72,7 +72,7 @@
                 </svg>
                 New Entry
             </a>
-            <div x-data={dropdownOpen : false} class="relative">
+            <div x-data="{dropdownOpen : false}" class="relative">
 
                 <button
                     @click="dropdownOpen = !dropdownOpen"
@@ -133,7 +133,7 @@
                             name=""
                             id="checkbox-hide-field">
                             <span class="ml-3">{{
-                                    $column - > field_name
+                                    $column->field_name
                                 }}</span>
                         </a>
                         @else
@@ -146,7 +146,7 @@
                                 name=""
                                 id="checkbox-hide-field">
                                 <span class="ml-3">{{
-                                        $column - > field_name
+                                        $column->field_name
                                     }}</span>
                             </a>
 
@@ -156,8 +156,8 @@
                     </div>
                 </div>
 
-                <div class="w-full overflow-hidden rounded-lg shadow-xs">
-                    <div class="w-full overflow-x-auto">
+                <div class="w-full rounded-lg shadow-xs">
+                    <div class="w-full">
                         <table class="w-full whitespace-no-wrap">
                             <thead>
                                 <tr
@@ -179,11 +179,10 @@
 
                     <div
                         class=" font-semibold tracking-wide text-gray-500 text-center border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
-                        {{
-                            -- <span class="flex items-center col-span-3">
+                        {{-- <span class="flex items-center col-span-3">
                                 Showing 21-30 of 100
-                            </span>--
-                        }}
+                            </span>
+                            --}}
 
                         <div class="flex items-center space-x-4 text-sm ml-4 mt-3">
                             <input id="check-all-box" type="checkbox" onclick="checkOnAllCheckbox()">
@@ -209,7 +208,7 @@
                                 @if ($data->previousPageUrl() != null)
                                 <a
                                     href={{
-                                    $data - > previousPageUrl()
+                                    $data->previousPageUrl()
                                 }}
                                     class="bg-purple-600 ml-4 hover:bg-purple-400 w-20 text-white relative  block rounded-md  p-2 focus:outline-none">
                                     Previous
@@ -217,7 +216,7 @@
                                 @endif @if ($data->nextPageUrl() != null)
                                 <a
                                     href={{
-                                    $data - > nextPageUrl()
+                                    $data->nextPageUrl()
                                 }}
                                     id="save-table-button"
                                     class="bg-purple-600 ml-3 text-white hover:bg-purple-400 w-20 relative  block rounded-md  p-2 focus:outline-none">

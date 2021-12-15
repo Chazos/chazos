@@ -44,6 +44,34 @@
                 placeholder="Site Image">
         </label>
 
+        <label class="block text-sm mt-4">
+            <span
+                class="text-gray-700 dark:text-gray-400">Hide Builder</span>
+            <select type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="site_hide_builder"
+                placeholder="Site Name">
+
+                <option value="yes" {{ cg_get_setting('site_hide_builder') == "yes" ? "selected" : ""  }} >Yes</option>
+                <option value="no" {{ cg_get_setting('site_hide_builder') == "no" ? "selected" : ""  }}>No</option>
+
+            </select>
+        </label>
+
+        <label class="block text-sm mt-4">
+            <span
+                class="text-gray-700 dark:text-gray-400">Hide Plugins</span>
+            <select type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="site_hide_plugins"
+                placeholder="Site Name">
+
+                <option value="yes" {{ cg_get_setting('site_hide_plugins') == "yes" ? "selected" : ""  }} >Yes</option>
+                <option value="no" {{ cg_get_setting('site_hide_plugins') == "no" ? "selected" : ""  }}>No</option>
+
+            </select>
+        </label>
+
         <div class="mt-5">
             <div class="flex flex-row justify-end">
                 <button

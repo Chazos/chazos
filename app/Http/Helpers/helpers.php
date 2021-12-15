@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
 if (! function_exists('cg_get_collections')) {
@@ -163,9 +164,9 @@ if (! function_exists('cg_get_setting')) {
         $setting = Settings::where('name', $name)->first();
 
         if ( $setting ) {
-            return $setting->value;
+             return $setting->value;
         }else{
-            return '';
+            return 'Settings not found';
         }
     }
 }
@@ -219,5 +220,20 @@ if (! function_exists('cg_set_env_variable')) {
             Artisan::call("config:cache");
         }
     }
+}
+
+
+abstract class PaymentStatus{
+    const pending = "PENDING";
+    const paid = "PAID";
+    const failed = "FAILED";
+    const timeout_reached = "TIMEOUT_REACHED";
+    const cancelled = "CANCELLED";
+    const transit = "IN TRANSIT";
+    const delivered = "DELIVERED";
+    const returned = "RETURNED";
+    const rejected = "REJECTED";
+    const expired = "EXPIRED";
+    const unknown = "UNKNOWN";
 }
 

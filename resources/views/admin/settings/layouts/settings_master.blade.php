@@ -22,8 +22,8 @@
                   </div>
 
               <ul>
-                  <li class="hover:bg-purple-300 hover:rounded-sm  hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full  py-1"><a class="text-sm" href="{{ route('admin.settings') }}">Site</a></li>
-                  <li class="hover:bg-purple-300  rounded-sm hover:w-full {{ $current_link == "payment_set" ? 'bg-purple-400 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.payments') }}">Payments</a></li>
+                  <li class="pl-4 hover:bg-purple-300 hover:rounded-sm  hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full  py-1"><a class="text-sm" href="{{ route('admin.settings') }}">Site</a></li>
+                  <li class="pl-4 hover:bg-purple-300  rounded-sm hover:w-full {{ $current_link == "payment_set" ? 'bg-purple-400 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.payments') }}">Payments</a></li>
 
               </ul>
 
@@ -35,7 +35,7 @@
               </div>
 
               <ul>
-                <li class="hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.roles') }}">Roles</a></li>
+                <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.roles') }}">Roles</a></li>
               </ul>
 
               <div class="flex mt-3 ml-3">
@@ -46,8 +46,8 @@
               </div>
 
               <ul>
-                <li class="hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Email settings</a></li>
-                <li class="hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_templates" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Templates</a></li>
+                <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Email settings</a></li>
+                <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_templates" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Templates</a></li>
               </ul>
 
             </div>

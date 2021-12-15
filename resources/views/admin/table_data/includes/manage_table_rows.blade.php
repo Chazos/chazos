@@ -19,8 +19,8 @@
         @endforeach
         <td class="px-4 py-3">
 
-            <div x-data="{tableDataOptionsDropdown: false}" class="flex items-center space-x-4 text-sm">
-                <div class="">
+            <div x-data="{tableDataOptionsDropdown: false}" class="flex items-center justify-center">
+                <div class="relative inline-block">
                     <!-- Dropdown toggle button -->
                     <button x-on:click="tableDataOptionsDropdown = !tableDataOptionsDropdown"
                         class="shadow-sm relative z-10 block p-2 text-white hover:bg-purple-600 hover:shadow-lg bg-purple-500 border border-transparent rounded-md dark:text-white focus:border-blue-500 focus:ring-opacity-40 dark:focus:ring-opacity-40 focus:ring-blue-300 dark:focus:ring-blue-400 focus:ring dark:bg-gray-800 focus:outline-none">
@@ -30,7 +30,7 @@
 
                     <!-- Dropdown menu -->
                     <div x-show="tableDataOptionsDropdown" @click.away="tableDataOptionsDropdown = false"
-                        class="absolute right-30 mt-2 py-2 bg-white rounded-md shadow-xl z-20">
+                        class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
                         @foreach ($actions as $action)
 
                             @php

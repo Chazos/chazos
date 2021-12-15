@@ -64,7 +64,7 @@ class OrderController extends Controller
 
         $order_id = DB::table('orders')->insertGetId([
             'user_id' => Auth::user()->id,
-            'status' => 'pending',
+            'status' => \PaymentStatus::pending,
             'total' => $total,
             'discount' => 0,
             'created_at' => date('Y-m-d H:i:s'),

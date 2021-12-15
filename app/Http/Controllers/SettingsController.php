@@ -31,6 +31,10 @@ class SettingsController extends Controller
                 $has_file = $request->hasFile($key);
                 $setting = Settings::where('name', $key)->first();
 
+                if ($data[$key] == null){
+                    $data[$key] = '';
+                }
+
                 if($setting){
                     $setting->value = $has_file ? "placeholder" : $data[$key];
                     $setting->save();
@@ -59,7 +63,8 @@ class SettingsController extends Controller
         }catch (\Exception $e){
             return response()->json([
                 'status' => 'error',
-                'message' => 'Something went wrong'], 500);
+                'message' => 'Something went wrong',
+                'error' => $e], 500);
         }
 
 

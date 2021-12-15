@@ -33,7 +33,7 @@
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
         name="PAYPAL_TEST_CLIENT_SECRET"
         value="{{ cg_get_setting('PAYPAL_TEST_CLIENT_SECRET') }}"
-        placeholder="Paynow Test Client Secret">
+        placeholder="PayPal Test Client Secret">
 </label>
 <label class="block text-sm mt-4">
     <span
@@ -42,7 +42,7 @@
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
         name="PAYPAL_TEST_EMAIL_ADDRESS"
         value="{{ cg_get_setting('PAYPAL_TEST_EMAIL_ADDRESS') }}"
-        placeholder="Paynow Test Email Address">
+        placeholder="PayPal Test Email Address">
 </label>
 <h6 class="mb-4 uppercase mt-8 text-sm font-semibold text-gray-600 dark:text-gray-300">
     Live Mode
@@ -63,7 +63,7 @@
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
         name="PAYPAL_LIVE_CLIENT_SECRET"
         value="{{ cg_get_setting('PAYPAL_LIVE_CLIENT_SECRET') }}"
-        placeholder="Paynow Live Client Secret">
+        placeholder="PayPal Live Client Secret">
 </label>
 <label class="block text-sm mt-4">
     <span
@@ -72,5 +72,5 @@
         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
         name="PAYPAL_LIVE_EMAIL_ADDRESS"
         value="{{ cg_get_setting('PAYPAL_LIVE_EMAIL_ADDRESS') }}"
-        placeholder="Paynow Live Email Address">
+        placeholder="PayPal Live Email Address">
 </label>

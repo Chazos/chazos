@@ -99,6 +99,10 @@ class OrderController extends Controller
     public function createTransaction()
     {
 
+        $tax_rate = cg_get_setting("TAX_RATE");
+        $tax_amount = $this->order->total * ($tax_rate / 100);
+        $grand_total = $this->order->total + $tax_amount;
+
 
         $transaction_id = DB::table('transactions')->insertGetId([
             'user_id' => Auth::user()->id,
@@ -106,8 +110,8 @@ class OrderController extends Controller
             'total' => $this->order->total,
             'discount' => $this->order->discount,
             'currency' => 'USD',
-            'tax' => 0, // TODO: Fetch tax from settings and calculate it,
-            'grand_total' => $this->order->total, // TODO: Calculate actual grand total
+            'tax' => $tax_rate,
+            'grand_total' => $grand_total,
             'gateway' => 'unknown',
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s')

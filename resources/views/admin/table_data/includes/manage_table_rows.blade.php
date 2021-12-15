@@ -55,7 +55,7 @@
 
 
                         <hr class="border-gray-200 dark:border-gray-700 ">
-                        <button
+                        <a
                             href="{{ route('admin.edit_item', ['table_name' => $table->table_name, 'id' => $item->id]) }}"
                             class="flex w-full items-center p-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
                             <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -67,7 +67,7 @@
                             <span class="mx-1">
                                 Edit
                             </span>
-                        </button>
+                        </a>
                         <button id="modify-table-perms-btn"
                             onclick="deleteRow('#row-{{ $item->id }}','{{ $table->table_name }}', {{ $item->id }})"
                             class="flex w-full items-center px-3 py-3 text-sm text-gray-600 capitalize transition-colors duration-200 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">

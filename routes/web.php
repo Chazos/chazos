@@ -9,6 +9,7 @@ use App\Http\Controllers\TableController;
 use App\Http\Controllers\CustomActionController;
 use App\Http\Controllers\PluginController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\TransactionsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -76,6 +77,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::post('/deactivate-plugin/{plugin_name}',  [PluginController::class, 'deactivate'])->name('admin.plugins.deactivate');
     Route::post('/delete-plugin/{plugin_name}',  [PluginController::class, 'delete'])->name('admin.plugins.delete');
     Route::post('/install-plugin',  [PluginController::class, 'install'])->name('admin.plugins.install');
+
+    // Transactions
+    Route::get('/transactions',  [TransactionsController::class, 'index'])->name('admin.transactions');
 });
 
 

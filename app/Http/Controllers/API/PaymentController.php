@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Events\PurchaseMade;
 use App\Http\Controllers\Controller;
 use App\Services\PaynowService;
 use Illuminate\Http\Request;
@@ -51,6 +52,7 @@ class PaymentController extends Controller
 
             $transaction_paid = true;
             $order_status = \PaymentStatus::paid;
+            PurchaseMade::dispatch($transaction, $order, $orderItems);
 
         }else if ($response['status'] == "failed"){
 

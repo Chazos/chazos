@@ -88,12 +88,16 @@ class OrderController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
 
-            // TODO: Delete cart and cart items
+            
+            DB::table('cart_items')->where('cart_id', $cart->id)->delete();
 
-            $this->order = DB::table('orders')->where('id', $order_id)->first();
-            $this->orderItems = DB::table('order_items')->where('order_id', $order_id)->get();
-            return true;
+
+
         }
+
+        $this->order = DB::table('orders')->where('id', $order_id)->first();
+        $this->orderItems = DB::table('order_items')->where('order_id', $order_id)->get();
+        return true;
     }
 
     public function createTransaction()

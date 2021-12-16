@@ -166,7 +166,7 @@ if (! function_exists('cg_get_setting')) {
         if ( $setting ) {
              return $setting->value;
         }else{
-            return 'Settings not found';
+            return '';
         }
     }
 }

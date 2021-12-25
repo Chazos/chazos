@@ -30,6 +30,7 @@ Route::post('subscribe', [DataController::class, 'susbcribe']);
 Route::post('register', [AuthenticationController::class, 'register']);
 Route::post('login', [AuthenticationController::class, 'authenticate']);
 Route::get('/logout', [AuthenticationController::class, 'logout']);
+Route::get('/csrf-token', [AuthenticationController::class, 'csrf_token']);
 
 
 

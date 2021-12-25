@@ -44,6 +44,16 @@ class AuthenticationController extends Controller
        }
 
     }
+
+
+    public function csrf_token(Request $request){
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Token generated successfully',
+            'token' => $request->session()->token()
+        ]);
+    }
+    
       /**
      * Handle an authentication attempt.
      *

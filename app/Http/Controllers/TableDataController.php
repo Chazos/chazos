@@ -120,8 +120,22 @@ class TableDataController extends Controller
         $table =  Table::where('table_name', $table)->first();
         $model = "App\Models\\" . $table->model_name;
         $item = $model::where('id', $id)->first();
+        $actions = json_decode($table->actions);
         $fields = json_decode($table->fields);
-        return view('admin.table_data.edit', compact('table', 'item', 'table', 'fields'));
+
+        return view('admin.table_data.edit', compact('table', 'item', 'actions', 'table', 'fields'));
+    }
+
+    public function view_item(Request $request, $table, $id)
+    {
+        $table =  Table::where('table_name', $table)->first();
+        $model = "App\Models\\" . $table->model_name;
+        $item = $model::where('id', $id)->first();
+        $fields = json_decode($table->fields);
+        $actions = json_decode($table->actions);
+
+
+        return view('admin.table_data.view', compact('table', 'item', 'actions', 'table', 'fields'));
     }
 
 

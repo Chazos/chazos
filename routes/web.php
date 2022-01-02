@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/manage/{id}',  [TableDataController::class, 'manage'])->name('admin.manage');
     Route::post('/manage/{table_name}/delete/{id}',  [TableDataController::class, 'delete_item'])->name('admin.delete_item');
     Route::get('/manage/{table_name}/edit/{id}',  [TableDataController::class, 'edit_item'])->name('admin.edit_item');
+    Route::get('/manage/{table_name}/view/{id}',  [TableDataController::class, 'view_item'])->name('admin.view_item');
     Route::post('/manage/{table_name}/update/{id}',  [TableDataController::class, 'update_item'])->name('admin.update_item');
     Route::post('/manage/{table_name}/export',  [TableDataController::class, 'export_data'])->name('admin.export_table');
     Route::post('/manage/{table_name}/import',  [TableDataController::class, 'import_data'])->name('admin.import_table');

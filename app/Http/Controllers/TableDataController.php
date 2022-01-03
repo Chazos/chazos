@@ -20,7 +20,9 @@ class TableDataController extends Controller
         $table = Table::where('id', $id)->first();
         $config_fields = json_decode(json_encode(json_decode($table->configure_fields)), true);
         $columns = json_decode($table->fields);
-        $actions = json_decode($table->actions);
+        $actions = json_decode($table->actions) ?: [];
+
+
         $model = "App\Models\\" . $table->model_name;
 
 

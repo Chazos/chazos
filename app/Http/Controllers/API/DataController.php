@@ -123,7 +123,7 @@ class DataController extends Controller
             if ($this->user_can_perform_action($table_name, 'create')){
                 $resource_name = "App\Http\Resources\\" . ucfirst($table_name) . 'Resource';
                 $model = 'App\Models\\' . $table->model_name;
-                $new_data = $request->new_data;
+                $new_data = $request->all();
                 $new_row = new $model;
 
 

@@ -111,7 +111,8 @@ class TableController extends Controller
             "read",
             "delete",
             "edit",
-            "update"
+            "update",
+            "create"
         );
 
         // Role::where('name', 'admin')->first()->givePermissionTo("can edit blog");

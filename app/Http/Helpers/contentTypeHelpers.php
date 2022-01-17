@@ -138,7 +138,7 @@ if (! function_exists('tb_create_perms')) {
 if (! function_exists('tb_delete_perms')) {
     function tb_delete_perms($table_name){
         $roles = Role::all();
-        $perms = array("read", "edit", "delete", "update", "create");
+        $perms = array("create", "read", "edit", "delete", "update");
 
         foreach ($perms as $perm) {
             $whole_perm = "can " . $perm . " " . $table_name;

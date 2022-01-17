@@ -108,6 +108,7 @@ class TableController extends Controller
         $role_perms = [];
         $filter_roles = [];
         $perms = array(
+            "create",
             "read",
             "delete",
             "edit",

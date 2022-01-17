@@ -121,7 +121,8 @@ if (! function_exists('tb_add_perms')) {
 
 if (! function_exists('tb_create_perms')) {
     function tb_create_perms($table_name){
-        $perms = array("create", "read", "edit", "delete", "update");
+        $roles = Role::all();
+        $perms = array("read", "edit", "delete", "update", "create");
 
         foreach ($perms as $perm) {
             try{

@@ -15,7 +15,9 @@
             onkeyup="filterTable(this.value)"
             class=" pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md  dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
             type="text"
-            placeholder="Search for projects"
+            placeholder="Search for {{
+                ucfirst($table->table_name)
+            }}"
             aria-label="Search"></div>
 
         <div class="flex justify-end py-3">
@@ -156,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="w-full rounded-lg shadow-xs">
+                <div class="w-full rounded-lg shadow-xs overflow-x-auto">
                     <div class="w-full">
                         <table class="w-full whitespace-no-wrap">
                             <thead>

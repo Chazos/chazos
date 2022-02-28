@@ -1,4 +1,4 @@
-<div class="lg:w-3/4  px-5 py-10 mr-5">
+<div class="lg:col-span-3 col-span-4 px-5 py-10 mr-5">
     <div x-show="showCollectionTable == false" class="flex items-center  w-full h-full">
         <div class="px-10 text-gray-600 text-5xl font-bold text-center">
             Click a table to view its fields or create one
@@ -209,7 +209,7 @@
 
 
 
-            <div class="flex flex-row justify-end mt-5">
+            <div class="flex flex-row justify-end mt-5 mb-5">
                 {{-- <button x-on:click="deleteUnsavedCollection()"
                     class="bg-red-400 ml-4 hover:bg-red-600 w-20 text-white relative  block rounded-md  p-2 focus:outline-none">
                     Cancel

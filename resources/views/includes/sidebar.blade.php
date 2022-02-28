@@ -1,7 +1,9 @@
 <aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
     <div class="py-4 text-gray-500 dark:text-gray-400">
         <a class="ml-6 text-lg font-bold text-gray-800 dark:text-gray-200" href="#">
-            Chazos
+            {{ cg_get_setting('site_name') != "" && cg_get_setting('site_name') != null ?
+               cg_get_setting('site_name')
+               :"Chazos"}}
         </a>
         <ul class="mt-6">
             <li class="relative px-6 py-3">
@@ -29,7 +31,15 @@
                     @click="togglePagesMenu" aria-haspopup="true">
                     <span class="inline-flex items-center">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                        <span class="ml-4">Tables</span>
+                        <span class="ml-4">
+                            {{
+                                cg_get_setting('tables_menu_name') != null &&
+                                cg_get_setting('tables_menu_name') != ""  ?
+                                cg_get_setting('tables_menu_name') :
+                                "Tables"
+
+                            }}
+                        </span>
                     </span>
                     <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
@@ -87,6 +97,8 @@
                 </a>
             </li>
             @endif
+
+            @if(cg_get_setting('site_hide_transactions') == "no" || cg_get_setting('site_hide_transactions') == "")
             <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.transactions') }}">
@@ -94,6 +106,7 @@
                     <span class="ml-4">Transactions</span>
                 </a>
             </li>
+            @endif
             {{-- <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.tables') }}">
@@ -154,7 +167,13 @@
                             @click="togglePagesMenu" aria-haspopup="true">
                             <span class="inline-flex items-center">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
-                                <span class="ml-4">Tables</span>
+                                <span class="ml-4">
+                                  {{  cg_get_setting('tables_menu_name') != null &&
+                                cg_get_setting('tables_menu_name') != ""  ?
+                                cg_get_setting('tables_menu_name') :
+                                "Tables"
+                                }}
+                                </span>
                             </span>
                             <svg class="w-4 h-4" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd"
@@ -225,6 +244,7 @@
                     </li>
                     @endif
 
+                    @if(cg_get_setting('site_hide_transactions') == "no" || cg_get_setting('site_hide_transactions') == "")
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                             href="{{ route('admin.transactions') }}">
@@ -232,6 +252,7 @@
                             <span class="ml-4">Transactions</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"

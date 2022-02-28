@@ -27,7 +27,7 @@ def development():
         replace_in_file("index.php", "__DIR__.'/bootstrap/app.php", "__DIR__.'/../bootstrap/app.php")
         replace_in_file("index.php", "__DIR__.'/vendor/autoload.php", "__DIR__.'/../vendor/autoload.php")
         replace_in_file("index.php", "__DIR__.'/storage/framework/maintenance.php", "__DIR__.'/../storage/framework/maintenance.php")
-        replace_in_file("config/app.php", "env('ASSET_URL', 'public/')", "env('ASSET_URL', null)")
+        replace_in_file("config/app.php", "env('ASSET_URL', '/public')", "env('ASSET_URL', null)")
         replace_in_file(".env", "APP_DEBUG=false", "APP_DEBUG=true")
         replace_in_file(".env", "APP_ENV=production", "APP_ENV=local")
         print("👨🏽‍💻 Now in develop mode")
@@ -43,7 +43,7 @@ def shared_hosting():
         replace_in_file("index.php", "__DIR__.'/../bootstrap/app.php", "__DIR__.'/bootstrap/app.php")
         replace_in_file("index.php", "__DIR__.'/../vendor/autoload.php", "__DIR__.'/vendor/autoload.php")
         replace_in_file("index.php", "__DIR__.'/../storage/framework/maintenance.php", "__DIR__.'/storage/framework/maintenance.php")
-        replace_in_file("config/app.php", "env('ASSET_URL', null)", "env('ASSET_URL', 'public/')")
+        replace_in_file("config/app.php", "env('ASSET_URL', null)", "env('ASSET_URL', '/public')")
         replace_in_file(".env", "APP_DEBUG=true", "APP_DEBUG=false")
         replace_in_file(".env", "APP_ENV=local", "APP_ENV=production")
         # php artisan optimize

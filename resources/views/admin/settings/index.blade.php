@@ -36,6 +36,15 @@
         </label>
         <label class="block text-sm mt-4">
             <span
+                class="text-gray-700 dark:text-gray-400">Custom Tables Name</span>
+            <input type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="tables_menu_name"
+                value="{{ cg_get_setting('tables_menu_name') }}"
+                placeholder="Change sidebar 'Tables' menu name">
+        </label>
+        <label class="block text-sm mt-4">
+            <span
                 class="text-gray-700 dark:text-gray-400">Site Image</span>
             <input
                 type="file"
@@ -54,6 +63,34 @@
 
                 <option value="yes" {{ cg_get_setting('site_hide_builder') == "yes" ? "selected" : ""  }} >Yes</option>
                 <option value="no" {{ cg_get_setting('site_hide_builder') == "no" ? "selected" : ""  }}>No</option>
+
+            </select>
+        </label>
+
+        <label class="block text-sm mt-4">
+            <span
+                class="text-gray-700 dark:text-gray-400">Hide Transactions</span>
+            <select type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="site_hide_transactions"
+                placeholder="Hide your transactions">
+
+                <option value="yes" {{ cg_get_setting('site_hide_transactions') == "yes" ? "selected" : ""  }} >Yes</option>
+                <option value="no" {{ cg_get_setting('site_hide_transactions') == "no" ? "selected" : ""  }}>No</option>
+
+            </select>
+        </label>
+
+        <label class="block text-sm mt-4">
+            <span
+                class="text-gray-700 dark:text-gray-400">Hide Create Account</span>
+            <select type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="site_hide_create_account"
+                placeholder="Hide Create Account Button">
+
+                <option value="yes" {{ cg_get_setting('site_hide_create_account') == "yes" ? "selected" : ""  }} >Yes</option>
+                <option value="no" {{ cg_get_setting('site_hide_create_account') == "no" ? "selected" : ""  }}>No</option>
 
             </select>
         </label>

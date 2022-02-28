@@ -1,8 +1,17 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
+
+            @php
+             $logo = cg_get_project_logo();
+            @endphp
+}
             <a href="/">
-               <img class="w-20 h-20" src="{{ cg_get_project_logo() }}" alt="" srcset="">
+                @if ($logo == "")
+                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                @else
+                    <img class="w-20 h-20" src="{{ cg_get_project_logo() }}" alt="" srcset="">
+                @endif
             </a>
         </x-slot>
 
@@ -47,10 +56,21 @@
                     </a>
                 @endif
 
+
                 <x-button class="ml-3">
                     {{ __('Log in') }}
                 </x-button>
             </div>
+
+
         </form>
     </x-auth-card>
+
+    @if(cg_get_setting('site_hide_create_account') == "no" || cg_get_setting('site_hide_create_account') == "")
+    <div class="flex items-center justify-center relative bottom-20">
+        <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+            {{ __('Create account') }}
+        </a>
+    </div>
+    @endif
 </x-guest-layout>

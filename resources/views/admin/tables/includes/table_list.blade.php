@@ -1,4 +1,4 @@
-<div class="lg:w-1/4 py-10  bg-gray-200">
+<div class="lg:col-span-1 col-span-4 py-10  bg-gray-200">
 
     <div class="ml-5">
         <p class="font-bold uppercase text-xs text-gray-600">Table List</p>

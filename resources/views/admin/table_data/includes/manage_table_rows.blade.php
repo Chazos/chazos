@@ -31,6 +31,14 @@
                     <!-- Dropdown menu -->
                     <div x-show="tableDataOptionsDropdown" @click.away="tableDataOptionsDropdown = false"
                         class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl dark:bg-gray-800">
+
+
+                        @php
+
+                            $actions = $actions == null ? [] : $actions;
+
+                        @endphp
+
                         @foreach ($actions as $action)
 
                             @php

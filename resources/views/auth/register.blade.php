@@ -1,8 +1,17 @@
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
+
+            @php
+             $logo = cg_get_project_logo();
+            @endphp
+}
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                @if ($logo == "")
+                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                @else
+                    <img class="w-20 h-20" src="{{ cg_get_project_logo() }}" alt="" srcset="">
+                @endif
             </a>
         </x-slot>
 

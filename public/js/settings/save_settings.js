@@ -12,6 +12,10 @@ $('.save-settings-button').on('click', (event) => {
       .then(function (response) {
          if (response.data.status == 'success'){
             setSuccessAlert(response.data.message)
+
+            setTimeout(()=> {
+                window.location.reload()
+            }, 2000)
          }
       })
       .catch(function (error) {

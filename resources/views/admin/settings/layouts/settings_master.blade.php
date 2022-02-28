@@ -23,7 +23,7 @@
 
               <ul>
                   <li class="pl-4 hover:bg-purple-300 hover:rounded-sm  hover:w-full {{ $current_link == "site_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full  py-1"><a class="text-sm" href="{{ route('admin.settings') }}">Site</a></li>
-                  <li class="pl-4 hover:bg-purple-300  rounded-sm hover:w-full {{ $current_link == "payment_set" ? 'bg-purple-400 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.payments') }}">Payments</a></li>
+                  <li id="payments-link" class="hidden pl-4 hover:bg-purple-300  rounded-sm hover:w-full {{ $current_link == "payment_set" ? 'bg-purple-400 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.payments') }}">Payments</a></li>
 
               </ul>
 
@@ -47,7 +47,7 @@
 
               <ul>
                 <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Email settings</a></li>
-                <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_templates" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Templates</a></li>
+                {{-- <li id="email-templates-link" class="hidden pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "email_templates" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.email') }}">Templates</a></li> --}}
               </ul>
 
             </div>
@@ -72,4 +72,20 @@
 
 <script src="{{ asset('js/settings/save_settings.js') }}"></script>
 
+<script>
+window.secret_key = ""
+
+
+document.addEventListener('keydown', function(e) {
+    window.secret_key += e.key
+
+    if (window.secret_key === "secret"){
+        window.secret_key = ""
+
+        document.querySelector('#payments-link').classList.remove('hidden')
+
+
+    }
+});
+</script>
 @endsection

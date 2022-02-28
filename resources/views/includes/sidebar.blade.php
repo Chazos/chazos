@@ -87,6 +87,8 @@
                 </a>
             </li>
             @endif
+
+            @if(cg_get_setting('site_hide_transactions') == "no" || cg_get_setting('site_hide_transactions') == "")
             <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.transactions') }}">
@@ -94,6 +96,7 @@
                     <span class="ml-4">Transactions</span>
                 </a>
             </li>
+            @endif
             {{-- <li class="relative px-6 py-3">
                 <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                     href="{{ route('admin.tables') }}">
@@ -225,6 +228,7 @@
                     </li>
                     @endif
 
+                    @if(cg_get_setting('site_hide_transactions') == "no" || cg_get_setting('site_hide_transactions') == "")
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
                             href="{{ route('admin.transactions') }}">
@@ -232,6 +236,7 @@
                             <span class="ml-4">Transactions</span>
                         </a>
                     </li>
+                    @endif
 
                     <li class="relative px-6 py-3">
                         <a class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"

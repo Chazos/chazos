@@ -108,10 +108,12 @@ class TableController extends Controller
         $role_perms = [];
         $filter_roles = [];
         $perms = array(
+            "create",
             "read",
             "delete",
             "edit",
-            "update"
+            "update",
+            "create"
         );
 
         // Role::where('name', 'admin')->first()->givePermissionTo("can edit blog");

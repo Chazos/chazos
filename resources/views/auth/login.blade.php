@@ -66,9 +66,11 @@
         </form>
     </x-auth-card>
 
+    @if(cg_get_setting('site_hide_create_account') == "no" || cg_get_setting('site_hide_create_account') == "")
     <div class="flex items-center justify-center relative bottom-20">
         <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
             {{ __('Create account') }}
         </a>
     </div>
+    @endif
 </x-guest-layout>

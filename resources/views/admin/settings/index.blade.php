@@ -74,6 +74,20 @@
 
         <label class="block text-sm mt-4">
             <span
+                class="text-gray-700 dark:text-gray-400">Hide Create Account</span>
+            <select type="text"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"
+                name="site_hide_create_account"
+                placeholder="Hide Create Account Button">
+
+                <option value="yes" {{ cg_get_setting('site_hide_create_account') == "yes" ? "selected" : ""  }} >Yes</option>
+                <option value="no" {{ cg_get_setting('site_hide_create_account') == "no" ? "selected" : ""  }}>No</option>
+
+            </select>
+        </label>
+
+        <label class="block text-sm mt-4">
+            <span
                 class="text-gray-700 dark:text-gray-400">Hide Plugins</span>
             <select type="text"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 border-gray-50 leading-tight focus:outline-none focus:shadow-outline focus:border-gray-200"

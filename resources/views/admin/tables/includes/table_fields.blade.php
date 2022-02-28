@@ -209,7 +209,7 @@
 
 
 
-            <div class="flex flex-row justify-end mt-5">
+            <div class="flex flex-row justify-end mt-5 mb-10">
                 {{-- <button x-on:click="deleteUnsavedCollection()"
                     class="bg-red-400 ml-4 hover:bg-red-600 w-20 text-white relative  block rounded-md  p-2 focus:outline-none">
                     Cancel

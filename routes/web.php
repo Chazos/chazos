@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
     // Role Settings
     Route::get('/roles',  [RoleController::class, 'roles'])->name('admin.settings.roles');
+    Route::get('/user-roles',  [RoleController::class, 'user_roles'])->name('admin.settings.user_roles');
+    Route::post('/assign-role',  [RoleController::class, 'assign_role'])->name('admin.settings.assign_roles');
     Route::post('/create-role',  [RoleController::class, 'create_role'])->name('admin.settings.create_role');
     Route::post('/save-settings',  [SettingsController::class, 'save_settings'])->name('admin.settings.save');
 

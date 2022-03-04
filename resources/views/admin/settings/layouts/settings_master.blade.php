@@ -36,6 +36,7 @@
 
               <ul>
                 <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "role_set" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.roles') }}">Roles</a></li>
+                <li class="pl-4 hover:bg-purple-300 rounded-sm hover:w-full {{ $current_link == "user_role" ? 'bg-purple-500 rounded-sm text-white' : 'text-gray-800' }} hover:text-white pl-2 w-full py-1"><a class="text-sm"  href="{{ route('admin.settings.user_roles') }}">User Roles</a></li>
               </ul>
 
               <div class="flex mt-3 ml-3">

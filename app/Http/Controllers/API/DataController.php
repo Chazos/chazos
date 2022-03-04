@@ -161,9 +161,10 @@ class DataController extends Controller
                 $data = $model::where('id', $id)->first();
 
 
+
                 return response()->json([
                     'status' => 'success',
-                    'data' => new $resource_name($data),
+                    'data' => $data != null ? new $resource_name($data) : null,
                     'message' => 'Data retrieved successfully'
                 ]);
             }else{

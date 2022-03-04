@@ -81,9 +81,6 @@ class DataController extends Controller
 
     }
 
-
-
-
     public function index(Request $request, $table_name){
         $table = Table::where('table_name', $table_name)->first();
 
@@ -230,7 +227,7 @@ class DataController extends Controller
                 $model = 'App\Models\\' . $table->model_name;
                 $data = $model::where('id', $id)->first();
 
-                $new_data = $request->new_data;
+                $new_data = $request->all();
 
                 try{
                     foreach ($new_data as $key => $value){

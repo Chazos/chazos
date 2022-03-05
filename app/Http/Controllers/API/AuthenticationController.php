@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
                 'password' => Hash::make($request->password),
             ]);
 
-            $user->assignRole('user');
+            $user->assignRole('everyone');
 
             return response()->json([
                 'status' => 'success',
@@ -53,7 +53,7 @@ class AuthenticationController extends Controller
             'token' => $request->session()->token()
         ]);
     }
-    
+
       /**
      * Handle an authentication attempt.
      *
@@ -76,7 +76,8 @@ class AuthenticationController extends Controller
             return response()->json([
                 'status' => 'success',
                 'message' => 'User authenticated',
-                'user' => Auth::user(),
+                'user' => $user,
+                'roles' => $user->getRoleNames(),
                 'token' => $token->plainTextToken
             ]);
         }

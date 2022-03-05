@@ -84,8 +84,10 @@ const assignRole = () => {
             }
         })
         .then(function (response) {
-            if (response.status == 'success') {
-                setSuccessAlert(response.message)
+
+        console.log(response)
+            if (response.data.status == 'success') {
+                setSuccessAlert(response.data.message)
             }
         })
         .catch(function (error) {

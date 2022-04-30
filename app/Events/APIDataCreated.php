@@ -14,8 +14,8 @@ class APIDataCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $table;
-    protected $data;
+    public $table;
+    public $data;
 
 
     /**

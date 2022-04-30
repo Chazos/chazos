@@ -4,7 +4,7 @@ Chazos is headless CMS built with Laravel. It is a simple CMS that allows you to
 
 It should be used as a backend for websites, web apps and mobile apps.
 
-Chazos is a greek work for stupid. Someone who is stupid is someone who is brainless or headless 😁. 
+Chazos is a greek work for stupid. Someone who is stupid is someone who is brainless or headless 😁. Thus the name chazos. 
 
 
 ### How to install
@@ -24,7 +24,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 4.  Run install
 
-    `python woof.py install`
+    `php artisan chazos:install`
 
 8. Serve it
 
@@ -35,7 +35,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 1. Type the following
 
-`python woof.py shared`
+`php artisan chazos:shared`
 
 **Do this putting the file on server, since it also runs optimize commands**
 
@@ -43,7 +43,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 1. Type the following
 
-`python woof.py update`
+`php artisan chazos:update`
 
 **Remember to save your data first**
 
@@ -51,7 +51,7 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 1. Type the following
 
-`python woof dev`
+`php artisan chazos:develop`
 
 **If you want to make a pull request clean the project first**
 
@@ -80,5 +80,9 @@ Chazos is a greek work for stupid. Someone who is stupid is someone who is brain
 
 **Settings**
 ![Chazos Settings](./readme_images/chazos_settings.png)
+
+### Contribution
+
+Let me finish documentation first!
 
 

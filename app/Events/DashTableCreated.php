@@ -14,7 +14,7 @@ class DashTableCreated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $table;
+    public $table;
 
     /**
      * Create a new event instance.

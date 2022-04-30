@@ -14,9 +14,9 @@ class PurchaseMade
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $transaction;
-    protected $order;
-    protected $orderItems;
+    public $transaction;
+    public $order;
+    public $orderItems;
 
     /**
      * Create a new event instance.

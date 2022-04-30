@@ -14,9 +14,9 @@ class CustomAction
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $action;
-    protected $table;
-    protected $id;
+    public $action;
+    public $table;
+    public $id;
 
     /**
      * Create a new event instance.

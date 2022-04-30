@@ -14,8 +14,8 @@ class APIDataUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $data;
-    protected $table;
+    public $data;
+    public $table;
 
     /**
      * Create a new event instance.
